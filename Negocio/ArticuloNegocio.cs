@@ -81,5 +81,36 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void modificar (Articulo art)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @imagenUrl, @precio, @id
+                //Le envio el Id del articulo seleccionado para que solo modifique las propiedades de ese articulo.
+                datos.setearConsulta("UPDATE ARTICULOS SET Codigo = @codigo, Nombre = @nombre, Descripcion = @descripcion, IdMarca = @idMarca, IdCategoria = @idCategoria, ImagenUrl = @imagenUrl, Precio = @precio WHERE Id = @id");
+                datos.setearParametros("@codigo", art.Codigo);
+                datos.setearParametros("@nombre", art.Nombre);
+                datos.setearParametros("@descripcion", art.Descripcion);
+                datos.setearParametros("@idMarca", art.Marca.Id);
+                datos.setearParametros("@idCategoria", art.Categoria.Id);
+                datos.setearParametros("@imagenUrl", art.ImagenUrl);
+                datos.setearParametros("@precio", art.Precio);
+                datos.setearParametros("@id", art.Id);
+
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
