@@ -8,5 +8,6 @@ namespace Negocio
 {
     public class UserNegocio
     {
+
     }
 }

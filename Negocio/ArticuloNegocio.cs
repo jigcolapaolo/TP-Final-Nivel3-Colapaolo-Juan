@@ -53,7 +53,7 @@ namespace Negocio
 
         }
 
-        public void agregar (Articulo nuevo)
+        public void agregar(Articulo nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -82,7 +82,7 @@ namespace Negocio
             }
         }
 
-        public void modificar (Articulo art)
+        public void modificar(Articulo art)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -113,7 +113,7 @@ namespace Negocio
             }
         }
 
-        public void eliminar (int id)
+        public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -122,6 +122,51 @@ namespace Negocio
                 datos.setearParametros("@id", id);
 
                 datos.ejecutarAccion();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        //Recibe el Id del usuario logueado para mostrar su lista de favoritos.
+        public List<Articulo> listarFavoritos(int idUser)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Articulo> lista = new List<Articulo>();
+            try
+            {
+                datos.setearConsulta("SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio  FROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F WHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @idUser AND A.Id = F.IdArticulo");
+                datos.setearParametros("@idUser", idUser);
+
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo articulo = new Articulo();
+                    articulo.Id = (int)datos.Lector["Id"];
+                    articulo.Codigo = (string)datos.Lector["Codigo"];
+                    articulo.Nombre = (string)datos.Lector["Nombre"];
+                    articulo.Descripcion = (string)datos.Lector["Descripcion"];
+                    articulo.Marca = new Marca();
+                    articulo.Marca.Id = (int)datos.Lector["IdMarca"];
+                    articulo.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    articulo.Categoria = new Categoria();
+                    articulo.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    articulo.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    articulo.Precio = (float)datos.Lector["Precio"];
+
+                    lista.Add(articulo);
+                }
+
+                return lista;
+
             }
             catch (Exception e)
             {
