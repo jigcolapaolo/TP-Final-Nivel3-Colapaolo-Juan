@@ -38,8 +38,6 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-
-            return lista;
         }
     }
 }
