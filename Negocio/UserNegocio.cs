@@ -43,6 +43,7 @@ namespace Negocio
             }
         }
 
+        //Retorna el id del nuevo usuario creado para mantener la sesion abierta.
         public int nuevoUser(User nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
