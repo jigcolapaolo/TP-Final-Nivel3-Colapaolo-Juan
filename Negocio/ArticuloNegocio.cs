@@ -134,6 +134,7 @@ namespace Negocio
             }
         }
 
+        //FAVORITOS
         //Recibe el Id del usuario logueado para mostrar su lista de favoritos.
         public List<Articulo> listarFavoritos(int idUser)
         {
@@ -167,6 +168,48 @@ namespace Negocio
 
                 return lista;
 
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        //Recibe el Id del usuario logueado y del articulo seleccionado para agregarlo a su lista de favoritos.
+        public void agregarFavorito(int idUser, int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("INSERT INTO FAVORITOS(IdUser, IdArticulo) VALUES (" + idUser + "," + idArticulo + ")");
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        //Recibe el Id del usuario logueado y del articulo seleccionado para eliminarlo de su lista de favoritos.
+        public void eliminarFavorito(int idUser, int idArticulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE FROM FAVORITOS WHERE IdUser = " + idUser + " AND IdArticulo = " + idArticulo);
+
+                datos.ejecutarAccion();
             }
             catch (Exception e)
             {
