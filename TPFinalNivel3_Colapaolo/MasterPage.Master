@@ -5,26 +5,223 @@
 <html>
 
 <head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Catalogo Web</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
+    <%--iconos bootstrap--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <%--Link Bootstrap--%>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="Content/Estilos.css" rel="stylesheet" type="text/css" />
 </head>
 
 
 <body>
     <form id="form1" runat="server">
-        <div class="container">
-            <hr>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+
+        <div class="wrapper bg-success">
+            <%--Sidebar--%>
+            <aside id="sidebar">
+                <div class="d-flex">
+                    <%--Icono Logo--%>
+                    <button class="toggle-btn" type="button">
+                        <i class="bi bi-arrow-90deg-right"></i>
+                    </button>
+                    <%--Logo--%>
+                    <div class="sidebar-logo">
+                        <a href="#">Filtro</a>
+                    </div>
+                </div>
+
+
+                <%--Filtro--%>
+                <ul class="sidebar-nav">
+
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">
+                            <i class="bi bi-globe2"></i>
+                            <span>Todos los Artículos</span>
+                        </a>
+                    </li>
+                    <hr />
+
+                    <%--Filtro Categoria--%>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                            data-bs-target="#authC" aria-expanded="false" aria-controls="authC">
+                            <i class="bi bi-phone"></i>
+                            <span>Categoría</span>
+                        </a>
+                        <ul id="authC" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item ms-1">
+                                <%--Celulares--%>
+                                <input type="radio" class="btn-check" name="Categoria" id="optionC1" autocomplete="off">
+                                <label class="sidebar-link" for="optionC1"><i class="bi bi-dot"></i>Celulares</label>
+                                <%--Televisores--%>
+                                <input type="radio" class="btn-check" name="Categoria" id="optionC2" autocomplete="off">
+                                <label class="sidebar-link" for="optionC2"><i class="bi bi-dot"></i>Televisores</label>
+                                <%--Media--%>
+                                <input type="radio" class="btn-check" name="Categoria" id="optionC3" autocomplete="off">
+                                <label class="sidebar-link" for="optionC3"><i class="bi bi-dot"></i>Media</label>
+                                <%--Audio--%>
+                                <input type="radio" class="btn-check" name="Categoria" id="optionC4" autocomplete="off">
+                                <label class="sidebar-link" for="optionC4"><i class="bi bi-dot"></i>Audio</label>
+
+                            </li>
+                        </ul>
+                    </li>
+                    <hr />
+
+                    <%--Filtro Marca--%>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                            data-bs-target="#authM" aria-expanded="false" aria-controls="authM">
+                            <i class="bi bi-filter-circle-fill"></i>
+                            <span>Marca</span>
+                        </a>
+                        <ul id="authM" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+                                <%--Samsung--%>
+                                <input type="radio" class="btn-check" name="Marca" id="optionM1" autocomplete="off">
+                                <label class="sidebar-link" for="optionM1"><i class="bi bi-dot"></i>Samsung</label>
+                                <%--Apple--%>
+                                <input type="radio" class="btn-check" name="Marca" id="optionM2" autocomplete="off">
+                                <label class="sidebar-link" for="optionM2"><i class="bi bi-dot"></i>Apple</label>
+                                <%--Sony--%>
+                                <input type="radio" class="btn-check" name="Marca" id="optionM3" autocomplete="off">
+                                <label class="sidebar-link" for="optionM3"><i class="bi bi-dot"></i>Sony</label>
+                                <%--Huawei--%>
+                                <input type="radio" class="btn-check" name="Marca" id="optionM4" autocomplete="off">
+                                <label class="sidebar-link" for="optionM4"><i class="bi bi-dot"></i>Huawei</label>
+                                <%--Motorola--%>
+                                <input type="radio" class="btn-check" name="Marca" id="optionM5" autocomplete="off">
+                                <label class="sidebar-link" for="optionM5"><i class="bi bi-dot"></i>Motorola</label>
+                            </li>
+                        </ul>
+                    </li>
+                    <hr />
+
+                    <%--Precio--%>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                            data-bs-target="#authP" aria-expanded="false" aria-controls="authP">
+                            <i class="bi bi-currency-dollar"></i>
+                            <span>Precio</span>
+                        </a>
+                        <ul id="authP" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                            <li class="sidebar-item">
+
+                                <%--Ordenar mas Barato--%>
+                                <input type="radio" class="btn-check" name="Precio" id="optionP1" autocomplete="off">
+                                <label class="sidebar-link" for="optionP1"><i class="bi bi-dot"></i>Mas Barato</label>
+                                <%--Ordenar mas Caro--%>
+                                <input type="radio" class="btn-check" name="Precio" id="optionP2" autocomplete="off">
+                                <label class="sidebar-link" for="optionP2"><i class="bi bi-dot"></i>Mas Caro</label>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+
+
+                <%--Footer - Logout--%>
+                <div class="sidebar-footer mt-auto">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-exit"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </aside>
+
+
+
+
+
+            <div class="main">
+                <%--Navbar--%>
+                <div class="container-fluid">
+
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+                        <div class="container-fluid">
+                            <%--Logo--%>
+                            <a class="navbar-brand" href="#">
+                                <img src="./Images/Logo.png" height="50" />
+                            </a>
+
+                            <%--Bienvenido--%>
+
+                            <div class="mt-3">
+                                <p>Bienvenido (Usuario)!</p>
+                            </div>
+
+                            <%--Toggler--%>
+                            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <i class="bi bi-three-dots-vertical display-6"></i>
+                                <%--<span class="navbar-toggler-icon"></span>--%>
+                            </button>
+
+
+                            <%--Items--%>
+                            <div class="collapse navbar-collapse justify-content-lg-end text-center" id="navbarTop">
+
+                                <ul class="navbar-nav mx-auto">
+                                    <%--Home--%>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="Default.aspx">Home
+                                        </a>
+                                    </li>
+                                    <%--Link--%>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="ListaArticulos.aspx">Lista de Artículos
+                                        </a>
+                                    </li>
+                                    <%--Favoritos--%>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="Favoritos.aspx">Favoritos
+                                        </a>
+                                    </li>
+                                </ul>
+                                <hr class="border-success" />
+                                <%--Login, registrarse--%>
+                                <div class="d-flex justify-content-center my-lg-0 my-3">
+                                    <a class="btn btn-success rounded-pill ms-1">Login</a>
+                                    <a class="btn btn-outline-success rounded-pill ms-1">Registrarse</a>
+                                    <a class="btn btn-outline-danger rounded-pill ms-1">Logout</a>
+                                </div>
+
+                                <asp:Image ID="imgPerfil"
+                                    Style="height: 40px; width: 40px; border-radius: 50%;"
+                                    ImageUrl="~/Images/Perfil.png"
+                                    runat="server" />
+
+                            </div>
+                        </div>
+                    </nav>
+
+
+                    <div class="container mt-3">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <%--container paginas--%>
     </form>
+
     <%--Link Bootstrap--%>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
+    <script src="Content/Script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
 </body>
 </html>
