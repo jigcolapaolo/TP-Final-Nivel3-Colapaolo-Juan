@@ -24,17 +24,17 @@
 <body>
     <form id="form1" runat="server">
 
-        <div class="wrapper bg-success">
+        <div class="wrapper bg-success bg-gradient">
             <%--Sidebar--%>
             <aside id="sidebar">
                 <div class="d-flex">
-                    <%--Icono Logo--%>
+                    <%--Toggler Sidebar--%>
                     <button class="toggle-btn" type="button">
                         <i class="bi bi-arrow-90deg-right"></i>
                     </button>
-                    <%--Logo--%>
+                    <%--Filtro Texto--%>
                     <div class="sidebar-logo">
-                        <a href="#">Filtro</a>
+                        <a class="text-light cursorDefault" >Filtro</a>
                     </div>
                 </div>
 
@@ -147,17 +147,17 @@
                 <%--Navbar--%>
                 <div class="container-fluid">
 
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient shadow-sm">
                         <div class="container-fluid">
                             <%--Logo--%>
-                            <a class="navbar-brand" href="#">
+                            <a class="navbar-brand" href="Default.aspx">
                                 <img src="./Images/Logo.png" height="50" />
                             </a>
 
                             <%--Bienvenido--%>
 
                             <div class="mt-3">
-                                <p>Bienvenido (Usuario)!</p>
+                                <p class="cursorDefault">Bienvenido (Usuario)!</p>
                             </div>
 
                             <%--Toggler--%>
@@ -175,17 +175,17 @@
                                 <ul class="navbar-nav mx-auto">
                                     <%--Home--%>
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="Default.aspx">Home
+                                        <a class="nav-link active" aria-current="page" href="Default.aspx"><i class="bi bi-house me-1"></i>Home
                                         </a>
                                     </li>
-                                    <%--Link--%>
+                                    <%--Lista de Articulos--%>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="ListaArticulos.aspx">Lista de Artículos
+                                        <a class="nav-link" href="ListaArticulos.aspx"><i class="bi bi-list-ul me-1"></i>Lista de Artículos
                                         </a>
                                     </li>
                                     <%--Favoritos--%>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="Favoritos.aspx">Favoritos
+                                        <a class="nav-link" href="Favoritos.aspx"><i class="bi bi-star me-1"></i>Favoritos
                                         </a>
                                     </li>
                                 </ul>

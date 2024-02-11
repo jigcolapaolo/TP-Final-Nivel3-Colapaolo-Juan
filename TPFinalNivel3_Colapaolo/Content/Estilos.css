@@ -11,6 +11,10 @@ a {
     text-decoration: none;
 }
 
+.cursorDefault {
+    cursor:default;
+}
+
 li {
     list-style: none;
 }
@@ -101,6 +105,10 @@ label.sidebar-link {
     border-left: 3px solid transparent;
     padding-left: 60px;
     cursor:pointer;
+}
+
+#navbarTop ul li a:hover {
+    color:orange;
 }
 
 .sidebar-link i {
