@@ -75,6 +75,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\Logo.png" />
     <Content Include="Images\Perfil.png" />
+    <Content Include="Images\SinImagen.png" />
     <Content Include="Informe.aspx" />
     <Content Include="ListaArticulos.aspx" />
     <Content Include="Login.aspx" />
