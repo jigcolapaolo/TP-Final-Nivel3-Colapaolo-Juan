@@ -34,7 +34,7 @@ namespace Negocio
                     articulo.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     articulo.ImagenUrl = (string)datos.Lector["ImagenUrl"];
-                    articulo.Precio = (float)datos.Lector["Precio"];
+                    articulo.Precio = (decimal)datos.Lector["Precio"];
 
                     lista.Add(articulo);
                 }
@@ -161,7 +161,7 @@ namespace Negocio
                     articulo.Categoria.Id = (int)datos.Lector["IdCategoria"];
                     articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
                     articulo.ImagenUrl = (string)datos.Lector["ImagenUrl"];
-                    articulo.Precio = (float)datos.Lector["Precio"];
+                    articulo.Precio = (decimal)datos.Lector["Precio"];
 
                     lista.Add(articulo);
                 }
