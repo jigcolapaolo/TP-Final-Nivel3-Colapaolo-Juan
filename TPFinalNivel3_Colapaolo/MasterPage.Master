@@ -23,17 +23,18 @@
 
 <body>
     <form id="form1" runat="server">
+        <div id="sidebarOverlay"></div>
 
-        <div class="wrapper bg-success bg-gradient">
+        <div class="wrapper">
             <%--Sidebar--%>
-            <aside id="sidebar">
+            <aside id="sidebar" class="bg-success bg-gradient shadow">
                 <div class="d-flex">
                     <%--Toggler Sidebar--%>
-                    <button class="toggle-btn" type="button">
+                    <button class="toggle-btn sidebarMarginToggler" type="button">
                         <i class="bi bi-arrow-90deg-right"></i>
                     </button>
                     <%--Filtro Texto--%>
-                    <div class="sidebar-logo">
+                    <div class="sidebar-logo sidebarMarginLogo">
                         <a class="text-light cursorDefault" >Filtro</a>
                     </div>
                 </div>
@@ -214,6 +215,7 @@
                 </div>
             </div>
         </div>
+
 
         <%--container paginas--%>
     </form>

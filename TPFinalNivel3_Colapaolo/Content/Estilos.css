@@ -7,12 +7,23 @@
     padding: 0;
 }
 
+/*Barra de scroll*/
+* {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+}
+
+    *::-webkit-scrollbar {
+        display: none; /* WebKit (Safari, Chrome) */
+    }
+/*Barra de scroll fin*/
+
 a {
     text-decoration: none;
 }
 
 .cursorDefault {
-    cursor:default;
+    cursor: default;
 }
 
 li {
@@ -81,6 +92,43 @@ body {
 /*NAVBAR FIXED*/
 
 
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%; /* Asegurar que el sidebar ocupe toda la altura */
+    width: 70px;
+    min-width: 70px;
+    z-index: 1000;
+    transition: all .25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+/*Ajusta el container*/
+.main {
+    margin-left: 70px; 
+    margin-top: 56px; 
+    padding-top: 15px; 
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.sidebarMarginToggler {
+    margin-top:75px;
+}
+.sidebarMarginLogo {
+    margin-top:95px;
+}
+
+/*FIXED END*/
+
 
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
@@ -110,11 +158,11 @@ label.sidebar-link {
     white-space: nowrap;
     border-left: 3px solid transparent;
     padding-left: 60px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 #navbarTop ul li a:hover {
-    color:orange;
+    color: orange;
 }
 
 .sidebar-link i {
@@ -128,12 +176,12 @@ a.sidebar-link:hover, a.sidebar-link:focus, a.sidebar-link:active {
 }
 
 .sidebar-dropdown {
-    border-radius:0px 20px 20px 0px;
+    border-radius: 0px 20px 20px 0px;
 }
 
 .sidebar-footer .sidebar-link:hover {
     color: #bf0d0d;
-    font-weight:bold;
+    font-weight: bold;
 }
 
 input[type="radio"].btn-check:checked + label {
@@ -151,7 +199,7 @@ input[type="radio"].btn-check:checked + label {
     position: absolute;
     top: 0;
     left: 70px;
-    background-color:darkslategrey;
+    background-color: darkslategrey;
     padding: 0;
     min-width: 15rem;
     display: none;
@@ -181,3 +229,30 @@ input[type="radio"].btn-check:checked + label {
     transform: rotate(45deg);
     transition: all .2s ease-out;
 }
+
+
+/*Scroll Vertical en Sidebar*/
+.sidebar-nav-scroll {
+    overflow-y: auto;
+    max-height: calc(100vh - 60px); 
+}
+
+
+/*Efecto offcanvas del sidebar*/
+#sidebarOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 900; 
+    transition: background-color 0.3s ease; 
+    pointer-events: none; 
+}
+
+#sidebar.expand ~ #sidebarOverlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
