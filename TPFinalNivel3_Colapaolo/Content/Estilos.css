@@ -76,6 +76,12 @@ body {
         font-weight: 600;
     }
 
+/*SIDEBAR FIXED*/
+
+/*NAVBAR FIXED*/
+
+
+
 #sidebar:not(.expand) .sidebar-logo,
 #sidebar:not(.expand) a.sidebar-link span {
     display: none;

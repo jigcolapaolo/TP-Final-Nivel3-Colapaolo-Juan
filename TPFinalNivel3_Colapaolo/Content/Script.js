@@ -16,6 +16,18 @@ hamBurger.addEventListener("click", function () {
 
 });
 
+function clickFavorito(elemento) {
+    // Si la clase actual es "bi bi-star", la cambio a "bi bi-star-fill"
+    if (elemento.classList.contains("bi-star")) {
+        elemento.classList.remove("bi-star");
+        elemento.classList.add("bi-star-fill");
+    } else {
+        // Si la clase actual es diferente de "bi bi-star", la cambiamos a "bi bi-star"
+        elemento.classList.remove("bi-star-fill");
+        elemento.classList.add("bi-star");
+    }
+}
+
 
 
 
