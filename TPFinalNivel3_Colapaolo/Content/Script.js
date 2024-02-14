@@ -64,5 +64,12 @@ navbarToggler.addEventListener("click", function () {
 
 
 
-
+function toggleCheckboxes(checkbox) {
+    var checkboxes = document.querySelectorAll('.btn-check');
+    checkboxes.forEach(function (cb) {
+        if (cb !== checkbox) {
+            cb.checked = false;
+        }
+    });
+}
 

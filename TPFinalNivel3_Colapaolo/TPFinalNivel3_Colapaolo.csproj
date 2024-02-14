@@ -67,9 +67,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\SinSidebar.css" />
     <Content Include="Content\Estilos.css" />
     <Content Include="Content\Script.js" />
-    <Content Include="Default.aspx" />
+    <Content Include="Index.aspx" />
     <Content Include="DetalleArticulo.aspx" />
     <Content Include="Favoritos.aspx" />
     <Content Include="Global.asax" />
@@ -85,12 +86,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="DetalleArticulo.aspx.cs">
       <DependentUpon>DetalleArticulo.aspx</DependentUpon>
@@ -130,6 +131,13 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MasterNavbar.Master.cs">
+      <DependentUpon>MasterNavbar.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterNavbar.Master.designer.cs">
+      <DependentUpon>MasterNavbar.Master</DependentUpon>
+    </Compile>
     <Compile Include="MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -155,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="MasterPage.Master" />
+    <Content Include="MasterNavbar.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

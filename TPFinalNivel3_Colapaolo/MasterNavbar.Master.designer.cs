@@ -11,7 +11,7 @@ namespace TPFinalNivel3_Colapaolo
 {
 
 
-    public partial class MasterPage
+    public partial class MasterNavbar
     {
 
         /// <summary>
@@ -31,24 +31,6 @@ namespace TPFinalNivel3_Colapaolo
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-
-        /// <summary>
-        /// Control repeaterCategoria.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repeaterCategoria;
-
-        /// <summary>
-        /// Control repeaterMarcas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater repeaterMarcas;
 
         /// <summary>
         /// Control imgPerfil.

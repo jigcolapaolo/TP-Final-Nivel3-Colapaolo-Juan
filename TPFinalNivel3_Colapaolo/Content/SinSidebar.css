@@ -51,7 +51,7 @@ body {
     background-color: #fafbfe;
 }
 
-#sidebar {
+/*#sidebar {
     width: 70px;
     min-width: 70px;
     z-index: 1000;
@@ -63,7 +63,7 @@ body {
     #sidebar.expand {
         width: 260px;
         min-width: 260px;
-    }
+    }*/
 
 .toggle-btn {
     background-color: transparent;
@@ -92,11 +92,11 @@ body {
 /*NAVBAR FIXED*/
 
 
-#sidebar {
+/*#sidebar {
     position: fixed;
     top: 0;
     left: 0;
-    height: 100%; /* Asegurar que el sidebar ocupe toda la altura */
+    height: 100%; 
     width: 70px;
     min-width: 70px;
     z-index: 1000;
@@ -105,9 +105,8 @@ body {
     flex-direction: column;
 }
 
-/*Ajusta el container*/
+*/
 .main {
-    margin-left: 70px; 
     margin-top: 56px; 
     padding-top: 15px; 
 }

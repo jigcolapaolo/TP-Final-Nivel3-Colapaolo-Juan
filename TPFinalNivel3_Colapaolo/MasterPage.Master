@@ -35,7 +35,7 @@
                     </button>
                     <%--Filtro Texto--%>
                     <div class="sidebar-logo sidebarMarginLogo">
-                        <a class="text-light cursorDefault" >Filtro</a>
+                        <a class="text-light cursorDefault">Filtro</a>
                     </div>
                 </div>
 
@@ -60,19 +60,19 @@
                         </a>
                         <ul id="authC" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item ms-1">
-                                <%--Celulares--%>
-                                <input type="radio" class="btn-check" name="Categoria" id="optionC1" autocomplete="off">
-                                <label class="sidebar-link" for="optionC1"><i class="bi bi-dot"></i>Celulares</label>
-                                <%--Televisores--%>
-                                <input type="radio" class="btn-check" name="Categoria" id="optionC2" autocomplete="off">
-                                <label class="sidebar-link" for="optionC2"><i class="bi bi-dot"></i>Televisores</label>
-                                <%--Media--%>
-                                <input type="radio" class="btn-check" name="Categoria" id="optionC3" autocomplete="off">
-                                <label class="sidebar-link" for="optionC3"><i class="bi bi-dot"></i>Media</label>
-                                <%--Audio--%>
-                                <input type="radio" class="btn-check" name="Categoria" id="optionC4" autocomplete="off">
-                                <label class="sidebar-link" for="optionC4"><i class="bi bi-dot"></i>Audio</label>
+                                <%--CategoriaRepeater--%>
+                                <asp:Repeater runat="server" ID="repeaterCategoria">
+                                    <ItemTemplate>
 
+                                        <input type="checkbox" class="btn-check" id='<%#"optionC" + (Container.ItemIndex + 1) %>' onclick="toggleCheckboxes(this)" autocomplete="off">
+                                        <label class="sidebar-link" for='<%#"optionC" + (Container.ItemIndex + 1) %>'><i class="bi bi-dot"></i><%#Eval("Descripcion") %></label>
+
+                                        <%--                                        <input type="radio" class="btn-check" name="Categoria" id='<%#"optionC" + (Container.ItemIndex + 1) %>' autocomplete="off"">
+                                        <label class="sidebar-link" for='<%#"optionC" + (Container.ItemIndex + 1) %>'><i class="bi bi-dot"></i><%#Eval("Descripcion") %></label>--%>
+                                    </ItemTemplate>
+                                </asp:Repeater>
+
+                                <%--CategoriaRepeater Fin--%>
                             </li>
                         </ul>
                     </li>
@@ -87,21 +87,16 @@
                         </a>
                         <ul id="authM" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-                                <%--Samsung--%>
-                                <input type="radio" class="btn-check" name="Marca" id="optionM1" autocomplete="off">
-                                <label class="sidebar-link" for="optionM1"><i class="bi bi-dot"></i>Samsung</label>
-                                <%--Apple--%>
-                                <input type="radio" class="btn-check" name="Marca" id="optionM2" autocomplete="off">
-                                <label class="sidebar-link" for="optionM2"><i class="bi bi-dot"></i>Apple</label>
-                                <%--Sony--%>
-                                <input type="radio" class="btn-check" name="Marca" id="optionM3" autocomplete="off">
-                                <label class="sidebar-link" for="optionM3"><i class="bi bi-dot"></i>Sony</label>
-                                <%--Huawei--%>
-                                <input type="radio" class="btn-check" name="Marca" id="optionM4" autocomplete="off">
-                                <label class="sidebar-link" for="optionM4"><i class="bi bi-dot"></i>Huawei</label>
-                                <%--Motorola--%>
-                                <input type="radio" class="btn-check" name="Marca" id="optionM5" autocomplete="off">
-                                <label class="sidebar-link" for="optionM5"><i class="bi bi-dot"></i>Motorola</label>
+                                <%--MarcaRepeater--%>
+                                <asp:Repeater runat="server" ID="repeaterMarcas">
+                                    <ItemTemplate>
+
+                                        <input type="radio" class="btn-check" name="Marca" id='<%#"optionM" + (Container.ItemIndex + 1) %>' autocomplete="off">
+                                        <label class="sidebar-link" for='<%#"optionM" + (Container.ItemIndex + 1) %>'><i class="bi bi-dot"></i><%#Eval("Descripcion") %></label>
+
+                                    </ItemTemplate>
+                                </asp:Repeater>
+                                <%--MarcaRepeater Fin--%>
                             </li>
                         </ul>
                     </li>
@@ -151,7 +146,7 @@
                     <nav class="navbar navbar-expand-lg navbar-light bg-light bg-gradient shadow-sm">
                         <div class="container-fluid">
                             <%--Logo--%>
-                            <a class="navbar-brand" href="Default.aspx">
+                            <a class="navbar-brand" href="Index.aspx">
                                 <img src="./Images/Logo.png" height="50" />
                             </a>
 
@@ -176,7 +171,7 @@
                                 <ul class="navbar-nav mx-auto">
                                     <%--Home--%>
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="Default.aspx"><i class="bi bi-house me-1"></i>Home
+                                        <a class="nav-link active" aria-current="page" href="Index.aspx"><i class="bi bi-house me-1"></i>Home
                                         </a>
                                     </li>
                                     <%--Lista de Articulos--%>
@@ -193,8 +188,8 @@
                                 <hr class="border-success" />
                                 <%--Login, registrarse--%>
                                 <div class="d-flex justify-content-center my-lg-0 my-3">
-                                    <a class="btn btn-success rounded-pill ms-1">Login</a>
-                                    <a class="btn btn-outline-success rounded-pill ms-1">Registrarse</a>
+                                    <a href="Login.aspx" class="btn btn-success rounded-pill ms-1">Login</a>
+                                    <a href="Registro.aspx" class="btn btn-outline-success rounded-pill ms-1">Registrarse</a>
                                     <a class="btn btn-outline-danger rounded-pill ms-1">Logout</a>
                                 </div>
 
