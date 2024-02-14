@@ -23,6 +23,8 @@
 
 <body>
     <form id="form1" runat="server">
+
+        <%--Offcanvas--%>
         <div id="sidebarOverlay"></div>
 
         <div class="wrapper">
@@ -161,7 +163,6 @@
                                 data-bs-target="#navbarTop" aria-controls="navbarTop" aria-expanded="false"
                                 aria-label="Toggle navigation">
                                 <i class="bi bi-three-dots-vertical display-6"></i>
-                                <%--<span class="navbar-toggler-icon"></span>--%>
                             </button>
 
 

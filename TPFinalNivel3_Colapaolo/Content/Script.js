@@ -50,6 +50,7 @@ function clickFavorito(elemento) {
 const navbarToggler = document.querySelector(".navbar-toggler");
 const sidebarOverlay = document.querySelector("#sidebarOverlay");
 
+
 navbarToggler.addEventListener("click", function () {
     const body = document.querySelector("body");
 

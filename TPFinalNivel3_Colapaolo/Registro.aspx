@@ -8,6 +8,10 @@
             position: absolute;
             left: -99999px;
         }
+
+        .main {
+            margin-left: 0 !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">

@@ -1,11 +1,26 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterNavbar.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TPFinalNivel3_Colapaolo.Login" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="TPFinalNivel3_Colapaolo.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        #sidebar {
+            display: none;
+            visibility: hidden;
+            position: absolute;
+            left: -99999px;
+        }
+
+        .main {
+            margin-left: 0 !important;
+        }
+    </style>
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+
+    <div id="sidebarOverlay" class=""></div>
     <%--FILA 1--%>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center bg-success rounded">
         <div class="col-3"></div>
         <%--COLUMNA 1--%>
         <div class="col-3">
@@ -21,11 +36,12 @@
             </div>
 
             <%--BOTON LOGIN--%>
-            <asp:Button Text="Ingresar" CssClass="btn btn-primary" ID="btnIngresar" UseSubmitBehavior="true"  runat="server" />
+            <asp:Button Text="Ingresar" CssClass="btn btn-primary" ID="btnIngresar" UseSubmitBehavior="true" runat="server" />
 
         </div>
         <div class="col-3"></div>
     </div>
+
 
 
 </asp:Content>
