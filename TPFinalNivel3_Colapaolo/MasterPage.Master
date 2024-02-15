@@ -204,10 +204,10 @@
                     </nav>
 
 
-                    <div class="container mt-3">
+                    <%--<div class="container mt-3" id="mainContainer">--%>
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                         </asp:ContentPlaceHolder>
-                    </div>
+                    <%--</div>--%>
                 </div>
             </div>
         </div>
