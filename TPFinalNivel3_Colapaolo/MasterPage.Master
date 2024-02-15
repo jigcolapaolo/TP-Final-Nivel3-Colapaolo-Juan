@@ -154,8 +154,8 @@
 
                             <%--Bienvenido--%>
 
-                            <div class="mt-3">
-                                <p class="cursorDefault">Bienvenido (Usuario)!</p>
+                            <div>
+                                <asp:Label Text="Bienvenido!" ID="lblBienvenido" CssClass="cursorDefault" runat="server" />
                             </div>
 
                             <%--Toggler--%>
@@ -189,14 +189,14 @@
                                 <hr class="border-success" />
                                 <%--Login, registrarse--%>
                                 <div class="d-flex justify-content-center my-lg-0 my-3">
-                                    <a href="Login.aspx" class="btn btn-success rounded-pill ms-1">Login</a>
-                                    <a href="Registro.aspx" class="btn btn-outline-success rounded-pill ms-1">Registrarse</a>
-                                    <a class="btn btn-outline-danger rounded-pill ms-1">Logout</a>
+                                    <asp:Button ID="btnLogin" OnClick="btnLogin_Click" CssClass="btn btn-success rounded-pill ms-1" Text="Login" runat="server" />
+                                    <asp:Button ID="btnRegistrarse" OnClick="btnRegistrarse_Click" CssClass="btn btn-outline-success rounded-pill ms-1" Text="Registrarse" runat="server" />
+                                    <asp:Button ID="btnLogout" Visible="false" CssClass="btn btn-sm btn-outline-danger rounded-pill ms-1" OnClick="btnLogout_Click" UseSubmitBehavior="false" Text="Logout" runat="server" />
                                 </div>
 
-                                <asp:Image ID="imgPerfil"
-                                    Style="height: 40px; width: 40px; border-radius: 50%;"
-                                    ImageUrl="~/Images/Perfil.png"
+                                <asp:Image ID="imgPerfil" CssClass="ms-1"
+                                    Style="height: 50px; width: 50px; border-radius: 50%; border:1px solid gray;"
+                                    ImageUrl="~/Images/Perfil.png" Visible="false"
                                     runat="server" />
 
                             </div>
