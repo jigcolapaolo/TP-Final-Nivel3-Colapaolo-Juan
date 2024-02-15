@@ -42,7 +42,6 @@
 
     <form id="form2" runat="server">
 
-
         <div class="bg-white p-4 rounded-5 text-secondary shadow" style="width: 25rem">
             <%--Imagen logo--%>
             <div class="d-flex justify-content-center">
@@ -67,7 +66,7 @@
             </div>
 
             <%--Boton login--%>
-            <asp:Button Text="Ingresar" ID="btnLogin" CssClass="btn btn-warning bg-gradient text-dark w-100 mt-4 fw-semibold shadow-sm" 
+            <asp:Button Text="Ingresar" ID="btnLogin" CssClass="btn btn-warning bg-gradient text-dark w-100 mt-4 fw-semibold shadow-sm"
                 UseSubmitBehavior="false" OnClick="btnLogin_Click" runat="server" />
             <%--Registro--%>
             <div class="d-flex gap-1 justify-content-center mt-1">
@@ -81,8 +80,6 @@
                 </a>
             </div>
         </div>
-
-
     </form>
 
     <%--Link Bootstrap--%>

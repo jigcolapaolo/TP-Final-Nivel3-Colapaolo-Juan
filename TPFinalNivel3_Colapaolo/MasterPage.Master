@@ -154,7 +154,7 @@
 
                             <%--Bienvenido--%>
 
-                            <div>
+                            <div class="me-5">
                                 <asp:Label Text="Bienvenido!" ID="lblBienvenido" CssClass="cursorDefault" runat="server" />
                             </div>
 
@@ -169,6 +169,7 @@
                             <%--Items--%>
                             <div class="collapse navbar-collapse justify-content-lg-end text-center" id="navbarTop">
 
+                                <hr class="border-success" />
                                 <ul class="navbar-nav mx-auto">
                                     <%--Home--%>
                                     <li class="nav-item">
@@ -194,10 +195,13 @@
                                     <asp:Button ID="btnLogout" Visible="false" CssClass="btn btn-sm btn-outline-danger rounded-pill ms-1" OnClick="btnLogout_Click" UseSubmitBehavior="false" Text="Logout" runat="server" />
                                 </div>
 
-                                <asp:Image ID="imgPerfil" CssClass="ms-1"
-                                    Style="height: 50px; width: 50px; border-radius: 50%;"
-                                    ImageUrl="~/Images/Perfil.png" Visible="false"
-                                    runat="server" />
+                                <div class="bg-success bg-gradient d-flex justify-content-center align-items-center rounded-pill ms-2" style="height: 60px; width: 60px;">
+                                    <asp:Image ID="imgPerfil" CssClass=""
+                                        Style="height: 50px; width: 50px; border-radius: 50%;"
+                                        ImageUrl="~/Images/Perfil.png" Visible="false"
+                                        runat="server" />
+
+                                </div>
 
                             </div>
                         </div>
@@ -205,8 +209,8 @@
 
 
                     <%--<div class="container mt-3" id="mainContainer">--%>
-                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        </asp:ContentPlaceHolder>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
                     <%--</div>--%>
                 </div>
             </div>
