@@ -37,6 +37,11 @@ namespace TPFinalNivel3_Colapaolo
                     Session.Add("user", user);
                     Response.Redirect("Index.aspx", false);
                 }
+                else
+                {
+                    Session.Add("Error", "Email o Password incorrecto.");
+                    Response.Redirect("Informe.aspx", false);
+                }
 
             }
             catch (Exception ex)

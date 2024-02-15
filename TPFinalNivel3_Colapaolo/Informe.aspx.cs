@@ -11,7 +11,10 @@ namespace TPFinalNivel3_Colapaolo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Error"] != null)
+                lblInforme.Text = Session["Error"].ToString();
+            else
+                Response.Redirect("Index.aspx", false);
         }
     }
 }
