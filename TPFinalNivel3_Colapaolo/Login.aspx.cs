@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
+using Negocio;
+using Helper;
 
 namespace TPFinalNivel3_Colapaolo
 {
@@ -11,7 +14,36 @@ namespace TPFinalNivel3_Colapaolo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                UserNegocio negocioUser = new UserNegocio();
 
+            }
+        }
+
+        protected void btnLogin_Click(object sender, EventArgs e)
+        {
+            UserNegocio negocioUser = new UserNegocio();
+            User user = new User();
+
+
+            try
+            {
+                user.Email = txtEmail.Text;
+                user.Pass = txtPassword.Text;
+
+                if (negocioUser.Login(user))
+                {
+                    Session.Add("user", user);
+                    Response.Redirect("Index.aspx", false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("Error", ex.ToString());
+            }
         }
     }
 }

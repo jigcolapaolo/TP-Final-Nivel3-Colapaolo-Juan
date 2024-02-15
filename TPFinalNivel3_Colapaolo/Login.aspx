@@ -18,10 +18,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        a:hover {
-            color: orange;
-        }
-
         .form-control:hover, .form-control:focus, .form-control:active {
             border-color: orange;
             box-shadow: none;
@@ -55,34 +51,33 @@
             <%--Linea--%>
             <div class="border-bottom text-center" style="height: 0.9rem"></div>
 
-            <%--User--%>
+            <%--Email--%>
             <div class="input-group mt-4">
                 <div class="input-group-text bg-warning bg-opacity-75 bg-gradient">
                     <i class="bi bi-person-fill"></i>
                 </div>
-                <input class="form-control bg-light" type="text" placeholder="User" />
+                <asp:TextBox CssClass="form-control bg-light" ID="txtEmail" placeholder="Ejemplo@Gmail.com" runat="server" />
             </div>
             <%--Password--%>
             <div class="input-group mt-1">
                 <div class="input-group-text bg-warning bg-opacity-75 bg-gradient">
                     <i class="bi bi-lock-fill"></i>
                 </div>
-                <input class="form-control bg-light" type="password" placeholder="Password" />
+                <asp:TextBox CssClass="form-control bg-light" ID="txtPassword" placeholder="Password" TextMode="Password" runat="server" />
             </div>
 
             <%--Boton login--%>
-            <div class="btn btn-warning bg-gradient text-white-emphasis w-100 mt-4 fw-semibold shadow-sm">
-                Ingresar
-            </div>
+            <asp:Button Text="Ingresar" ID="btnLogin" CssClass="btn btn-warning bg-gradient text-dark w-100 mt-4 fw-semibold shadow-sm" 
+                UseSubmitBehavior="false" OnClick="btnLogin_Click" runat="server" />
             <%--Registro--%>
             <div class="d-flex gap-1 justify-content-center mt-1">
                 <div>¿No tenés una cuenta?</div>
-                <a href="#" class="link-danger text-decoration-none fw-semibold">Registrate</a>
+                <a href="Registro.aspx" class="link-danger text-decoration-none fw-semibold">Registrate</a>
             </div>
 
             <%--Boton Home--%>
             <div class="d-flex justify-content-center mt-4">
-                <a class="btn rounded-pill" id="homeBtn" aria-current="page" href="Index.aspx"><i class="bi bi-house me-1"></i>Volver a Home
+                <a class="btn rounded-pill shadow" id="homeBtn" aria-current="page" href="Index.aspx"><i class="bi bi-house me-1"></i>Volver a Home
                 </a>
             </div>
         </div>

@@ -22,10 +22,10 @@ namespace Negocio
                 while (datos.Lector.Read())
                 {
                     usuario.Id = (int)datos.Lector["Id"];
-                    usuario.Nombre = (string)datos.Lector["nombre"];
-                    usuario.Apellido = (string)datos.Lector["apellido"];
-                    usuario.UrlImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
-                    usuario.Admin = (bool)datos.Lector["admin"];
+                    usuario.Nombre = datos.Lector["nombre"] != DBNull.Value ? (string)datos.Lector["nombre"] : null;
+                    usuario.Apellido = datos.Lector["apellido"] != DBNull.Value ? (string)datos.Lector["apellido"] : null;
+                    usuario.UrlImagenPerfil = datos.Lector["urlImagenPerfil"] != DBNull.Value ? (string)datos.Lector["urlImagenPerfil"] : null;
+                    usuario.Admin = datos.Lector["admin"] != DBNull.Value ? (bool)datos.Lector["admin"] : false;
 
                     return true;
                 }
