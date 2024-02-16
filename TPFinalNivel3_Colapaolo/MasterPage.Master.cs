@@ -14,6 +14,8 @@ namespace TPFinalNivel3_Colapaolo
     {
         public List<Marca> listaMarcas { get; set; }
         public List<Categoria> listaCategoria { get; set; }
+
+        public User user { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -36,18 +38,15 @@ namespace TPFinalNivel3_Colapaolo
 
                 if (Seguridad.sesionActiva(Session["user"]))
                 {
-                    User user = (User)Session["user"];
+                    user = (User)Session["user"];
 
                     //Imagen
-                    imgPerfil.Visible = true;
-                    imgPerfil.ImageUrl = user.UrlImagenPerfil;
+                    imgPerfil.ImageUrl = Validacion.validarImagen(user);
 
-                    //Boton Logout, Registrarse y Login
-                    btnLogout.Visible = true;
+
+                    //Boton Registrarse y Login
                     btnRegistrarse.Visible = false;
                     btnLogin.Visible = false;
-
-
 
                     //Label Bienvenido
                     string nombreUser = !string.IsNullOrEmpty(user.Nombre) ? user.Nombre.ToString() : "";

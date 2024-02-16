@@ -271,3 +271,13 @@ input[type="checkbox"].btn-check:checked + label {
 .no-border{
     border:none;
 }
+
+
+
+/*Efectos ImgPerfil*/
+#divImg:hover {
+    box-shadow: 0px 0px 122px 22px rgba(22,184,41,1);
+}
+    #divImg:hover #imgPerfil {
+        transform: scale(1.05);
+    }

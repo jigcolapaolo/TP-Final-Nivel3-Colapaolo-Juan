@@ -137,9 +137,7 @@
                         <span>Logout</span>
                     </a>
                 </div>
-                <%}
-
-                %>
+                <%}%>
             </aside>
 
 
@@ -160,10 +158,10 @@
                             </a>
 
                             <%--Bienvenido--%>
-
-                            <div class="me-5">
-                                <asp:Label Text="Bienvenido!" ID="lblBienvenido" CssClass="cursorDefault" runat="server" />
+                            <div class="me-lg-0 me-4">
+                                <asp:Label Text="Bienvenido!" ID="lblBienvenido" CssClass="cursorDefault rounded-pill p-2 bg-success-subtle" runat="server" />
                             </div>
+
 
                             <%--Toggler--%>
                             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
@@ -174,7 +172,7 @@
 
 
                             <%--Items--%>
-                            <div class="collapse navbar-collapse justify-content-lg-end text-center" id="navbarTop">
+                            <div class="collapse navbar-collapse justify-content-lg-end text-center mx-auto" id="navbarTop">
 
                                 <hr class="border-success" />
                                 <ul class="navbar-nav mx-auto">
@@ -184,40 +182,55 @@
                                         </a>
                                     </li>
                                     <%--Lista de Articulos--%>
+
+                                    <%if (user != null && user.Admin)
+                                        {%>
                                     <li class="nav-item">
                                         <a class="nav-link" href="ListaArticulos.aspx"><i class="bi bi-list-ul me-1"></i>Lista de Artículos
                                         </a>
                                     </li>
+                                    <%} %>
                                     <%--Favoritos--%>
+                                    <%if (user != null)
+                                        {%>
+
                                     <li class="nav-item">
                                         <a class="nav-link" href="Favoritos.aspx"><i class="bi bi-star me-1"></i>Favoritos
                                         </a>
                                     </li>
+                                    <%} %>
                                 </ul>
                                 <hr class="border-success" />
-                                <%--Login, Registro, Logout--%>
-                                <div class="d-flex justify-content-center my-lg-0 my-3">
+                                <%--Login, Registro--%>
+                                <div class="d-flex justify-content-center my-lg-0 my-2">
                                     <%--Login--%>
                                     <asp:Button ID="btnLogin" OnClick="btnLogin_Click" CssClass="btn btn-success rounded-pill ms-1"
                                         Text="Login" runat="server" />
                                     <%--Registro--%>
                                     <asp:Button ID="btnRegistrarse" OnClick="btnRegistrarse_Click"
                                         CssClass="btn btn-outline-success rounded-pill ms-1" Text="Registrarse" runat="server" />
-                                    <%--Logout--%>
-                                    <asp:Button ID="btnLogout" Text="Logout" CssClass="btn btn-sm btn-outline-danger rounded-pill ms-1"
-                                        runat="server" data-bs-toggle="modal" OnClientClick="return false;"
-                                        data-bs-target="#logoutModal" Visible="false" UseSubmitBehavior="false" />
                                 </div>
 
                                 <%--ImagenPerfil--%>
                                 <%if (Session["user"] != null)
                                     {%>
-                                <div class="bg-success bg-gradient d-flex justify-content-center align-items-center rounded-pill ms-2"
-                                    style="height: 60px; width: 60px; cursor: pointer">
-                                    <asp:Image ID="imgPerfil" CssClass=""
+                                <div class="bg-success-subtle bg-gradient mx-auto mx-lg-0 ms-lg-5 d-flex justify-content-center align-items-center rounded-pill"
+                                    style="height: 60px; width: 60px; cursor: pointer" id="divImg">
+
+                                    <div class="dropdown">
+                                        <ul class="dropdown-menu dropdown-menu-md-end dropdown-menu-start bg-success-subtle">
+                                            <li><a class="dropdown-item bg-success-subtle" href="#"><i class="bi bi-person-lines-fill me-2"></i>Mi Perfil</a></li>
+                                            <li><a class="dropdown-item bg-success-subtle pb-3" href="#"><i class="bi bi-star me-2"></i>Mis Favoritos</a></li>
+                                            <li><a href="#" data-bs-target="#logoutModal" data-bs-toggle="modal"
+                                                class="dropdown-item link-danger border-top border-success-subtle pt-2 bg-success-subtle" id="dropdownLogout"><i class="lni lni-exit me-2"></i>Logout</a></li>
+
+                                        </ul>
+                                    </div>
+
+                                    <asp:Image ID="imgPerfil" CssClass="dropdown-toggle"
                                         Style="height: 50px; width: 50px; border-radius: 50%;"
-                                        ImageUrl="~/Images/Perfil.png" Visible="false"
-                                        runat="server" />
+                                        ImageUrl="~/Images/Perfil.png"
+                                        runat="server" data-bs-toggle="dropdown" aria-expanded="false" />
 
                                 </div>
                                 <%} %>
@@ -233,8 +246,6 @@
                 </div>
             </div>
         </div>
-
-
 
         <!-- Modal Logout -->
         <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
