@@ -27,11 +27,12 @@ hamBurger.addEventListener("click", function () {
 
         // Scroll para los elementos del sidebar
         sidebarNav.classList.remove("sidebar-nav-scroll");
-        // Efecto offcanvas al abrir sidebar
+        // Efecto offcanvas al cerrar sidebar
         sidebarOverlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
     }
 
 });
+
 
 function clickFavorito(elemento) {
     // Si la clase actual es "bi bi-star", se cambia a "bi bi-star-fill"
@@ -50,13 +51,12 @@ function clickFavorito(elemento) {
 const navbarToggler = document.querySelector(".navbar-toggler");
 const sidebarOverlay = document.querySelector("#sidebarOverlay");
 
-
 navbarToggler.addEventListener("click", function () {
     const body = document.querySelector("body");
 
     body.classList.toggle("sidebar-expanded");
 
-    if (body.classList.contains("sidebar-expanded")) {
+    if (body.classList.contains("sidebar-expanded") || sidebar.classList.contains("expand")) {
         sidebarOverlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     } else {
         sidebarOverlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
@@ -64,7 +64,42 @@ navbarToggler.addEventListener("click", function () {
 });
 
 
+//Cierre del sidebar y navbar y quito el offcanvas al clickear en el mainContainer
+const mainContainer = document.querySelector("#mainContainer");
+const togglerButton = document.querySelector(".navbar-toggler");
+mainContainer.addEventListener("click", function () {
 
+    const body = document.querySelector("body");
+
+    if (sidebarOverlay.style.backgroundColor == "rgba(0, 0, 0, 0.5)") {
+
+        sidebarOverlay.style.backgroundColor = "rgba(0, 0, 0, 0)";
+
+        if (navbarTop.classList.contains("show") && sidebar.classList.contains("expand")) {
+            togglerButton.click();
+            hamBurger.click();
+        }
+
+        if (navbarTop.classList.contains("show")) {
+            togglerButton.click();
+        }
+
+        if (sidebar.classList.contains("expand")) {
+            hamBurger.click();
+        }
+    }
+
+})
+
+
+window.addEventListener('resize', function () {
+    // Obtener el tamaño de pantalla actual
+    mainContainer.click();
+});
+
+
+
+//Solo permite seleccionar un checkbox a la vez
 function toggleCheckboxes(checkbox) {
     var checkboxes = document.querySelectorAll('.btn-check');
     checkboxes.forEach(function (cb) {

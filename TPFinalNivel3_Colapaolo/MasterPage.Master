@@ -21,7 +21,7 @@
 </head>
 
 
-<body>
+<body id="jsBody">
     <form id="form1" runat="server">
 
         <%--Offcanvas--%>
@@ -195,7 +195,7 @@
                                     <asp:Button ID="btnLogout" Visible="false" CssClass="btn btn-sm btn-outline-danger rounded-pill ms-1" OnClick="btnLogout_Click" UseSubmitBehavior="false" Text="Logout" runat="server" />
                                 </div>
 
-                                <div class="bg-success bg-gradient d-flex justify-content-center align-items-center rounded-pill ms-2" style="height: 60px; width: 60px;">
+                                <div class="bg-success bg-gradient d-flex justify-content-center align-items-center rounded-pill ms-2" style="height: 60px; width: 60px; cursor: pointer">
                                     <asp:Image ID="imgPerfil" CssClass=""
                                         Style="height: 50px; width: 50px; border-radius: 50%;"
                                         ImageUrl="~/Images/Perfil.png" Visible="false"
@@ -208,10 +208,10 @@
                     </nav>
 
 
-                    <%--<div class="container mt-3" id="mainContainer">--%>
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    </asp:ContentPlaceHolder>
-                    <%--</div>--%>
+                    <div class="container mt-3" id="mainContainer">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
                 </div>
             </div>
         </div>
