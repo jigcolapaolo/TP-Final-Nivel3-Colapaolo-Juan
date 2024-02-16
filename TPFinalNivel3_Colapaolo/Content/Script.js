@@ -88,12 +88,11 @@ mainContainer.addEventListener("click", function () {
             hamBurger.click();
         }
     }
-
 })
 
 
+//Cierro todas las barras al cambiar de tamaño la pantalla 
 window.addEventListener('resize', function () {
-    // Obtener el tamaño de pantalla actual
     mainContainer.click();
 });
 
@@ -108,4 +107,3 @@ function toggleCheckboxes(checkbox) {
         }
     });
 }
-

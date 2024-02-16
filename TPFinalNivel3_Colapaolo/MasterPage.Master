@@ -129,13 +129,20 @@
 
 
                 <%--Footer - Logout--%>
+                <%if (Session["user"] != null)
+                    {%>
                 <div class="sidebar-footer mt-auto">
-                    <a href="#" class="sidebar-link">
+                    <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#logoutModal">
                         <i class="lni lni-exit"></i>
                         <span>Logout</span>
                     </a>
                 </div>
+                <%}
+
+                %>
             </aside>
+
+
 
 
 
@@ -188,26 +195,37 @@
                                     </li>
                                 </ul>
                                 <hr class="border-success" />
-                                <%--Login, registrarse--%>
+                                <%--Login, Registro, Logout--%>
                                 <div class="d-flex justify-content-center my-lg-0 my-3">
-                                    <asp:Button ID="btnLogin" OnClick="btnLogin_Click" CssClass="btn btn-success rounded-pill ms-1" Text="Login" runat="server" />
-                                    <asp:Button ID="btnRegistrarse" OnClick="btnRegistrarse_Click" CssClass="btn btn-outline-success rounded-pill ms-1" Text="Registrarse" runat="server" />
-                                    <asp:Button ID="btnLogout" Visible="false" CssClass="btn btn-sm btn-outline-danger rounded-pill ms-1" OnClick="btnLogout_Click" UseSubmitBehavior="false" Text="Logout" runat="server" />
+                                    <%--Login--%>
+                                    <asp:Button ID="btnLogin" OnClick="btnLogin_Click" CssClass="btn btn-success rounded-pill ms-1"
+                                        Text="Login" runat="server" />
+                                    <%--Registro--%>
+                                    <asp:Button ID="btnRegistrarse" OnClick="btnRegistrarse_Click"
+                                        CssClass="btn btn-outline-success rounded-pill ms-1" Text="Registrarse" runat="server" />
+                                    <%--Logout--%>
+                                    <asp:Button ID="btnLogout" Text="Logout" CssClass="btn btn-sm btn-outline-danger rounded-pill ms-1"
+                                        runat="server" data-bs-toggle="modal" OnClientClick="return false;"
+                                        data-bs-target="#logoutModal" Visible="false" UseSubmitBehavior="false" />
                                 </div>
 
-                                <div class="bg-success bg-gradient d-flex justify-content-center align-items-center rounded-pill ms-2" style="height: 60px; width: 60px; cursor: pointer">
+                                <%--ImagenPerfil--%>
+                                <%if (Session["user"] != null)
+                                    {%>
+                                <div class="bg-success bg-gradient d-flex justify-content-center align-items-center rounded-pill ms-2"
+                                    style="height: 60px; width: 60px; cursor: pointer">
                                     <asp:Image ID="imgPerfil" CssClass=""
                                         Style="height: 50px; width: 50px; border-radius: 50%;"
                                         ImageUrl="~/Images/Perfil.png" Visible="false"
                                         runat="server" />
 
                                 </div>
-
+                                <%} %>
                             </div>
                         </div>
                     </nav>
 
-
+                    <%--container paginas--%>
                     <div class="container mt-3" id="mainContainer">
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                         </asp:ContentPlaceHolder>
@@ -217,7 +235,25 @@
         </div>
 
 
-        <%--container paginas--%>
+
+        <!-- Modal Logout -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content bg-success-subtle bg-gradient">
+                    <div class="modal-header no-border">
+                        <h1 class="modal-title fs-5" id="logoutModalLabel">¿Cerrar Sesión?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer no-border d-flex justify-content-center gap-4">
+                        <%--<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Si</button>--%>
+                        <asp:Button ID="modalBtnLogout" CssClass="btn btn-danger" OnClick="modalBtnLogout_Click"
+                            data-bs-dismiss="modal" Text="Si" runat="server" />
+                        <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </form>
 
     <%--Link Bootstrap--%>

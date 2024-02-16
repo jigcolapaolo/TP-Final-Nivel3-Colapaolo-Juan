@@ -265,3 +265,9 @@ input[type="checkbox"].btn-check:checked + label {
 }
 
 
+
+/*No Border*/
+
+.no-border{
+    border:none;
+}

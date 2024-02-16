@@ -56,15 +56,6 @@ namespace TPFinalNivel3_Colapaolo
             }
         }
 
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-            if (Session["user"] != null)
-            {
-                Session.Clear();
-                Response.Redirect("Index.aspx", false);
-            }
-        }
-
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
             Response.Redirect("Registro.aspx", false);
@@ -73,6 +64,15 @@ namespace TPFinalNivel3_Colapaolo
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             Response.Redirect("Login.aspx", false);
+        }
+
+        protected void modalBtnLogout_Click(object sender, EventArgs e)
+        {
+            if (Session["user"] != null)
+            {
+                Session.Clear();
+                Response.Redirect("Index.aspx", false);
+            }
         }
     }
 }
