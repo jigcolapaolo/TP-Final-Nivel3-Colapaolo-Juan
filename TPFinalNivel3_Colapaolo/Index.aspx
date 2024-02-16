@@ -47,7 +47,12 @@
                     <%--Card--%>
 
                     <div class="card shadow" style="width: 16rem;">
+
+                        <%if (Session["user"] != null)
+                            {%>
                         <i class="bi bi-star text-warning h4 p-2 bg-success bg-gradient position-absolute" onclick="clickFavorito(this)" id="star"></i>
+                        <%} %>
+
                         <a href="DetalleArticulo.aspx">
                             <img src='<%# string.IsNullOrEmpty(Eval("ImagenUrl").ToString()) ? "./Images/SinImagen.png" : Eval("ImagenUrl") %>'
                                 height="300" class="card-img-top" onerror="this.onerror=null;this.src='./Images/SinImagen.png';" alt="Imagen de Artículo" />
