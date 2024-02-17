@@ -229,7 +229,7 @@
 
                                     <asp:Image ID="imgPerfil" CssClass="dropdown-toggle"
                                         Style="height: 50px; width: 50px; border-radius: 50%;"
-                                        ImageUrl="~/Images/Perfil.png"
+                                        ImageUrl="~/Images/Perfil.png" onerror="this.onerror=null;this.src='./Images/Perfil.png';"
                                         runat="server" data-bs-toggle="dropdown" aria-expanded="false" />
 
                                 </div>

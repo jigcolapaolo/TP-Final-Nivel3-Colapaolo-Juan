@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 using Helper;
+using System.Security.Policy;
+using System.Net;
 
 namespace TPFinalNivel3_Colapaolo
 {

@@ -122,7 +122,7 @@
                     <div class="d-flex justify-content-center">
                         <%--IMAGEN--%>
                         <asp:Image
-                            ImageUrl="~/Images/Perfil.png"
+                            ImageUrl="~/Images/Perfil.png" onerror="this.onerror=null;this.src='./Images/Perfil.png';"
                             runat="server" ID="imgRegistro" CssClass="img-fluid rounded mb-3" Width="" Height="200" />
                     </div>
 
