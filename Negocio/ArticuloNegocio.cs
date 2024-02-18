@@ -142,7 +142,7 @@ namespace Negocio
             List<Articulo> lista = new List<Articulo>();
             try
             {
-                datos.setearConsulta("SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio  FROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F WHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @idUser AND A.Id = F.IdArticulo");
+                datos.setearConsulta("SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria  FROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F WHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @idUser AND A.Id = F.IdArticulo");
                 datos.setearParametros("@idUser", idUser);
 
                 datos.ejecutarLectura();

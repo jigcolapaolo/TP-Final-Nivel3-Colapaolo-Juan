@@ -40,7 +40,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-5 mb-4 ms-md-2">
 
         <%--Repeater--%>
-        <asp:Repeater runat="server" ID="repRepeater">
+        <asp:Repeater runat="server" ID="repRepeater" OnItemDataBound="repRepeater_ItemDataBound">
             <ItemTemplate>
 
                 <div class="col ms-5 ms-md-0">
@@ -51,6 +51,8 @@
                         <%if (Session["user"] != null)
                             {%>
                         <i class="bi bi-star text-warning h4 p-2 bg-success bg-gradient position-absolute" onclick="clickFavorito(this)" id="star"></i>
+
+
                         <%} %>
 
                         <a href="DetalleArticulo.aspx">

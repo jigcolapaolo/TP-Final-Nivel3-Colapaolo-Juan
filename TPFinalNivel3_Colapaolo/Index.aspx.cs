@@ -10,6 +10,7 @@ using Helper;
 using System.Security.Cryptography.X509Certificates;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web.UI.HtmlControls;
 
 namespace TPFinalNivel3_Colapaolo
 {
@@ -33,6 +34,9 @@ namespace TPFinalNivel3_Colapaolo
 
         }
 
+        protected void repRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
 
+        }
     }
 }

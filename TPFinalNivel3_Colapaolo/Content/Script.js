@@ -47,6 +47,7 @@ function clickFavorito(elemento) {
 }
 
 
+
 //Efecto offcanvas del toggler del navbar
 const navbarToggler = document.querySelector(".navbar-toggler");
 const sidebarOverlay = document.querySelector("#sidebarOverlay");
