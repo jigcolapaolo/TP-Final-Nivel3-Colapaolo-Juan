@@ -18,7 +18,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <%--USER--%>
-
+    <%if (!Helper.Seguridad.isAdmin(Session["user"]))
+        {%>
     <div class="container rounded p-4">
         <%--FILA 1--%>
         <div class="row">
@@ -36,7 +37,7 @@
                 <div class="d-flex justify-content-start align-items-center">
                     <asp:Label Text="" ID="lblNombre" CssClass="display-6 text-danger text-break" runat="server" />
                 </div>
-                <%--Marca y Categoria--%>
+                <%--Categoria y Marca--%>
                 <div class="d-flex justify-content-start align-items-center fs-5">
                     <asp:Label Text="" ID="lblCategoria" CssClass="text-secondary" runat="server" />
                     <div class="text-secondary mx-1">/</div>
@@ -58,8 +59,75 @@
             </div>
         </div>
     </div>
-
-
-
+    <%}
+        else
+        {%>
     <%--ADMIN--%>
+    <div class="container rounded p-4">
+        <%--FILA 1--%>
+        <div class="row">
+            <%--COLUMNA 1--%>
+            <div class="col-12 col-lg-7">
+                <%--ImagenArticulo--%>
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <asp:Image ImageUrl="./Images/SinImagen.png" ID="imgArticuloAdmin" CssClass="img-fluid rounded"
+                        onerror="this.onerror=null;this.src='./Images/SinImagen.png';" Height="450" runat="server" />
+                    <input type="file" class="form-control form-control-sm w-75 my-2 my-lg-0 mt-lg-2" id="txtImagen" runat="server" />
+                </div>
+            </div>
+            <%--COLUMNA 2--%>
+            <div class="col-12 col-lg-5 d-flex flex-column justify-content-around bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
+                <%--Codigo--%>
+                <div class="d-flex flex-column justify-content-start align-items-start">
+                    <asp:Label Text="Código" for="txtCodigo" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                    <asp:TextBox Text="" ID="txtCodigo" CssClass="form-control" runat="server" />
+                </div>
+                <%--Nombre--%>
+                <div class="d-flex flex-column justify-content-start align-items-start mt-1">
+                    <asp:Label Text="Nombre" for="txtNombre" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                    <asp:TextBox Text="" ID="txtNombre" CssClass="form-control" runat="server" />
+                </div>
+                <%--Categoria y Marca--%>
+                <div class="d-flex justify-content-around align-items-center my-2">
+                    <div class="d-flex flex-column justify-content-start align-items-start">
+                        <asp:Label Text="Categoría" for="ddlCategoria" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                        <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                    <div class="d-flex flex-column justify-content-start align-items-start">
+                        <asp:Label Text="Marca" for="ddlMarca" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                        <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server"></asp:DropDownList>
+                    </div>
+                </div>
+                <%--Precio--%>
+                <div class="my-2 d-flex flex-column justify-content-start align-items-start">
+                    <asp:Label Text="Precio" for="txtPrecio" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                    <asp:TextBox Text="" ID="txtPrecio" Type="Number" CssClass="form-control" runat="server" />
+                </div>
+                <%--Descripcion--%>
+                <div class="d-flex flex-column justify-content-start align-items-start">
+                    <asp:Label Text="Descripción" for="txtDescripcion" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                    <asp:TextBox Text="" TextMode="MultiLine" CssClass="form-control" ID="txtDescripcion" runat="server" />
+                </div>
+                <%--Boton Volver--%>
+                <div class="d-flex justify-content-around align-items-end mt-4">
+                    <asp:LinkButton CssClass="btn btn-success btn-sm rounded-pill" runat="server">
+                        <i class="bi bi-plus-circle me-1"></i>Agregar
+                    </asp:LinkButton>
+                    <asp:LinkButton CssClass="btn btn-warning btn-sm rounded-pill" runat="server">
+                        <i class="bi bi-pencil-square me-1"></i>Modificar
+                    </asp:LinkButton>
+                    <asp:LinkButton CssClass="btn btn-danger btn-sm rounded-pill" runat="server">
+                        <i class="bi bi-trash3 me-1"></i>Eliminar
+                    </asp:LinkButton>
+                    <%--<a href="Index.aspx" class="btn btn-outline-success btn-sm rounded-pill"><i class="bi bi-arrow-left-circle me-2"></i>Volver</a>--%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%} %>
+
+        <%--Flecha Volver--%>
+    <a href="Index.aspx" class="arrow-up">
+        <div class="btn btn-outline-success btn-sm rounded-pill"><i class="bi bi-arrow-left-circle me-2"></i>Volver</div>
+    </a>
 </asp:Content>
