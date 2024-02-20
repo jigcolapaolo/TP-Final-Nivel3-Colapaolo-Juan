@@ -25,7 +25,7 @@ namespace TPFinalNivel3_Colapaolo
 
             if (!IsPostBack)
             {
-                
+
 
                 if (ListaArticulosFav == null)
                 {
@@ -43,9 +43,9 @@ namespace TPFinalNivel3_Colapaolo
         //si no lo estan, busca el control de ese objeto que guarda su Id en Text.
         //Finalmente para eliminar ese elemento de la lista de favoritos, uso como parametros el id del usuario actual y el id
         //de cada objeto con Checked="false". Para terminar cargo de vuelta la lista.
-        protected void btnActualizar_Click(object sender, EventArgs e)
-        {
 
+        protected void btnLinkActualizar_Click(object sender, EventArgs e)
+        {
             User user = Session["user"] != null ? (User)Session["user"] : null;
 
             foreach (RepeaterItem item in repRepeaterFav.Items)
@@ -74,8 +74,39 @@ namespace TPFinalNivel3_Colapaolo
 
             repRepeaterFav.DataSource = ListaArticulosFav;
             repRepeaterFav.DataBind();
+        }
 
 
+        protected void Page_Unload(object sender, EventArgs e)
+        {
+            User user = Session["user"] != null ? (User)Session["user"] : null;
+
+            foreach (RepeaterItem item in repRepeaterFav.Items)
+            {
+
+                CheckBox chkFavorito = (CheckBox)item.FindControl("chkFavorito");
+
+                if (!chkFavorito.Checked)
+                {
+                    Label lblId = (Label)item.FindControl("lblId");
+                    string id = lblId.Text;
+                    int intId = Convert.ToInt32(id);
+
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    negocio.eliminarFavorito(user.Id, intId);
+                }
+
+            }
+
+            if (ListaArticulosFav == null)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+
+                ListaArticulosFav = negocio.listarFavoritos(user.Id);
+            }
+
+            repRepeaterFav.DataSource = ListaArticulosFav;
+            repRepeaterFav.DataBind();
         }
     }
 }

@@ -28,18 +28,30 @@
                 background-color: yellow;
                 cursor: pointer;
             }
+
+
+        .arrow-up {
+            position: fixed;
+            bottom: 20px; /* Distancia desde el borde inferior */
+            right: 20px; /* Distancia desde el borde derecho */
+            z-index: 1000; /* Asegura que esté por encima del contenido */
+        }
+
+        .arrow-up img {
+            width: 40px; /* Tamaño del icono */
+            height: 40px;
+        }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="row my-4">
-        <h1 class="text-secondary display-6">Mis Favoritos</h1>
+    <div class="my-4">
+        <h1 class="text-secondary display-6" id="topFav">Mis Favoritos</h1>
+        <asp:LinkButton ID="btnLinkActualizar" OnClick="btnLinkActualizar_Click" runat="server" CssClass="btn btn-warning btn-sm rounded-pill my-2">Guardar Cambios</asp:LinkButton>
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 g-5 mb-4 ms-md-2">
-
-        <asp:Button Text="Actualizar" ID="btnActualizar" UseSubmitBehavior="false" CssClass="btn btn-success btn-sm" OnClick="btnActualizar_Click" runat="server" />
 
         <%--Repeater--%>
         <asp:Repeater runat="server" ID="repRepeaterFav">
@@ -74,6 +86,10 @@
 
 
     </div>
+
+    <a href="#" class="arrow-up">
+        <div href="#topFav" class="btn btn-outline-success rounded"><i class="bi bi-arrow-up"></i></div>
+    </a>
 
 
 </asp:Content>
