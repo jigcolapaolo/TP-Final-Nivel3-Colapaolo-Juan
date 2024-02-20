@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Favoritos.aspx.cs" Inherits="TPFinalNivel3_Colapaolo.Favoritos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-        <style>
+    <style>
         .card-img-top {
             max-width: 100%;
             max-height: 100%;
@@ -34,49 +34,46 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="row my-4">
-    <h1 class="text-secondary display-6">Mis Favoritos</h1>
-</div>
+        <h1 class="text-secondary display-6">Mis Favoritos</h1>
+    </div>
 
+    <div class="row row-cols-1 row-cols-md-3 g-5 mb-4 ms-md-2">
 
-<div class="row row-cols-1 row-cols-md-3 g-5 mb-4 ms-md-2">
+        <asp:Button Text="Actualizar" ID="btnActualizar" UseSubmitBehavior="false" CssClass="btn btn-success btn-sm" OnClick="btnActualizar_Click" runat="server" />
 
-    <%--Repeater--%>
-    <asp:Repeater runat="server" ID="repRepeaterFav">
-        <ItemTemplate>
+        <%--Repeater--%>
+        <asp:Repeater runat="server" ID="repRepeaterFav">
+            <ItemTemplate>
 
-            <div class="col ms-5 ms-md-0">
-                <%--Card--%>
+                <div class="col ms-5 ms-md-0">
+                    <%--Card--%>
+                    <div class="card shadow" style="width: 16rem;">
+                        <%--<i class="bi bi-star text-warning h4 p-2 bg-success bg-gradient position-absolute" onclick="clickFavorito(this)" id="star"></i>--%>
+                        <asp:CheckBox ID="chkFavorito" runat="server" Checked="true" />
+                        <label class="form-check-label" for='<%# "chkFavorito_" + Container.ItemIndex %>'>
+                            <i class="bi bi-star text-warning h4 p-2 bg-success bg-gradient"></i>
+                        </label>
 
-                <div class="card shadow" style="width: 16rem;">
-
-                    <%if (Session["user"] != null)
-                        {%>
-                    <i class="bi bi-star text-warning h4 p-2 bg-success bg-gradient position-absolute" onclick="clickFavorito(this)" id="star"></i>
-
-
-                    <%} %>
-
-                    <a href="DetalleArticulo.aspx">
-                        <img src='<%# string.IsNullOrEmpty(Eval("ImagenUrl").ToString()) ? "./Images/SinImagen.png" : Eval("ImagenUrl") %>'
-                            height="300" class="card-img-top" onerror="this.onerror=null;this.src='./Images/SinImagen.png';" alt="Imagen de Artículo" />
-                        <div class="card-body">
-                            <a href="#" class="link-danger">
-                                <h5 class="card-title"><%#Eval("Nombre") %></h5>
-                            </a>
-                            <small class="card-text mb-3"><%#Eval("Categoria") %> / <%#Eval("Marca") %></small>
-                            <h1 class="card-text">$<%#Eval("Precio") %></h1>
-                        </div>
-                    </a>
+                        <a href="DetalleArticulo.aspx">
+                            <img src='<%# string.IsNullOrEmpty(Eval("ImagenUrl").ToString()) ? "./Images/SinImagen.png" : Eval("ImagenUrl") %>'
+                                height="300" class="card-img-top" onerror="this.onerror=null;this.src='./Images/SinImagen.png';" alt="Imagen de Artículo" />
+                            <div class="card-body">
+                                <a href="#" class="link-danger">
+                                    <h5 class="card-title"><%#Eval("Nombre") %></h5>
+                                    <asp:Label Text='<%#Eval("Id") %>' ID="lblId" CssClass="invisible" runat="server" />
+                                </a>
+                                <small class="card-text mb-3"><%#Eval("Categoria") %> / <%#Eval("Marca") %></small>
+                                <h1 class="card-text">$<%#Eval("Precio") %></h1>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-            </div>
+
+            </ItemTemplate>
+        </asp:Repeater>
 
 
-
-        </ItemTemplate>
-    </asp:Repeater>
-
-
-</div>
+    </div>
 
 
 </asp:Content>

@@ -22,5 +22,15 @@ namespace Helper
 
             return false;
         }
+
+        public static bool isAdmin(object user)
+        {
+            User usuario = user != null ? (User)user : null;
+
+            if (usuario.Admin && usuario != null)
+                return true;
+            else
+                return false;
+        }
     }
 }

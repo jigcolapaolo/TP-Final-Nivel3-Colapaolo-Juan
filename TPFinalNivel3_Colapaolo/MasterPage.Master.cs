@@ -40,7 +40,7 @@ namespace TPFinalNivel3_Colapaolo
 
                 if (Seguridad.sesionActiva(Session["user"]))
                 {
-                    user = (User)Session["user"];
+                    User user = (User)Session["user"];
 
                     //Imagen
                     imgPerfil.ImageUrl = Validacion.validarImagen(user);

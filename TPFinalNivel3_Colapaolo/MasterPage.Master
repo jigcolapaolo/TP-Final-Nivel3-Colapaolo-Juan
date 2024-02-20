@@ -183,7 +183,7 @@
                                     </li>
                                     <%--Lista de Articulos--%>
 
-                                    <%if (user != null && user.Admin)
+                                    <%if (Helper.Seguridad.sesionActiva(Session["user"]) && Helper.Seguridad.isAdmin(Session["user"]))
                                         {%>
                                     <li class="nav-item">
                                         <a class="nav-link" href="ListaArticulos.aspx"><i class="bi bi-list-ul me-1"></i>Lista de Artículos
@@ -191,7 +191,7 @@
                                     </li>
                                     <%} %>
                                     <%--Favoritos--%>
-                                    <%if (user != null)
+                                    <%if (Helper.Seguridad.sesionActiva(Session["user"]))
                                         {%>
 
                                     <li class="nav-item">
@@ -212,15 +212,24 @@
                                 </div>
 
                                 <%--ImagenPerfil--%>
-                                <%if (Session["user"] != null)
+                                <%if (Helper.Seguridad.sesionActiva(Session["user"]))
                                     {%>
+
+                                <%if (Helper.Seguridad.sesionActiva(Session["user"]) && Helper.Seguridad.isAdmin(Session["user"]))
+                                    {%>
+                                <div>
+                                    <small><i class="bi bi-circle-fill text-danger me-1"></i>Admin.</small>
+                                </div>
+                                <%} %>
+
                                 <div class="bg-success-subtle bg-gradient mx-auto mx-lg-0 ms-lg-5 d-flex justify-content-center align-items-center rounded-pill"
                                     style="height: 60px; width: 60px; cursor: pointer" id="divImg">
 
+                                    <%--Perfil Dropdown--%>
                                     <div class="dropdown">
                                         <ul class="dropdown-menu dropdown-menu-md-end dropdown-menu-start bg-success-subtle">
-                                            <li><a class="dropdown-item bg-success-subtle" href="#"><i class="bi bi-person-lines-fill me-2"></i>Mi Perfil</a></li>
-                                            <li><a class="dropdown-item bg-success-subtle pb-3" href="#"><i class="bi bi-star me-2"></i>Mis Favoritos</a></li>
+                                            <li><a class="dropdown-item bg-success-subtle" href="Perfil.aspx"><i class="bi bi-person-lines-fill me-2"></i>Mi Perfil</a></li>
+                                            <li><a class="dropdown-item bg-success-subtle pb-3" href="Favoritos.aspx"><i class="bi bi-star me-2"></i>Mis Favoritos</a></li>
                                             <li><a href="#" data-bs-target="#logoutModal" data-bs-toggle="modal"
                                                 class="dropdown-item link-danger border-top border-success-subtle pt-2 bg-success-subtle" id="dropdownLogout"><i class="lni lni-exit me-2"></i>Logout</a></li>
 

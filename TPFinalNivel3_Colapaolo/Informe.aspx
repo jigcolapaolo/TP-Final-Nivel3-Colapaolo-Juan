@@ -25,7 +25,7 @@
 
             #homeBtn:hover {
                 background-image: linear-gradient(to bottom, #198754, #44c767);
-                border-color: white;
+                border-color: lightgreen;
                 color: white;
             }
 
