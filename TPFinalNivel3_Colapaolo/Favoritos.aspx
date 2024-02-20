@@ -30,17 +30,6 @@
             }
 
 
-        .arrow-up {
-            position: fixed;
-            bottom: 20px; /* Distancia desde el borde inferior */
-            right: 20px; /* Distancia desde el borde derecho */
-            z-index: 1000; /* Asegura que esté por encima del contenido */
-        }
-
-        .arrow-up img {
-            width: 40px; /* Tamaño del icono */
-            height: 40px;
-        }
     </style>
 </asp:Content>
 
@@ -87,6 +76,7 @@
 
     </div>
 
+    <%--Flecha Volver a Top--%>
     <a href="#" class="arrow-up">
         <div href="#topFav" class="btn btn-outline-success rounded"><i class="bi bi-arrow-up"></i></div>
     </a>

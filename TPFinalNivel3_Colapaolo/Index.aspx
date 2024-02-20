@@ -33,7 +33,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="row my-4">
-        <h1 class="text-secondary display-6">Catálogo</h1>
+        <h1 id="topCat" class="text-secondary display-6">Catálogo</h1>
     </div>
 
 
@@ -55,7 +55,7 @@
 
                         <%} %>
 
-                        <a href="DetalleArticulo.aspx">
+                        <a href="DetalleArticulo.aspx?id=<%#Eval("Id") %>">
                             <img src='<%# string.IsNullOrEmpty(Eval("ImagenUrl").ToString()) ? "./Images/SinImagen.png" : Eval("ImagenUrl") %>'
                                 height="300" class="card-img-top" onerror="this.onerror=null;this.src='./Images/SinImagen.png';" alt="Imagen de Artículo" />
                             <div class="card-body">
@@ -76,5 +76,10 @@
 
 
     </div>
+
+    <%--Flecha Volver a Top--%>
+    <a href="#" class="arrow-up">
+        <div href="#topCat" class="btn btn-outline-success rounded"><i class="bi bi-arrow-up"></i></div>
+    </a>
 
 </asp:Content>

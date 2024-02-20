@@ -26,7 +26,7 @@
             <div class="col-12 col-lg-7">
                 <%--ImagenArticulo--%>
                 <div class="d-flex justify-content-center align-items-center">
-                    <asp:Image ImageUrl="https://images.samsung.com/is/image/samsung/assets/ar/p6_gro2/p6_initial_mktpd/smartphones/galaxy-s10/specs/galaxy-s10-plus_specs_design_colors_prism_black.jpg?$163_346_PNG$" CssClass="img-fluid rounded"
+                    <asp:Image ImageUrl="./Images/SinImagen.png" ID="imgArticulo" CssClass="img-fluid rounded"
                         onerror="this.onerror=null;this.src='./Images/SinImagen.png';" Height="450" runat="server" />
                 </div>
             </div>
@@ -34,23 +34,22 @@
             <div class="col-12 col-lg-5 d-flex flex-column justify-content-around bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
                 <%--Nombre--%>
                 <div class="d-flex justify-content-start align-items-center">
-                    <asp:Label Text="Moto G Play 7ma Gen" CssClass="display-6 text-danger text-break" runat="server" />
+                    <asp:Label Text="" ID="lblNombre" CssClass="display-6 text-danger text-break" runat="server" />
                 </div>
                 <%--Marca y Categoria--%>
                 <div class="d-flex justify-content-start align-items-center fs-5">
-                    <asp:Label Text="Samsung" CssClass="text-secondary" runat="server" />
+                    <asp:Label Text="" ID="lblCategoria" CssClass="text-secondary" runat="server" />
                     <div class="text-secondary mx-1">/</div>
-                    <asp:Label Text="Celulares" CssClass="text-secondary" runat="server" />
+                    <asp:Label Text="" ID="lblMarca" CssClass="text-secondary" runat="server" />
                 </div>
                 <%--Precio--%>
                 <div class="my-2 d-flex justify-content-start align-items-center">
-                    <asp:Label Text="$100000" CssClass="display-5" runat="server" />
+                    <asp:Label Text="" ID="lblPrecio" CssClass="display-5" runat="server" />
                 </div>
                 <%--Descripcion--%>
                 <div class="d-flex flex-column justify-content-start align-items-start">
                     <asp:Label Text="Descripción" CssClass="mb-3 fs-5 text-secondary" runat="server" />
-                    <asp:Label Text="Ya no se cuantas versiones haysadasdasdasdasfdasfasfasklfashlkfhaslkfhlkasfhksalfkaslhkfaslhkfas" 
-                        CssClass="text-break" ID="txtDescripcion" runat="server" />
+                    <asp:Label Text="" CssClass="text-break" ID="lblDescripcion" runat="server" />
                 </div>
                 <%--Boton Volver--%>
                 <div class="d-flex justify-content-end align-items-end mt-5">
