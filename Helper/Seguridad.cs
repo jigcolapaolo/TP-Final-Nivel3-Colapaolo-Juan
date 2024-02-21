@@ -27,7 +27,7 @@ namespace Helper
         {
             User usuario = user != null ? (User)user : null;
 
-            if (usuario.Admin && usuario != null)
+            if (usuario != null && usuario.Admin)
                 return true;
             else
                 return false;

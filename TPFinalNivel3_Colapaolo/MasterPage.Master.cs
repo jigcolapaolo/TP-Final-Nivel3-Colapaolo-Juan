@@ -20,6 +20,7 @@ namespace TPFinalNivel3_Colapaolo
         public User user { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 //Cargo las listas de Categoria y Marca en el Sidebar
