@@ -13,6 +13,34 @@
             margin-left: 0 !important;
         }
     </style>
+
+    <script>
+
+        //Funciones para abrir o cerrar el modal, esta funcion se ejecuta desde el codebehind
+        function AbrirModal() {
+            var modal = document.getElementById('exampleModal');
+            if (modal) {
+                modal.classList.add('show');
+                modal.style.display = 'block';
+                var backdrop = document.createElement('div');
+                backdrop.classList.add('modal-backdrop', 'fade', 'show');
+                document.body.appendChild(backdrop);
+            }
+        }
+
+        function CerrarModal() {
+            var modal = document.getElementById('exampleModal');
+            if (modal) {
+                modal.classList.remove('show');
+                modal.style.display = 'none';
+                var backdrop = document.querySelector('.modal-backdrop');
+                if (backdrop) {
+                    document.body.removeChild(backdrop);
+                }
+            }
+        }
+    </script>
+
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -121,14 +149,15 @@
                         </div>
                         <%--Botones Agregar, Modificar, Eliminar--%>
                         <div class="d-flex justify-content-around align-items-end mt-4">
-                            <asp:LinkButton CssClass="btn btn-success btn-sm rounded-pill" runat="server">
-                    <i class="bi bi-plus-circle me-1"></i>Agregar
+                            <asp:LinkButton ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-success btn-sm rounded-pill" runat="server">
+                                <i class="bi bi-plus-circle me-1"></i>Agregar
                             </asp:LinkButton>
                             <asp:LinkButton CssClass="btn btn-warning btn-sm rounded-pill" runat="server">
-                    <i class="bi bi-pencil-square me-1"></i>Modificar
+                                <i class="bi bi-pencil-square me-1"></i>Modificar
                             </asp:LinkButton>
-                            <asp:LinkButton CssClass="btn btn-danger btn-sm rounded-pill" runat="server">
-                    <i class="bi bi-trash3 me-1"></i>Eliminar
+                            <asp:LinkButton ID="btnEliminar" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                CssClass="btn btn-danger btn-sm rounded-pill" runat="server">
+                                <i class="bi bi-trash3 me-1"></i>Eliminar
                             </asp:LinkButton>
                         </div>
                     </div>
@@ -150,7 +179,7 @@
                         </div>
                     </div>
                     <%--COLUMNA 2--%>
-                    <div class="col-12 col-lg-5 d-flex flex-column justify-content-around pt-0 bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
+                    <div class="col-12 col-lg-5 d-flex flex-column justify-content-around pt-lg-0 bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
                         <%--Vista Admin--%>
                         <div class="d-flex align-self-end">
                             <asp:LinkButton Text="" CssClass="d-flex justify-content-end link-success" ID="linkVistaAdmin" OnClick="linkVistaAdmin_Click" runat="server">
@@ -184,9 +213,26 @@
             <%} %>
 
             <%--Flecha Volver--%>
-            <a href="Index.aspx" class="arrow-up">
+            <a href="#" onclick="javascript:history.back();" class="arrow-up">
                 <div class="btn btn-success btn-sm rounded-pill shadow"><i class="bi bi-arrow-left-circle me-2"></i>Volver</div>
             </a>
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Eliminar Artículo?</h1>
+                            <asp:Button Text="" CssClass="btn-close" ID="btnClose" data-bs-dismiss="modal" aria-label="Close" runat="server" />
+                        </div>
+                        <div class="modal-footer no-border">
+                            <asp:Button Text="Si" CssClass="btn btn-danger" ID="btnModalEliminar"  OnClick="btnModalEliminar_Click" runat="server" />
+                            <asp:Button Text="No" CssClass="btn btn-secondary" ID="btnModalCerrar" data-bs-dismiss="modal" runat="server" />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </ContentTemplate>
     </asp:UpdatePanel>

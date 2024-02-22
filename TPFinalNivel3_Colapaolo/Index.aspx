@@ -55,7 +55,7 @@
 
                         <%} %>
 
-                        <a href="DetalleArticulo.aspx?id=<%#Eval("Id") %>">
+                        <a href='DetalleArticulo.aspx?id=<%#Eval("Id") %>&returnUrl=Index.aspx'>
                             <img src='<%# string.IsNullOrEmpty(Eval("ImagenUrl").ToString()) ? "./Images/SinImagen.png" : Eval("ImagenUrl") %>'
                                 height="300" class="card-img-top" onerror="this.onerror=null;this.src='./Images/SinImagen.png';" alt="Imagen de Artículo" />
                             <div class="card-body">

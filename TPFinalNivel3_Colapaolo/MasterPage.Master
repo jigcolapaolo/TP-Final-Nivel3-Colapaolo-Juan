@@ -258,7 +258,7 @@
 
         <!-- Modal Logout -->
         <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-sm shadow">
                 <div class="modal-content bg-success-subtle bg-gradient">
                     <div class="modal-header no-border">
                         <h1 class="modal-title fs-5" id="logoutModalLabel">¿Cerrar Sesión?</h1>

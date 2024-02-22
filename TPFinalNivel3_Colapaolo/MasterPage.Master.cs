@@ -76,5 +76,10 @@ namespace TPFinalNivel3_Colapaolo
                 Response.Redirect("Index.aspx", false);
             }
         }
+
+        protected void btnClose_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

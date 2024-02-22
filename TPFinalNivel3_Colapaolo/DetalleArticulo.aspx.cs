@@ -206,5 +206,32 @@ namespace TPFinalNivel3_Colapaolo
                 lblDescripcionAdmin.Text = articulo.Descripcion;
             }
         }
+
+        protected void btnModalEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocioArt = new ArticuloNegocio();
+            articulo = (Articulo)Session["articulo"];
+            int id = articulo.Id;
+
+            negocioArt.eliminar(id);
+
+            if (Request.UrlReferrer != null)
+            {
+                // Redirigir a la página de referencia
+                string urlAnterior = Request.QueryString["returnUrl"];
+                Response.Redirect(urlAnterior, false);
+            }
+            else
+            {
+                // Manejar caso donde no hay URL de referencia
+                Response.Write("No referrer found.");
+            }
+
+        }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
