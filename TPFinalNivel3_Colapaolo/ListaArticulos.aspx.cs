@@ -66,7 +66,7 @@ namespace TPFinalNivel3_Colapaolo
         protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int id = Convert.ToInt32(e.CommandArgument);
-            if (e.CommandName == "Agregar")
+            if (e.CommandName == "Editar")
             {
                 Response.Redirect("DetalleArticulo.aspx?id=" + id + "&returnUrl=" + Server.UrlEncode(Request.Url.ToString()));
             }

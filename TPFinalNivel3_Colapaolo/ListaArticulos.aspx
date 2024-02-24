@@ -21,6 +21,14 @@
         .dark-hover:hover {
             color: black;
         }
+
+        .pager-links a{
+            color:green;
+        }
+            .pager-links a:hover{
+                color:orange;
+            }
+
     </style>
 
     <script>
@@ -73,8 +81,8 @@
                 <asp:GridView ID="dgvArticulos" CssClass="table table-dark table-bordered table-striped-columns table-hover"
                     AutoGenerateColumns="false" runat="server" OnRowCommand="dgvArticulos_RowCommand" RowStyle-CssClass="table-light"
                     DataKeyNames="Id" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged"
-                    OnPageIndexChanging="dgvArticulos_PageIndexChanging"
-                    AllowPaging="True" PageSize="5" SelectedRowStyle-CssClass="seleccionado">
+                    OnPageIndexChanging="dgvArticulos_PageIndexChanging" PagerStyle-CssClass="table-warning pager-links"
+                    AllowPaging="True" PageSize="5">
                     <Columns>
                         <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                         <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
@@ -85,7 +93,7 @@
                         <asp:TemplateField HeaderText="Acciones">
                             <ItemTemplate>
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <asp:LinkButton ID="btnAgregar" runat="server" CommandName="Agregar" CommandArgument='<%# Eval("Id") %>'
+                                    <asp:LinkButton ID="btnEditar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("Id") %>'
                                         CssClass="btn btn-outline-success bi bi-pencil-square dark-hover no-border rounded-pill p-1"
                                         Text=""></asp:LinkButton>
                                     <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>'
@@ -103,13 +111,12 @@
             </div>
 
             <%--Pantalla chica--%>
-            <div class="d-lg-none container-fluid bg-success-subtle rounded p-4 vh-80">
+            <div class="d-lg-none container-fluid bg-success-subtle rounded p-4 max-vh-100 mb-4">
 
                 <asp:GridView ID="dgvArticulosSm" CssClass="table table-dark table-bordered table-striped-columns table-hover"
                     AutoGenerateColumns="false" runat="server" OnRowCommand="dgvArticulos_RowCommand"
-                    DataKeyNames="Id" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged" RowStyle-CssClass="table-light"
-                    OnPageIndexChanging="dgvArticulos_PageIndexChanging" AllowPaging="True" PageSize="5"
-                    SelectedRowStyle-CssClass="seleccionado">
+                    DataKeyNames="Id" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged" RowStyle-CssClass="table-light grid-borde"
+                    OnPageIndexChanging="dgvArticulos_PageIndexChanging" AllowPaging="True" PageSize="5" PagerStyle-CssClass="table-warning pager-links">
                     <Columns>
                         <asp:TemplateField HeaderText="Detalles">
                             <ItemTemplate>
@@ -126,7 +133,7 @@
                                         <strong>Precio: </strong>
                                         <asp:Label ID="lblPrecio" runat="server" Text='<%# Eval("Precio") %>'></asp:Label><br />
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <asp:LinkButton ID="btnAgregar" runat="server" CommandName="Agregar" CommandArgument='<%# Eval("Id") %>'
+                                            <asp:LinkButton ID="btnEditar" runat="server" CommandName="Editar" CommandArgument='<%# Eval("Id") %>'
                                                 CssClass="btn btn-outline-success bi bi-pencil-square dark-hover no-border rounded-pill p-1"
                                                 Text=""></asp:LinkButton>
                                             <asp:LinkButton ID="btnEliminar" runat="server" CommandName="Eliminar" CommandArgument='<%# Eval("Id") %>'
