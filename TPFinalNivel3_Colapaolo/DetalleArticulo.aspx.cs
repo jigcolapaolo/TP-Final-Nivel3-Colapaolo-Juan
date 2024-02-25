@@ -59,7 +59,9 @@ namespace TPFinalNivel3_Colapaolo
                     if (string.IsNullOrEmpty(articulo.ImagenUrl))
                         imgArticulo.ImageUrl = "./Images/SinImagen.png";
                     else
-                        imgArticulo.ImageUrl = articulo.ImagenUrl;
+                        imgArticulo.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
+
+
 
                     lblNombre.Text = articulo.Nombre;
                     lblMarca.Text = articulo.Marca.Descripcion;
@@ -69,48 +71,50 @@ namespace TPFinalNivel3_Colapaolo
                 }
                 else
                 {
-                    articulo = (Articulo)Session["articulo"];
+                    if (!IsPostBack)
+                    {
+                        articulo = (Articulo)Session["articulo"];
 
-                    //Cargo datos en modo Admin (VistaAdmin)
-                    if (string.IsNullOrEmpty(articulo.ImagenUrl))
-                        imgArticuloAdmin.ImageUrl = "./Images/SinImagen.png";
-                    else
-                        imgArticuloAdmin.ImageUrl = articulo.ImagenUrl;
+                        //Cargo datos en modo Admin (VistaAdmin)
+                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
+                            imgArticuloAdmin.ImageUrl = "./Images/SinImagen.png";
+                        else
+                            imgArticuloAdmin.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
 
-                    txtCodigo.Text = articulo.Codigo;
-                    txtNombre.Text = articulo.Nombre;
-                    txtPrecio.Text = string.Format(CultureInfo.InvariantCulture, "{0:G}", articulo.Precio);
-                    txtDescripcion.Text = articulo.Descripcion;
+                        txtCodigo.Text = articulo.Codigo;
+                        txtNombre.Text = articulo.Nombre;
+                        txtPrecio.Text = articulo.Precio.ToString(CultureInfo.InvariantCulture);
+                        txtDescripcion.Text = articulo.Descripcion;
 
-                    CategoriaNegocio negocioCat = new CategoriaNegocio();
-                    MarcaNegocio negocioMarca = new MarcaNegocio();
+                        CategoriaNegocio negocioCat = new CategoriaNegocio();
+                        MarcaNegocio negocioMarca = new MarcaNegocio();
 
-                    ddlCategoria.DataSource = negocioCat.listar();
-                    ddlCategoria.DataValueField = "Id";
-                    ddlCategoria.DataTextField = "Descripcion";
-                    ddlCategoria.DataBind();
-                    ddlMarca.DataSource = negocioMarca.listar();
-                    ddlMarca.DataValueField = "Id";
-                    ddlMarca.DataTextField = "Descripcion";
-                    ddlMarca.DataBind();
+                        ddlCategoria.DataSource = negocioCat.listar();
+                        ddlCategoria.DataValueField = "Id";
+                        ddlCategoria.DataTextField = "Descripcion";
+                        ddlCategoria.DataBind();
+                        ddlMarca.DataSource = negocioMarca.listar();
+                        ddlMarca.DataValueField = "Id";
+                        ddlMarca.DataTextField = "Descripcion";
+                        ddlMarca.DataBind();
 
-                    ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
-                    ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
+                        ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
+                        ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
 
 
-                    //Cargo datos en modo Admin (VistaUser)
-                    if (string.IsNullOrEmpty(articulo.ImagenUrl))
-                        imgArticuloAdminUser.ImageUrl = "./Images/SinImagen.png";
-                    else
-                        imgArticuloAdminUser.ImageUrl = articulo.ImagenUrl;
+                        //Cargo datos en modo Admin (VistaUser)
+                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
+                            imgArticuloAdminUser.ImageUrl = "./Images/SinImagen.png";
+                        else
+                            imgArticuloAdminUser.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
 
-                    lblNombreAdmin.Text = articulo.Nombre;
-                    lblMarcaAdmin.Text = articulo.Marca.Descripcion;
-                    lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
-                    lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
-                    lblDescripcionAdmin.Text = articulo.Descripcion;
+                        lblNombreAdmin.Text = articulo.Nombre;
+                        lblMarcaAdmin.Text = articulo.Marca.Descripcion;
+                        lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
+                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
+                        lblDescripcionAdmin.Text = articulo.Descripcion;
+                    }
                 }
-
             }
             else
             {
@@ -154,11 +158,11 @@ namespace TPFinalNivel3_Colapaolo
                 if (string.IsNullOrEmpty(articulo.ImagenUrl))
                     imgArticuloAdmin.ImageUrl = "./Images/SinImagen.png";
                 else
-                    imgArticuloAdmin.ImageUrl = articulo.ImagenUrl;
+                    imgArticuloAdmin.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
 
                 txtCodigo.Text = articulo.Codigo;
                 txtNombre.Text = articulo.Nombre;
-                txtPrecio.Text = string.Format(CultureInfo.InvariantCulture, "{0:G}", articulo.Precio);
+                txtPrecio.Text = articulo.Precio.ToString();
                 txtDescripcion.Text = articulo.Descripcion;
 
                 CategoriaNegocio negocioCat = new CategoriaNegocio();
@@ -194,7 +198,7 @@ namespace TPFinalNivel3_Colapaolo
                 if (string.IsNullOrEmpty(articulo.ImagenUrl))
                     imgArticuloAdminUser.ImageUrl = "./Images/SinImagen.png";
                 else
-                    imgArticuloAdminUser.ImageUrl = articulo.ImagenUrl;
+                    imgArticuloAdminUser.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
 
                 lblNombreAdmin.Text = articulo.Nombre;
                 lblMarcaAdmin.Text = articulo.Marca.Descripcion;
@@ -228,10 +232,10 @@ namespace TPFinalNivel3_Colapaolo
 
                 if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
                 {
-                    //GUARDO LA IMAGEN QUE HE SELECCIONADO EN LA RUTA COMPLETA QUE QUEDARIA COMO "./ImagenArt/a-1.jpg"
+                    //GUARDO LA IMAGEN QUE HE SELECCIONADO EN LA RUTA COMPLETA QUE QUEDARIA COMO "./ImagenArt/art-1.jpg"
                     txtImagen.PostedFile.SaveAs(ruta + "art-" + articulo.Codigo + fecha + ".jpg");
                     //GUARDO EL URL DE ESTA IMAGEN
-                    articulo.ImagenUrl = "p-" + articulo.Codigo + fecha + ".jpg";
+                    articulo.ImagenUrl = "art-" + articulo.Codigo + fecha + ".jpg";
 
                 }
                 else
@@ -266,6 +270,49 @@ namespace TPFinalNivel3_Colapaolo
 
         protected void btnModificar_Click(object sender, EventArgs e)
         {
+            articulo = (Articulo)Session["articulo"];
+
+            try
+            {
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+                articulo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.Descripcion = txtDescripcion.Text;
+
+                string ruta = Server.MapPath("./ImagenArt/");
+                string fecha = DateTime.Now.ToString("ddMMyyyyHHmmss");
+
+                if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
+                {
+                    txtImagen.PostedFile.SaveAs(ruta + "art-" + articulo.Codigo + fecha + ".jpg");
+                    //GUARDO EL URL DE ESTA IMAGEN
+                    articulo.ImagenUrl = "art-" + articulo.Codigo + fecha + ".jpg";
+                }
+
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                negocio.modificar(articulo);
+
+
+                if (Request.UrlReferrer != null)
+                {
+                    // Redirijo a la página de referencia
+                    string urlAnterior = Request.QueryString["returnUrl"];
+                    Response.Redirect(urlAnterior, false);
+                }
+                else
+                {
+                    // Manejo caso donde no haya una URL de referencia
+                    Response.Redirect("Index.aspx", false);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
         }
 
