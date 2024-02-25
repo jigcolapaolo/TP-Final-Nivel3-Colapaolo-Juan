@@ -33,13 +33,13 @@ namespace TPFinalNivel3_Colapaolo
         protected global::System.Web.UI.WebControls.GridView dgvArticulos;
 
         /// <summary>
-        /// Control Button1.
+        /// Control btnAgregarLg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.LinkButton btnAgregarLg;
 
         /// <summary>
         /// Control dgvArticulosSm.
@@ -51,13 +51,13 @@ namespace TPFinalNivel3_Colapaolo
         protected global::System.Web.UI.WebControls.GridView dgvArticulosSm;
 
         /// <summary>
-        /// Control btnAgregar.
+        /// Control btnAgregarSm.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregar;
+        protected global::System.Web.UI.WebControls.LinkButton btnAgregarSm;
 
         /// <summary>
         /// Control btnClose.

@@ -18,7 +18,7 @@
 
         //Funciones para abrir o cerrar el modal, esta funcion se ejecuta desde el codebehind
         function AbrirModal() {
-            var modal = document.getElementById('exampleModal');
+            var modal = document.getElementById('modalEliminarArt');
             if (modal) {
                 modal.classList.add('show');
                 modal.style.display = 'block';
@@ -29,7 +29,7 @@
         }
 
         function CerrarModal() {
-            var modal = document.getElementById('exampleModal');
+            var modal = document.getElementById('modalEliminarArt');
             if (modal) {
                 modal.classList.remove('show');
                 modal.style.display = 'none';
@@ -95,7 +95,7 @@
 
             <%if (Convert.ToBoolean(Session["vistaAdmin"]) == true)
                 {%>
-            <%--ADMIN OCN VISTA ADMIN--%>
+            <%--ADMIN CON VISTA ADMIN--%>
             <div class="container rounded p-1 pb-5 pb-lg-1">
                 <%--FILA 1--%>
                 <div class="row">
@@ -110,36 +110,54 @@
                     </div>
                     <%--COLUMNA 2--%>
                     <div class="col-12 col-lg-5 d-flex flex-column justify-content-around bg-success-subtle bg-opacity-75 bg-gradient rounded pt-3 pb-3 px-5">
+
+                        <%--Oculto el cambio de vista si no hay un articulo--%>
+                        <%if (articulo != null)
+                            {%>
                         <%--Vista User--%>
                         <div class="d-flex align-self-end">
                             <asp:LinkButton Text="" CssClass="d-flex justify-content-end link-success" ID="linkVista" OnClick="linkVista_Click" runat="server">
                                 <small><i class="bi bi-eye me-1"></i>Vista User</small>
                             </asp:LinkButton>
                         </div>
+                        <%} %>
+
+
+
                         <%--Codigo--%>
                         <div class="d-flex flex-column justify-content-start align-items-start">
-                            <asp:Label Text="Código" for="txtCodigo" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                            <asp:Label Text="" for="txtCodigo" CssClass="form-label fw-bold text-danger-emphasis" runat="server">
+                                <small><i class="bi bi-asterisk"></i></small>Código
+                            </asp:Label>
                             <asp:TextBox Text="" ID="txtCodigo" CssClass="form-control" runat="server" />
                         </div>
                         <%--Nombre--%>
                         <div class="d-flex flex-column justify-content-start align-items-start mt-1">
-                            <asp:Label Text="Nombre" for="txtNombre" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                            <asp:Label Text="" for="txtNombre" CssClass="form-label fw-bold text-danger-emphasis" runat="server">
+                                <small><i class="bi bi-asterisk"></i></small>Nombre
+                            </asp:Label>
                             <asp:TextBox Text="" ID="txtNombre" CssClass="form-control" runat="server" />
                         </div>
                         <%--Categoria y Marca--%>
                         <div class="d-flex justify-content-around align-items-center my-2">
                             <div class="d-flex flex-column justify-content-start align-items-start">
-                                <asp:Label Text="Categoría" for="ddlCategoria" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                                <asp:Label Text="" for="ddlCategoria" CssClass="form-label fw-bold text-danger-emphasis" runat="server">
+                                    <small><i class="bi bi-asterisk"></i></small>Categoría
+                                </asp:Label>
                                 <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server"></asp:DropDownList>
                             </div>
                             <div class="d-flex flex-column justify-content-start align-items-start">
-                                <asp:Label Text="Marca" for="ddlMarca" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                                <asp:Label Text="Marca" for="ddlMarca" CssClass="form-label fw-bold text-danger-emphasis" runat="server">
+                                    <small><i class="bi bi-asterisk"></i></small>Marca
+                                </asp:Label>
                                 <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server"></asp:DropDownList>
                             </div>
                         </div>
                         <%--Precio--%>
                         <div class="my-2 d-flex flex-column justify-content-start align-items-start">
-                            <asp:Label Text="Precio" for="txtPrecio" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
+                            <asp:Label Text="" for="txtPrecio" CssClass="form-label fw-bold text-danger-emphasis" runat="server">
+                                <small><i class="bi bi-asterisk"></i></small>Precio
+                            </asp:Label>
                             <asp:TextBox Text="" ID="txtPrecio" Type="Number" CssClass="form-control" runat="server" />
                         </div>
                         <%--Descripcion--%>
@@ -147,18 +165,31 @@
                             <asp:Label Text="Descripción" for="txtDescripcion" CssClass="form-label fw-bold text-danger-emphasis" runat="server" />
                             <asp:TextBox Text="" TextMode="MultiLine" CssClass="form-control" ID="txtDescripcion" runat="server" />
                         </div>
+                        <%--Campo Obligatorio--%>
+                        <div class="mt-2 d-flex justify-content-center"><i class="bi bi-asterisk"></i>Campo Obligatorio</div>
                         <%--Botones Agregar, Modificar, Eliminar--%>
                         <div class="d-flex justify-content-around align-items-end mt-4">
+
+
+                            <%if (articulo == null)
+                                {%>
+                            <%--Agregar--%>
                             <asp:LinkButton ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-success btn-sm rounded-pill" runat="server">
                                 <i class="bi bi-plus-circle me-1"></i>Agregar
                             </asp:LinkButton>
-                            <asp:LinkButton CssClass="btn btn-warning btn-sm rounded-pill" runat="server">
+                            <% }
+                                else
+                                {%>
+                            <%--Modificar--%>
+                            <asp:LinkButton CssClass="btn btn-warning btn-sm rounded-pill" ID="btnModificar" OnClick="btnModificar_Click" runat="server">
                                 <i class="bi bi-pencil-square me-1"></i>Modificar
                             </asp:LinkButton>
-                            <asp:LinkButton ID="btnEliminar" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            <%--Eliminar--%>
+                            <asp:LinkButton ID="btnEliminar" data-bs-toggle="modal" data-bs-target="#modalEliminarArt"
                                 CssClass="btn btn-danger btn-sm rounded-pill" runat="server">
                                 <i class="bi bi-trash3 me-1"></i>Eliminar
                             </asp:LinkButton>
+                            <% } %>
                         </div>
                     </div>
                 </div>
@@ -180,12 +211,20 @@
                     </div>
                     <%--COLUMNA 2--%>
                     <div class="col-12 col-lg-5 d-flex flex-column justify-content-around pt-lg-0 bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
+                        <%--Oculto el cambio de vista si no hay un articulo--%>
+
+                        <%if (articulo != null)
+                            {%>
                         <%--Vista Admin--%>
                         <div class="d-flex align-self-end">
                             <asp:LinkButton Text="" CssClass="d-flex justify-content-end link-success" ID="linkVistaAdmin" OnClick="linkVistaAdmin_Click" runat="server">
                                 <small><i class="bi bi-eye me-1"></i>Vista Admin</small>
                             </asp:LinkButton>
                         </div>
+                        <% } %>
+
+
+
                         <%--Nombre--%>
                         <div class="d-flex justify-content-start align-items-center">
                             <asp:Label Text="" ID="lblNombreAdmin" CssClass="display-6 text-danger text-break" runat="server" />
@@ -218,16 +257,16 @@
             </a>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- Modal Eliminar -->
+            <div class="modal fade" id="modalEliminarArt" tabindex="-1" aria-labelledby="modalEliminarArtLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">¿Eliminar Artículo?</h1>
+                        <div class="modal-header no-border">
+                            <h1 class="modal-title fs-5" id="modalEliminarArtLabel">¿Eliminar Artículo?</h1>
                             <asp:Button Text="" CssClass="btn-close" ID="btnClose" data-bs-dismiss="modal" aria-label="Close" runat="server" />
                         </div>
-                        <div class="modal-footer no-border">
-                            <asp:Button Text="Si" CssClass="btn btn-danger" ID="btnModalEliminar"  OnClick="btnModalEliminar_Click" runat="server" />
+                        <div class="modal-footer no-border d-flex justify-content-center align-items-center">
+                            <asp:Button Text="Si" CssClass="btn btn-danger" ID="btnModalEliminarArt" UseSubmitBehavior="false" OnClick="btnModalEliminarArt_Click" runat="server" />
                             <asp:Button Text="No" CssClass="btn btn-secondary" ID="btnModalCerrar" data-bs-dismiss="modal" runat="server" />
                         </div>
                     </div>

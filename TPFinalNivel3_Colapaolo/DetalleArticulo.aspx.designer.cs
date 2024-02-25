@@ -168,6 +168,15 @@ namespace TPFinalNivel3_Colapaolo
         protected global::System.Web.UI.WebControls.LinkButton btnAgregar;
 
         /// <summary>
+        /// Control btnModificar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnModificar;
+
+        /// <summary>
         /// Control btnEliminar.
         /// </summary>
         /// <remarks>
@@ -249,13 +258,13 @@ namespace TPFinalNivel3_Colapaolo
         protected global::System.Web.UI.WebControls.Button btnClose;
 
         /// <summary>
-        /// Control btnModalEliminar.
+        /// Control btnModalEliminarArt.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModalEliminar;
+        protected global::System.Web.UI.WebControls.Button btnModalEliminarArt;
 
         /// <summary>
         /// Control btnModalCerrar.

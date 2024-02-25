@@ -22,13 +22,13 @@
             color: black;
         }
 
-        .pager-links a{
-            color:green;
+        .pager-links a {
+            color: green;
         }
-            .pager-links a:hover{
-                color:orange;
-            }
 
+            .pager-links a:hover {
+                color: orange;
+            }
     </style>
 
     <script>
@@ -107,7 +107,9 @@
                     </Columns>
                 </asp:GridView>
 
-                <asp:Button Text="Agregar" CssClass="btn btn-primary" ID="Button1" runat="server" />
+                <asp:LinkButton Text="" CssClass="btn btn-success rounded" ID="btnAgregarLg" OnClick="btnAgregarLg_Click" runat="server">
+                    <i class="bi bi-plus-circle me-1"></i>Nuevo Artículo
+                </asp:LinkButton>
             </div>
 
             <%--Pantalla chica--%>
@@ -148,20 +150,22 @@
                 </asp:GridView>
 
 
-                <asp:Button Text="Agregar" CssClass="btn btn-primary" ID="btnAgregar" runat="server" />
+                <asp:LinkButton Text="" CssClass="btn btn-success rounded" ID="btnAgregarSm" OnClick="btnAgregarSm_Click" runat="server">
+                    <i class="bi bi-plus-circle me-1"></i>Nuevo Artículo
+                </asp:LinkButton>
             </div>
 
 
-            <!-- Modal -->
+            <!-- Modal eliminar -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header no-border">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">¿Eliminar Artículo?</h1>
                             <asp:Button Text="" CssClass="btn-close" ID="btnClose" OnClick="btnClose_Click"
                                 data-bs-dismiss="modal" aria-label="Close" runat="server" />
                         </div>
-                        <div class="modal-footer no-border">
+                        <div class="modal-footer no-border d-flex justify-content-center align-items-center">
                             <asp:Button Text="Si" CssClass="btn btn-danger" ID="btnModalEliminar" OnClick="btnModalEliminar_Click" runat="server" />
                             <asp:Button Text="No" CssClass="btn btn-secondary" ID="btnModalCerrar" data-bs-dismiss="modal" OnClick="btnModalCerrar_Click" runat="server" />
                         </div>

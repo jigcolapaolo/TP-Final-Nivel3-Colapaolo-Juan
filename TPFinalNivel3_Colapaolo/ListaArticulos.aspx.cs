@@ -115,5 +115,15 @@ namespace TPFinalNivel3_Colapaolo
             ScriptManager.RegisterStartupScript(this, GetType(), "CerrarModal", "CerrarModal();", true);
 
         }
+
+        protected void btnAgregarSm_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DetalleArticulo.aspx?returnUrl=" + Server.UrlEncode(Request.Url.ToString()));
+        }
+
+        protected void btnAgregarLg_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DetalleArticulo.aspx?returnUrl=" + Server.UrlEncode(Request.Url.ToString()));
+        }
     }
 }
