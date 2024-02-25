@@ -226,11 +226,8 @@ namespace TPFinalNivel3_Colapaolo
                 string ruta = Server.MapPath("./ImagenArt/");
                 string fecha = DateTime.Now.ToString("ddMMyyyyHHmmss");
 
-
-                //SI NO ES NULO EL POSTEDFILE Y EL CONTENIDO ES MAYOR A 0 (TAMAÑO), EJECUTO EL CODIGO
                 if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
                 {
-
                     //GUARDO LA IMAGEN QUE HE SELECCIONADO EN LA RUTA COMPLETA QUE QUEDARIA COMO "./ImagenArt/a-1.jpg"
                     txtImagen.PostedFile.SaveAs(ruta + "art-" + articulo.Codigo + fecha + ".jpg");
                     //GUARDO EL URL DE ESTA IMAGEN
@@ -241,6 +238,7 @@ namespace TPFinalNivel3_Colapaolo
                 {
                     articulo.ImagenUrl = "";
                 }
+
 
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 negocio.agregar(articulo);
@@ -263,7 +261,7 @@ namespace TPFinalNivel3_Colapaolo
                 articulo = null;
                 throw;
             }
-            
+
         }
 
         protected void btnModificar_Click(object sender, EventArgs e)
@@ -291,5 +289,6 @@ namespace TPFinalNivel3_Colapaolo
                 Response.Redirect("Index.aspx", false);
             }
         }
+
     }
 }
