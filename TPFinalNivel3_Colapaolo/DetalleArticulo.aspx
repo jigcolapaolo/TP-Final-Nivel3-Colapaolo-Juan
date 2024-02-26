@@ -159,7 +159,7 @@
                             <asp:Label Text="" for="txtPrecio" CssClass="form-label fw-bold text-danger-emphasis" runat="server">
                                 <small><i class="bi bi-asterisk"></i></small>Precio
                             </asp:Label>
-                            <asp:TextBox Text="" ID="txtPrecio" Type="Number" CssClass="form-control" runat="server" />
+                            <asp:TextBox Text="" ID="txtPrecio" Type="Number" step="0.1" CssClass="form-control" runat="server" />
                         </div>
                         <%--Descripcion--%>
                         <div class="d-flex flex-column justify-content-start align-items-start">

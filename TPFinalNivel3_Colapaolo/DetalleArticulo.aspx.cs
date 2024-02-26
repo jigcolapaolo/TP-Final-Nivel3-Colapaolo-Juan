@@ -66,7 +66,7 @@ namespace TPFinalNivel3_Colapaolo
                     lblNombre.Text = articulo.Nombre;
                     lblMarca.Text = articulo.Marca.Descripcion;
                     lblCategoria.Text = articulo.Categoria.Descripcion;
-                    lblPrecio.Text = "$" + articulo.Precio.ToString();
+                    lblPrecio.Text = "$" + articulo.Precio.ToString("0.000");
                     lblDescripcion.Text = articulo.Descripcion;
                 }
                 else
@@ -83,7 +83,7 @@ namespace TPFinalNivel3_Colapaolo
 
                         txtCodigo.Text = articulo.Codigo;
                         txtNombre.Text = articulo.Nombre;
-                        txtPrecio.Text = articulo.Precio.ToString(CultureInfo.InvariantCulture);
+                        txtPrecio.Text = articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
                         txtDescripcion.Text = articulo.Descripcion;
 
                         CategoriaNegocio negocioCat = new CategoriaNegocio();
@@ -162,7 +162,7 @@ namespace TPFinalNivel3_Colapaolo
 
                 txtCodigo.Text = articulo.Codigo;
                 txtNombre.Text = articulo.Nombre;
-                txtPrecio.Text = articulo.Precio.ToString();
+                txtPrecio.Text = articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
                 txtDescripcion.Text = articulo.Descripcion;
 
                 CategoriaNegocio negocioCat = new CategoriaNegocio();
@@ -203,7 +203,7 @@ namespace TPFinalNivel3_Colapaolo
                 lblNombreAdmin.Text = articulo.Nombre;
                 lblMarcaAdmin.Text = articulo.Marca.Descripcion;
                 lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
-                lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
+                lblPrecioAdmin.Text = "$" + articulo.Precio.ToString("0.000");
                 lblDescripcionAdmin.Text = articulo.Descripcion;
             }
 
@@ -221,7 +221,7 @@ namespace TPFinalNivel3_Colapaolo
                 articulo.Marca.Id = Convert.ToInt32(ddlMarca.SelectedValue);
                 articulo.Categoria = new Categoria();
                 articulo.Categoria.Id = Convert.ToInt32(ddlCategoria.SelectedValue);
-                articulo.Precio = Convert.ToDecimal(txtPrecio.Text);
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
 
                 articulo.Descripcion = string.IsNullOrEmpty(txtDescripcion.Text) ? "-Sin Descripción-" : txtDescripcion.Text;
 
@@ -278,7 +278,7 @@ namespace TPFinalNivel3_Colapaolo
                 articulo.Nombre = txtNombre.Text;
                 articulo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
                 articulo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
-                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.Precio = decimal.TryParse(txtPrecio.Text, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal precio) ? precio : 0;
                 articulo.Descripcion = txtDescripcion.Text;
 
                 string ruta = Server.MapPath("./ImagenArt/");
@@ -288,6 +288,7 @@ namespace TPFinalNivel3_Colapaolo
 
                 if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
                 {
+                    //Elimina todas las imagenes anteriores que pudo tener este articulo y luego guarda la nueva.
                     foreach (string archivo in archivosEncontrados)
                     {
                         File.Delete(archivo);

@@ -64,7 +64,7 @@
                                     <asp:Label Text='<%#Eval("Id") %>' ID="lblId" CssClass="invisible" runat="server" />
                                 </a>
                                 <small class="card-text mb-3"><%#Eval("Categoria") %> / <%#Eval("Marca") %></small>
-                                <h1 class="card-text">$<%#Eval("Precio") %></h1>
+                                <h1 class="card-text">$<%#string.Format("{0:0.00}", Convert.ToDecimal(Eval("Precio"))) %></h1>
                             </div>
                         </a>
                     </div>
