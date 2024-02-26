@@ -282,10 +282,17 @@ namespace TPFinalNivel3_Colapaolo
                 articulo.Descripcion = txtDescripcion.Text;
 
                 string ruta = Server.MapPath("./ImagenArt/");
+                string patronBusqueda = "art-" + articulo.Codigo + "*.jpg";
                 string fecha = DateTime.Now.ToString("ddMMyyyyHHmmss");
+                string[] archivosEncontrados = Directory.GetFiles(ruta, patronBusqueda);
 
                 if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
                 {
+                    foreach (string archivo in archivosEncontrados)
+                    {
+                        File.Delete(archivo);
+                    }
+
                     txtImagen.PostedFile.SaveAs(ruta + "art-" + articulo.Codigo + fecha + ".jpg");
                     //GUARDO EL URL DE ESTA IMAGEN
                     articulo.ImagenUrl = "art-" + articulo.Codigo + fecha + ".jpg";
