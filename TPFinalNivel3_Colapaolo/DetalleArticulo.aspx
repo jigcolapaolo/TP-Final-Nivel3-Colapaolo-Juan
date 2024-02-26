@@ -39,6 +39,19 @@
                 }
             }
         }
+
+        function cargarImagen(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var imgArticuloAdmin = document.getElementById('<%= imgArticuloAdmin.ClientID %>');
+                    imgArticuloAdmin.src = e.target.result;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 
 </asp:Content>
@@ -106,7 +119,7 @@
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <asp:Image ImageUrl="./Images/SinImagen.png" ID="imgArticuloAdmin" CssClass="img-fluid rounded"
                                 onerror="this.onerror=null;this.src='./Images/SinImagen.png';" Height="450" runat="server" />
-                            <input type="file" class="form-control form-control-sm w-75 my-2 my-lg-0 mt-lg-2" id="txtImagen" runat="server" />
+                            <input type="file" onchange="cargarImagen(this)" class="form-control form-control-sm w-75 my-2 my-lg-0 mt-lg-2" id="txtImagen" runat="server" />
                         </div>
                     </div>
                     <%--COLUMNA 2--%>
