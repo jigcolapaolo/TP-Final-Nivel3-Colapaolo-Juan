@@ -47,6 +47,23 @@
         /*Barra de scroll fin*/
     </style>
 
+    <script>
+
+        function cargarImagen(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    var imgArticuloAdmin = document.getElementById('<%= imgRegistro.ClientID %>');
+                    imgArticuloAdmin.src = e.target.result;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+    </script>
+
 </head>
 
 
@@ -127,7 +144,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center">
-                        <input type="file" class="form-control form-control-sm w-75" id="txtImagen" runat="server" />
+                        <input type="file" onchange="cargarImagen(this)" class="form-control form-control-sm w-75" id="txtImagen" runat="server" />
                     </div>
 
                 </div>
@@ -142,7 +159,7 @@
                 <div class="d-flex justify-content-center mt-4">
 
                     <%--Boton login--%>
-                    <asp:Button Text="Registrarse" ID="btnRegistro" CssClass="btn btn-warning bg-gradient text-dark me-4 fw-semibold shadow-sm"
+                    <asp:Button Text="Registrarse" ID="btnRegistro" OnClick="btnRegistro_Click" CssClass="btn btn-warning bg-gradient text-dark me-4 fw-semibold shadow-sm"
                         UseSubmitBehavior="false" runat="server" />
 
                     <%--Boton Home--%>

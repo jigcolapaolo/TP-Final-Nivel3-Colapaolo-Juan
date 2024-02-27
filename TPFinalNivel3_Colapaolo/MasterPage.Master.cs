@@ -44,7 +44,7 @@ namespace TPFinalNivel3_Colapaolo
                     User user = (User)Session["user"];
 
                     //Imagen
-                    imgPerfil.ImageUrl = Validacion.validarImagen(user);
+                    imgPerfil.ImageUrl = Validacion.validarImagenPerfil(user);
 
 
                     //Boton Registrarse y Login

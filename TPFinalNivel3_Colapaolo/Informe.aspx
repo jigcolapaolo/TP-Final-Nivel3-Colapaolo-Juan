@@ -34,13 +34,19 @@
             background: radial-gradient(circle, rgba(139,0,0,1) 0%, rgba(0,0,0,1) 100%);
         }
 
+        .bg-success {
+            background: #008000;
+            background: radial-gradient(circle, rgba(0,128,0,1) 0%, rgba(0,0,0,1) 100%);
+        }
+
         .cursorDefault {
-            cursor:default;
+            cursor: default;
         }
     </style>
 
 </head>
-<body class="bg-error d-flex justify-content-center align-items-center vh-100">
+
+<body class="bg-error d-flex justify-content-center align-items-center vh-100" id="bodyBg" runat="server">
 
     <form id="form2" runat="server">
 
@@ -48,14 +54,18 @@
             <%--Imagen logo y Error--%>
             <div class="d-flex justify-content-center">
                 <img src="./Images/Logo.png" alt="login-icon" style="height: 4rem" />
-                <div class="text-center text-danger fs-1 ms-5 fw-bold cursorDefault">#Error#</div>
+                <asp:Label Text="#Error#" CssClass="text-center text-danger fs-1 ms-5 fw-bold cursorDefault" ID="lblError" runat="server" />
             </div>
             <%--Linea--%>
             <div class="border-bottom text-center" style="height: 0.9rem"></div>
 
             <%--Mensaje de error--%>
             <div class="d-flex justify-content-center mt-4">
-                <h1 class="cursorDefault"><i class="bi bi-emoji-frown me-2 text-danger"></i>Hubo un problema</h1>
+                <div class="h1 me-2">
+                    <i class="bi bi-emoji-frown h1 text-danger" id="iEmoji" runat="server"></i>
+                </div>
+                <asp:Label Text="Hubo un problema" CssClass="h1 cursorDefault" ID="lblEmoji" runat="server">
+                </asp:Label>
             </div>
             <asp:Label ID="lblInforme" Text="" CssClass="d-flex justify-content-center fw-bold text-danger h5 mt-4 mb-4 cursorDefault" runat="server" />
 

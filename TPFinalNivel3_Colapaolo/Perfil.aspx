@@ -81,14 +81,14 @@
                         <div class="input-group-text bg-warning bg-opacity-75 bg-gradient">
                             <i class="bi bi-lock-fill"></i>
                         </div>
-                        <asp:TextBox CssClass="form-control bg-light" ID="txtPassword" placeholder="Password" TextMode="Password" runat="server" />
+                        <asp:TextBox CssClass="form-control bg-light" ID="txtPassword" placeholder="Ingresa tu Password Actual" TextMode="Password" runat="server" />
                     </div>
                     <%--Confirmar Password--%>
                     <div class="input-group mt-3 mb-5">
                         <div class="input-group-text bg-warning bg-opacity-75 bg-gradient">
                             <i class="bi bi-arrow-right-short"></i>
                         </div>
-                        <asp:TextBox CssClass="form-control bg-light" ID="txtConfirmarPass" placeholder="Confirmar Password" TextMode="Password" runat="server" />
+                        <asp:TextBox CssClass="form-control bg-light" ID="txtConfirmarPass" placeholder="Ingresa tu nueva Password" TextMode="Password" runat="server" />
                     </div>
 
                     <%--Nombre y Apellido--%>
@@ -129,7 +129,7 @@
 
                     <%--Boton Guardar--%>
                     <asp:Button Text="Guardar" ID="btnGuardar" CssClass="btn btn-warning bg-gradient text-dark me-4 fw-semibold shadow-sm"
-                        UseSubmitBehavior="false" runat="server" />
+                        UseSubmitBehavior="false" OnClick="btnGuardar_Click" runat="server" />
 
                     <%--Boton Home--%>
                     <a class="btn rounded-pill shadow" id="homeBtn" aria-current="page" href="Index.aspx"><i class="bi bi-house me-1"></i>Volver a Home

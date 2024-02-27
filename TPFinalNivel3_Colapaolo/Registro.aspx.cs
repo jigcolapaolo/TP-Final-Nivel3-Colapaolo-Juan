@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
+using Negocio;
+using Helper;
 
 namespace TPFinalNivel3_Colapaolo
 {
@@ -12,6 +15,71 @@ namespace TPFinalNivel3_Colapaolo
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        protected void btnRegistro_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                User usuario = new User();
+                UserNegocio negocio = new UserNegocio();
+
+                if (Validacion.IsValidEmail(txtEmail.Text))
+                {
+                    usuario.Email = txtEmail.Text;
+                }
+                else
+                {
+                    Session.Add("Error", "Formato de Email incorrecto.");
+                    Response.Redirect("Informe.aspx");
+                }
+
+                if (txtPassword.Text == txtConfirmarPass.Text)
+                {
+                    usuario.Pass = txtConfirmarPass.Text;
+                }
+                else
+                {
+                    Session.Add("Error", "El Password no coincide.");
+                    Response.Redirect("Informe.aspx");
+                }
+
+                usuario.Nombre = string.IsNullOrEmpty(txtNombre.Text) ? "" : txtNombre.Text;
+                usuario.Apellido = string.IsNullOrEmpty(txtApellido.Text) ? "" : txtApellido.Text;
+
+                //SELECCIONA LA UBICACION EN LA QUE ESTAMOS, SELECCIONA IMAGENPERFIL Y SE METE DENTRO
+                string ruta = Server.MapPath("./ImagenPerfil/");
+                string fecha = DateTime.Now.ToString("ddMMyyyyHHmmss");
+
+                if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
+                {
+                    //GUARDO LA IMAGEN QUE HE SELECCIONADO EN LA RUTA COMPLETA
+                    txtImagen.PostedFile.SaveAs(ruta + "p-" + usuario.Email + fecha + ".jpg");
+                    //GUARDO EL URL DE ESTA IMAGEN
+                    usuario.UrlImagenPerfil = "p-" + usuario.Email + fecha + ".jpg";
+
+                }
+                else
+                {
+                    usuario.UrlImagenPerfil = "";
+                }
+
+
+
+                usuario.Id = negocio.nuevoUser(usuario);
+
+                Session.Add("user", usuario);
+                Session.Add("mensajeInforme", "Registro exitoso.");
+                Response.Redirect("Informe.aspx?informe=" + true, false);
+
+
+            }
+            catch (Exception)
+            {
+
+                Session.Add("Error", "Error al ingresar los datos.");
+                Response.Redirect("Informe.aspx", false);
+            }
         }
     }
 }

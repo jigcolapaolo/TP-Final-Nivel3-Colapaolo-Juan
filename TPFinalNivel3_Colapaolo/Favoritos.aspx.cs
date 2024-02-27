@@ -76,37 +76,5 @@ namespace TPFinalNivel3_Colapaolo
             repRepeaterFav.DataBind();
         }
 
-
-        protected void Page_Unload(object sender, EventArgs e)
-        {
-            User user = Session["user"] != null ? (User)Session["user"] : null;
-
-            foreach (RepeaterItem item in repRepeaterFav.Items)
-            {
-
-                CheckBox chkFavorito = (CheckBox)item.FindControl("chkFavorito");
-
-                if (!chkFavorito.Checked)
-                {
-                    Label lblId = (Label)item.FindControl("lblId");
-                    string id = lblId.Text;
-                    int intId = Convert.ToInt32(id);
-
-                    ArticuloNegocio negocio = new ArticuloNegocio();
-                    negocio.eliminarFavorito(user.Id, intId);
-                }
-
-            }
-
-            if (ListaArticulosFav == null)
-            {
-                ArticuloNegocio negocio = new ArticuloNegocio();
-
-                ListaArticulosFav = negocio.listarFavoritos(user.Id);
-            }
-
-            repRepeaterFav.DataSource = ListaArticulosFav;
-            repRepeaterFav.DataBind();
-        }
     }
 }
