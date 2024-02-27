@@ -51,22 +51,22 @@ namespace TPFinalNivel3_Colapaolo
                 string ruta = Server.MapPath("./ImagenPerfil/");
                 string fecha = DateTime.Now.ToString("ddMMyyyyHHmmss");
 
+
+                usuario.Id = negocio.nuevoUser(usuario);
+
+
                 if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
                 {
                     //GUARDO LA IMAGEN QUE HE SELECCIONADO EN LA RUTA COMPLETA
-                    txtImagen.PostedFile.SaveAs(ruta + "p-" + usuario.Email + fecha + ".jpg");
+                    txtImagen.PostedFile.SaveAs(ruta + "p-" + usuario.Id + fecha + ".jpg");
                     //GUARDO EL URL DE ESTA IMAGEN
-                    usuario.UrlImagenPerfil = "p-" + usuario.Email + fecha + ".jpg";
+                    usuario.UrlImagenPerfil = "p-" + usuario.Id + fecha + ".jpg";
 
                 }
                 else
                 {
                     usuario.UrlImagenPerfil = "";
                 }
-
-
-
-                usuario.Id = negocio.nuevoUser(usuario);
 
                 Session.Add("user", usuario);
                 Session.Add("mensajeInforme", "Registro exitoso.");

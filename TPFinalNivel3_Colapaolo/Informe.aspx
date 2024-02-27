@@ -67,7 +67,7 @@
                 <asp:Label Text="Hubo un problema" CssClass="h1 cursorDefault" ID="lblEmoji" runat="server">
                 </asp:Label>
             </div>
-            <asp:Label ID="lblInforme" Text="" CssClass="d-flex justify-content-center fw-bold text-danger h5 mt-4 mb-4 cursorDefault" runat="server" />
+            <asp:Label ID="lblInforme" Text="" CssClass="d-flex justify-content-center fw-bold text-danger h5 mt-4 text-center mb-4 cursorDefault" runat="server" />
 
             <%--Linea--%>
             <div class="border-bottom text-center" style="height: 0.9rem"></div>
