@@ -37,6 +37,14 @@
 
     <div class="my-4">
         <h1 class="text-secondary display-6" id="topFav">Mis Favoritos</h1>
+                <%--Filtro por nombre--%>
+        <div class="input-group mt-2 mb-2 w-25">
+            <div class="input-group-text">
+                <i class="bi bi-search"></i>
+            </div>
+            <asp:TextBox Text="" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroNombreFav_TextChanged" placeholder="Buscar por Nombre" ID="txtFiltroNombreFav" runat="server" />
+        </div>
+
         <asp:LinkButton ID="btnLinkActualizar" OnClick="btnLinkActualizar_Click" runat="server" CssClass="btn btn-warning btn-sm rounded-pill my-2">Guardar Cambios</asp:LinkButton>
     </div>
 

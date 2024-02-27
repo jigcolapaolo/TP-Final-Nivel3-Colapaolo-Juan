@@ -76,5 +76,17 @@ namespace TPFinalNivel3_Colapaolo
             repRepeaterFav.DataBind();
         }
 
+        protected void txtFiltroNombreFav_TextChanged(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            User user = (User)Session["user"];
+
+            string criterio = "Nombre";
+            string filtro = txtFiltroNombreFav.Text;
+            List<Articulo> listaFav = negocio.filtroFavoritos(user.Id, criterio, filtro);
+
+            repRepeaterFav.DataSource = listaFav;
+            repRepeaterFav.DataBind();
+        }
     }
 }

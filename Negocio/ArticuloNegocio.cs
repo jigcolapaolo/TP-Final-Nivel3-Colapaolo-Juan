@@ -291,10 +291,10 @@ namespace Negocio
             {
                 List<Articulo> listaFav = new List<Articulo>();
 
-                string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria\r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @id AND A.Id = F.IdArticulo ";
+                string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria\r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @id AND A.Id = F.IdArticulo AND ";
 
                 if (criterio == "Nombre")
-                    consulta += filtro;
+                    consulta += criterio + " like '%" + filtro + "%'";
 
                 datos.setearConsulta(consulta);
                 datos.setearParametros("@id", IdUser);
