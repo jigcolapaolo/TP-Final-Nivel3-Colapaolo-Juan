@@ -295,3 +295,9 @@ input[type="checkbox"].btn-check:checked + label {
         width: 40px;
         height: 40px;
     }
+
+
+.form-control:hover, .form-control:focus, .form-control:active {
+    border-color: orange;
+    box-shadow: none;
+}

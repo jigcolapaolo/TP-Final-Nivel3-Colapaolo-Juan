@@ -32,15 +32,24 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="row my-4">
+    <div class="row my-4 justify-content-between">
         <h1 id="topCat" class="text-secondary display-6">Catálogo</h1>
+
+        <%--Filtro por nombre--%>
+        <div class="input-group mt-2 mb-2 w-25">
+            <div class="input-group-text">
+                <i class="bi bi-search"></i>
+            </div>
+            <asp:TextBox Text="" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroNombre_TextChanged" placeholder="Buscar por Nombre" ID="txtFiltroNombre" runat="server" />
+        </div>
+
     </div>
 
 
     <div class="row row-cols-1 row-cols-md-3 g-5 mb-4 ms-md-2">
 
         <%--Repeater--%>
-        <asp:Repeater runat="server" ID="repRepeater" OnItemDataBound="repRepeater_ItemDataBound">
+        <asp:Repeater runat="server" ID="repRepeater">
             <ItemTemplate>
 
                 <div class="col ms-5 ms-md-0">

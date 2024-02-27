@@ -34,8 +34,17 @@ namespace TPFinalNivel3_Colapaolo
 
         }
 
-        protected void repRepeater_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        protected void txtFiltroNombre_TextChanged(object sender, EventArgs e)
         {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            string criterio = "Nombre";
+            string filtro = txtFiltroNombre.Text;
+            List<Articulo> lista = negocio.filtro(criterio, filtro, true);
+
+            repRepeater.DataSource = lista;
+            repRepeater.DataBind();
+
 
         }
     }

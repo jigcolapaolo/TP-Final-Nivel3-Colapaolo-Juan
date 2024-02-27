@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -210,6 +211,117 @@ namespace Negocio
                 datos.setearConsulta("DELETE FROM FAVORITOS WHERE IdUser = " + idUser + " AND IdArticulo = " + idArticulo);
 
                 datos.ejecutarAccion();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Articulo> filtro(string criterio, string filtro, bool isIndex = false)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                List<Articulo> lista = new List<Articulo>();
+
+                string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria \r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND ";
+
+                if (isIndex)
+                {
+                    //Solo ejecuta por nombre si viene de pagina Index
+                    if (criterio == "Nombre")
+                        consulta += criterio + " like '%" + filtro + "%'";
+                }
+                else
+                {
+                    //Viene de listaArticulos (Admin)
+
+
+                }
+
+                datos.setearConsulta(consulta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo articulo = new Articulo();
+                    articulo.Id = (int)datos.Lector["Id"];
+                    articulo.Codigo = (string)datos.Lector["Codigo"];
+                    articulo.Nombre = (string)datos.Lector["Nombre"];
+                    articulo.Descripcion = (string)datos.Lector["Descripcion"];
+                    articulo.Marca = new Marca();
+                    articulo.Marca.Id = (int)datos.Lector["IdMarca"];
+                    articulo.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    articulo.Categoria = new Categoria();
+                    articulo.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    articulo.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    articulo.Precio = (decimal)datos.Lector["Precio"];
+
+                    lista.Add(articulo);
+                }
+
+
+
+                return lista;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public List<Articulo> filtroFavoritos(int IdUser, string criterio, string filtro)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                List<Articulo> listaFav = new List<Articulo>();
+
+                string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria\r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @id AND A.Id = F.IdArticulo ";
+
+                if (criterio == "Nombre")
+                    consulta += filtro;
+
+                datos.setearConsulta(consulta);
+                datos.setearParametros("@id", IdUser);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo articulo = new Articulo();
+                    articulo.Id = (int)datos.Lector["Id"];
+                    articulo.Codigo = (string)datos.Lector["Codigo"];
+                    articulo.Nombre = (string)datos.Lector["Nombre"];
+                    articulo.Descripcion = (string)datos.Lector["Descripcion"];
+                    articulo.Marca = new Marca();
+                    articulo.Marca.Id = (int)datos.Lector["IdMarca"];
+                    articulo.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    articulo.Categoria = new Categoria();
+                    articulo.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    articulo.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+                    articulo.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+                    articulo.Precio = (decimal)datos.Lector["Precio"];
+
+                    listaFav.Add(articulo);
+                }
+
+
+
+                return listaFav;
             }
             catch (Exception e)
             {
