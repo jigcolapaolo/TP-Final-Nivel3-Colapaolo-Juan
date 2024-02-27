@@ -155,6 +155,60 @@
                 </asp:LinkButton>
             </div>
 
+            <div class="container-fluid mt-3 mb-3">
+                <h1 class="display-6 border-bottom border-success-subtle">Filtro</h1>
+                <%--Mensaje error--%>
+                <div class="text-danger d-none" id="divError" runat="server">
+                    <i class="bi bi-x-circle"></i>
+                    <asp:Label Text="" ID="lblError" CssClass="text-danger" runat="server" />
+                </div>
+                <div class="row mt-4">
+                    <%--Campo--%>
+                    <div class="col-12 col-lg-4">
+                        <asp:Label Text="Campo" ID="lblCampo" CssClass="form-label fw-bold" AssociatedControlID="ddlCampo" runat="server" />
+                        <asp:DropDownList ID="ddlCampo" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" AutoPostBack="true" CssClass="form-select" runat="server">
+                            <asp:ListItem Text="Nombre" />
+                            <asp:ListItem Text="Codigo" />
+                            <asp:ListItem Text="Marca" />
+                            <asp:ListItem Text="Categoria" />
+                            <asp:ListItem Text="Precio" />
+                        </asp:DropDownList>
+                    </div>
+                    <%--Criterio--%>
+                    <div class="col-12 col-lg-4 mt-3 mt-lg-0">
+                        <asp:Label Text="Criterio" ID="lblCriterio" CssClass="form-label fw-bold" AssociatedControlID="ddlCriterio" runat="server" />
+                        <asp:DropDownList CssClass="form-select" ID="ddlCriterio" runat="server">
+                            <asp:ListItem Text="Seleccione un Campo" />
+                        </asp:DropDownList>
+                    </div>
+                    <%--Filtro--%>
+                    <div class="col-12 col-lg-4 mt-3 mt-lg-0" id="divFiltro" runat="server">
+                        <asp:Label Text="Filtro" ID="lblFiltro" CssClass="form-label fw-bold" AssociatedControlID="txtFiltroAdmin" runat="server" />
+                        <div class="input-group">
+                            <div class="input-group-text">
+                                <i class="bi bi-search"></i>
+                            </div>
+                            <asp:TextBox Text="" CssClass="form-control" AutoPostBack="true" placeholder="Buscar.." ID="txtFiltroAdmin" runat="server" />
+                        </div>
+                    </div>
+                </div>
+                <%--Boton buscar--%>
+                <div class="row mb-5 mt-3">
+                    <div class="col-6 col-lg-2 mt-3 mt-lg-0">
+                        <button type="button" class="btn btn-warning" onclick="<%=btnBuscara.ClientID %>.click()">
+                            <i class="bi bi-search me-2"></i>Buscar
+                        </button>
+                        <asp:Button Text="" style="display: none;" ID="btnBuscara" UseSubmitBehavior="false" OnClick="btnBuscara_Click" runat="server" />
+                    </div>
+                    <%--Boton todos--%>
+                    <div class="col-6 col-lg-3 mt-3 mt-lg-0">
+                        <asp:LinkButton Text="" CssClass="btn btn-outline-success" ID="btnTodos" OnClick="btnTodos_Click" runat="server">
+                            <i class="bi bi-arrow-clockwise me-2"></i>Todos los Artículos
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+
 
             <!-- Modal eliminar -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -36,11 +36,13 @@
         <h1 id="topCat" class="text-secondary display-6">Catálogo</h1>
 
         <%--Filtro por nombre--%>
-        <div class="input-group mt-2 mb-2 w-25">
-            <div class="input-group-text">
-                <i class="bi bi-search"></i>
+        <div class="col-10 col-lg-3">
+            <div class="input-group mt-2 mb-2">
+                <div class="input-group-text">
+                    <i class="bi bi-search"></i>
+                </div>
+                <asp:TextBox Text="" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroNombre_TextChanged" placeholder="Buscar por Nombre" ID="txtFiltroNombre" runat="server" />
             </div>
-            <asp:TextBox Text="" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroNombre_TextChanged" placeholder="Buscar por Nombre" ID="txtFiltroNombre" runat="server" />
         </div>
 
     </div>

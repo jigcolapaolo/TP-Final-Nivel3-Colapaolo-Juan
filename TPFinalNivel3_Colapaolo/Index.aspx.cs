@@ -40,7 +40,7 @@ namespace TPFinalNivel3_Colapaolo
 
             string criterio = "Nombre";
             string filtro = txtFiltroNombre.Text;
-            List<Articulo> lista = negocio.filtro(criterio, filtro, true);
+            List<Articulo> lista = negocio.filtro(criterio, filtro, "", true);
 
             repRepeater.DataSource = lista;
             repRepeater.DataBind();

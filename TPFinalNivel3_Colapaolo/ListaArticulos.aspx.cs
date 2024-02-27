@@ -31,29 +31,56 @@ namespace TPFinalNivel3_Colapaolo
 
             }
 
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.listar();
-            dgvArticulos.DataBind();
+            if (Session["listaFiltrada"] == null)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulos.DataSource = negocio.listar();
+                dgvArticulos.DataBind();
 
-            dgvArticulosSm.DataSource = negocio.listar();
-            dgvArticulosSm.DataBind();
+                dgvArticulosSm.DataSource = negocio.listar();
+                dgvArticulosSm.DataBind();
+            }
+            else
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulos.DataSource = Session["listaFiltrada"];
+                dgvArticulos.DataBind();
+
+                dgvArticulosSm.DataSource = Session["listaFiltrada"];
+                dgvArticulosSm.DataBind();
+            }
         }
 
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             ArticuloNegocio negocioArt = new ArticuloNegocio();
 
-            dgvArticulos.DataSource = negocioArt.listar();
-            dgvArticulos.PageIndex = e.NewPageIndex; /*Establece el índice de página de la GridView al nuevo valor*/
-            //proporcionado en e.NewPageIndex.
+            if (Session["listaFiltrada"] == null)
+            {
 
-            dgvArticulos.DataBind();              /*Vuelve a enlazar los datos a la GridView. Este paso es necesario después */
-            //de cambiar el índice de página para asegurarse de que la GridView muestre los 
-            //datos correspondientes a la nueva página.
+                dgvArticulos.DataSource = negocioArt.listar();
+                dgvArticulos.PageIndex = e.NewPageIndex; /*Establece el índice de página de la GridView al nuevo valor*/
+                //proporcionado en e.NewPageIndex.
 
-            dgvArticulosSm.DataSource = negocioArt.listar();
-            dgvArticulosSm.PageIndex = e.NewPageIndex;
-            dgvArticulosSm.DataBind();
+                dgvArticulos.DataBind();              /*Vuelve a enlazar los datos a la GridView. Este paso es necesario después */
+                //de cambiar el índice de página para asegurarse de que la GridView muestre los 
+                //datos correspondientes a la nueva página.
+
+                dgvArticulosSm.DataSource = negocioArt.listar();
+                dgvArticulosSm.PageIndex = e.NewPageIndex;
+                dgvArticulosSm.DataBind();
+            }
+            else
+            {
+                dgvArticulos.DataSource = Session["listaFiltrada"];
+                dgvArticulos.PageIndex = e.NewPageIndex;
+                dgvArticulos.DataBind();
+
+
+                dgvArticulosSm.DataSource = Session["listaFiltrada"];
+                dgvArticulosSm.PageIndex = e.NewPageIndex;
+                dgvArticulosSm.DataBind();
+            }
 
         }
 
@@ -124,6 +151,101 @@ namespace TPFinalNivel3_Colapaolo
         protected void btnAgregarLg_Click(object sender, EventArgs e)
         {
             Response.Redirect("DetalleArticulo.aspx?returnUrl=" + Server.UrlEncode(Request.Url.ToString()));
+        }
+
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlCriterio.Items.Clear();
+
+            if (ddlCampo.SelectedItem.ToString() == "Precio")
+            {
+                ddlCriterio.Items.Add("Mayor a..");
+                ddlCriterio.Items.Add("Menor a..");
+                ddlCriterio.Items.Add("Igual a..");
+
+                divFiltro.Visible = true;
+            }
+            else if (ddlCampo.SelectedItem.ToString() == "Marca")
+            {
+                MarcaNegocio negocioMarca = new MarcaNegocio();
+
+                ddlCriterio.DataSource = negocioMarca.listar();
+                ddlCriterio.DataValueField = "Id";
+                ddlCriterio.DataTextField = "Descripcion";
+                ddlCriterio.DataBind();
+
+                divFiltro.Visible = false;
+
+            }
+            else if (ddlCampo.SelectedItem.ToString() == "Categoria")
+            {
+                CategoriaNegocio negocioCat = new CategoriaNegocio();
+
+                ddlCriterio.DataValueField = "Id";
+                ddlCriterio.DataSource = negocioCat.listar();
+                ddlCriterio.DataTextField = "Descripcion";
+                ddlCriterio.DataBind();
+
+                divFiltro.Visible = false;
+            }
+            else
+            {
+                ddlCriterio.Items.Add("Empieza con..");
+                ddlCriterio.Items.Add("Termina con..");
+                ddlCriterio.Items.Add("Contiene..");
+
+                divFiltro.Visible = true;
+            }
+
+
+        }
+
+        protected void btnTodos_Click(object sender, EventArgs e)
+        {
+            Session["listaFiltrada"] = null;
+            Response.Redirect("ListaArticulos.aspx");
+        }
+
+        protected void btnBuscara_Click(object sender, EventArgs e)
+        {
+
+            if (((ddlCampo.SelectedItem.ToString() != "Marca" && ddlCampo.SelectedItem.ToString() != "Categoria") && txtFiltroAdmin.Text == "") || ddlCriterio.Items.Count == 1)
+            {
+                divError.Attributes["class"] = "text-danger my-2 h6";
+                lblError.Text = "Debe seleccionar un Campo, un Criterio y completar el Filtro.";
+            }
+            else
+            {
+                divError.Attributes["class"] = "text-danger my-2 d-none h6";
+
+                string criterio;
+                string filtro;
+
+                if (ddlCampo.SelectedItem.ToString() == "Marca" || ddlCampo.SelectedItem.ToString() == "Categoria")
+                {
+                    criterio = ddlCriterio.SelectedValue.ToString();
+                    filtro = "";
+                }
+                else
+                {
+                    criterio = ddlCriterio.SelectedItem.ToString();
+                    filtro = txtFiltroAdmin.Text;
+                }
+                string campo = ddlCampo.SelectedItem.ToString();
+
+
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                List<Articulo> lista = negocio.filtro(criterio, filtro, campo);
+
+                dgvArticulos.DataSource = lista;
+                dgvArticulos.DataBind();
+
+                dgvArticulosSm.DataSource = lista;
+                dgvArticulosSm.DataBind();
+
+                Session["listaFiltrada"] = lista;
+            }
+
         }
     }
 }

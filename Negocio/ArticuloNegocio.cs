@@ -223,7 +223,7 @@ namespace Negocio
             }
         }
 
-        public List<Articulo> filtro(string criterio, string filtro, bool isIndex = false)
+        public List<Articulo> filtro(string criterio, string filtro, string campo = "", bool isIndex = false)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -242,7 +242,59 @@ namespace Negocio
                 else
                 {
                     //Viene de listaArticulos (Admin)
-
+                    if (campo == "Nombre")
+                    {
+                        switch (criterio)
+                        {
+                            case "Empieza con..":
+                                consulta += "Nombre like '" + filtro + "%'";
+                                break;
+                            case "Termina con..":
+                                consulta += "Nombre like '%" + filtro + "'";
+                                break;
+                            default:
+                                consulta += "Nombre like '%" + filtro + "%'";
+                                break;
+                        }
+                    }
+                    else if (campo == "Codigo")
+                    {
+                        switch (criterio)
+                        {
+                            case "Empieza con..":
+                                consulta += "Codigo like '" + filtro + "%'";
+                                break;
+                            case "Termina con..":
+                                consulta += "Codigo like '%" + filtro + "'";
+                                break;
+                            default:
+                                consulta += "Codigo like '%" + filtro + "%'";
+                                break;
+                        }
+                    }
+                    else if (campo == "Marca")
+                    {
+                        consulta += "A.IdMarca = " + criterio;
+                    }
+                    else if (campo == "Categoria")
+                    {
+                        consulta += "A.IdCategoria = " + criterio;
+                    }
+                    else
+                    {
+                        switch (criterio)
+                        {
+                            case "Mayor a..":
+                                consulta += "Precio > " + filtro;
+                                break;
+                            case "Menor a..":
+                                consulta += "Precio < " + filtro;
+                                break;
+                            default:
+                                consulta += "Precio = " + filtro;
+                                break;
+                        }
+                    }
 
                 }
 
