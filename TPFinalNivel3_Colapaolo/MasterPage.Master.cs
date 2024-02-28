@@ -9,6 +9,7 @@ using Negocio;
 using Helper;
 using System.Security.Policy;
 using System.Net;
+using System.Web.UI.HtmlControls;
 
 namespace TPFinalNivel3_Colapaolo
 {
@@ -24,7 +25,7 @@ namespace TPFinalNivel3_Colapaolo
             if (!IsPostBack)
             {
                 //Cargo las listas de Categoria y Marca en el Sidebar
-                if(listaMarcas == null)
+                if (listaMarcas == null)
                 {
                     MarcaNegocio negocioMar = new MarcaNegocio();
                     CategoriaNegocio negocioCat = new CategoriaNegocio();
@@ -56,6 +57,7 @@ namespace TPFinalNivel3_Colapaolo
                     lblBienvenido.Text = nombreUser != "" ? "Bienvenido, " + nombreUser + "!" : "Bienvenido!";
                 }
             }
+
         }
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
@@ -80,6 +82,148 @@ namespace TPFinalNivel3_Colapaolo
         protected void btnClose_Click(object sender, EventArgs e)
         {
 
+        }
+
+        protected void chkFiltros_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (RepeaterItem item in repeaterCategoria.Items)
+            {
+
+                var chkCategoria = item.FindControl("chkCategoria") as CheckBox;
+
+
+                if (chkCategoria.Checked)
+                {
+                    Label lblId = (Label)item.FindControl("idCat");
+                    string id = lblId.Text;
+
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    Session["articulosFiltrados"] = negocio.filtro(id, "", "Categoria");
+                    Response.Redirect("Index.aspx");
+                }
+
+            }
+
+        }
+
+        protected void chkCategoria_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = sender as CheckBox;
+            string idCat = "";
+
+            foreach (RepeaterItem item in repeaterCategoria.Items)
+            {
+                var chkCategoria = item.FindControl("chkCategoria") as CheckBox;
+                var lblIdCat = item.FindControl("lblIdCat") as Label;
+
+                if (chkCategoria.Checked && chk == chkCategoria)
+                {
+                    idCat = lblIdCat.Text;
+                }
+
+            }
+
+            if (idCat != "")
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+
+                if (Page is Favoritos)
+                {
+                    user = (User)Session["user"];
+                    Session["favoritosFiltrados"] = negocio.filtroFavoritos(user.Id, "Categoria", idCat);
+                    Response.Redirect("Favoritos.aspx");
+                }
+                else
+                {
+                    Session["articulosFiltrados"] = negocio.filtro(idCat, "", "Categoria");
+                    Response.Redirect("Index.aspx");
+                }
+
+            }
+
+        }
+
+        protected void chkMarca_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = sender as CheckBox;
+            string idMarca = "";
+
+            foreach (RepeaterItem item in repeaterMarcas.Items)
+            {
+                var chkMarca = item.FindControl("chkMarca") as CheckBox;
+                var lblIdMarca = item.FindControl("lblIdMarca") as Label;
+
+                if (chkMarca.Checked && chk == chkMarca)
+                {
+                    idMarca = lblIdMarca.Text;
+                }
+
+            }
+
+            if (idMarca != "")
+            {
+
+                ArticuloNegocio negocio = new ArticuloNegocio();
+
+                if (Page is Favoritos)
+                {
+                    user = (User)Session["user"];
+                    Session["favoritosFiltrados"] = negocio.filtroFavoritos(user.Id, "Marca", idMarca);
+                    Response.Redirect("Favoritos.aspx");
+                }
+                else
+                {
+                    Session["articulosFiltrados"] = negocio.filtro(idMarca, "", "Marca");
+                    Response.Redirect("Index.aspx");
+                }
+
+            }
+        }
+
+        protected void btnTodosArt_Click(object sender, EventArgs e)
+        {
+            Session["articulosFiltrados"] = null;
+            Session["favoritosFiltrados"] = null;
+
+            if (Page is Favoritos)
+                Response.Redirect("Favoritos.aspx");
+            else
+                Response.Redirect("Index.aspx");
+        }
+
+        protected void chkArtBarato_CheckedChanged(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            if (Page is Favoritos)
+            {
+                user = (User)Session["user"];
+                Session["favoritosFiltrados"] = negocio.filtroFavoritos(user.Id, "Precio", "Mas Barato");
+                Response.Redirect("Favoritos.aspx");
+            }
+            else
+            {
+                Session["articulosFiltrados"] = negocio.filtro("Mas Barato", "", "Precio");
+                Response.Redirect("Index.aspx");
+            }
+
+        }
+
+        protected void chkArtCaro_CheckedChanged(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            if (Page is Favoritos)
+            {
+                user = (User)Session["user"];
+                Session["favoritosFiltrados"] = negocio.filtroFavoritos(user.Id, "Precio", "Mas Caro");
+                Response.Redirect("Favoritos.aspx");
+            }
+            else
+            {
+                Session["articulosFiltrados"] = negocio.filtro("Mas Caro", "", "Precio");
+                Response.Redirect("Index.aspx");
+            }
         }
     }
 }

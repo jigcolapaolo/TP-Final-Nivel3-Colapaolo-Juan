@@ -96,15 +96,3 @@ mainContainer.addEventListener("click", function () {
 window.addEventListener('resize', function () {
     mainContainer.click();
 });
-
-
-
-//Solo permite seleccionar un checkbox a la vez
-function toggleCheckboxes(checkbox) {
-    var checkboxes = document.querySelectorAll('.btn-check');
-    checkboxes.forEach(function (cb) {
-        if (cb !== checkbox) {
-            cb.checked = false;
-        }
-    });
-}

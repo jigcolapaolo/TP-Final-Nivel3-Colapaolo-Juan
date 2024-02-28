@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -294,6 +295,11 @@ namespace Negocio
                                 consulta += "Precio = " + filtro;
                                 break;
                         }
+
+                        if (criterio == "Mas Barato")
+                            consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria \r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id \r\nORDER BY Precio ASC";
+                        else
+                            consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria \r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id \r\nORDER BY Precio DESC";
                     }
 
                 }
@@ -335,7 +341,7 @@ namespace Negocio
             }
         }
 
-        public List<Articulo> filtroFavoritos(int IdUser, string criterio, string filtro)
+        public List<Articulo> filtroFavoritos(int IdUser, string criterio, string filtro = "")
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -346,7 +352,28 @@ namespace Negocio
                 string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria\r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @id AND A.Id = F.IdArticulo AND ";
 
                 if (criterio == "Nombre")
+                {
                     consulta += criterio + " like '%" + filtro + "%'";
+
+                }
+                else if (criterio == "Marca")
+                {
+                    consulta += "A.IdMarca = " + filtro;
+                }
+                else if (criterio == "Categoria")
+                {
+                    consulta += "A.IdCategoria = " + filtro;
+                }
+                else
+                {
+
+                    if (filtro == "Mas Caro")
+                        consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria\r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @id AND A.Id = F.IdArticulo ORDER BY Precio DESC";
+                    else
+                        consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, M.Descripcion Marca, C.Descripcion Categoria, ImagenUrl, Precio, A.IdMarca, A.IdCategoria\r\nFROM ARTICULOS A, CATEGORIAS C, MARCAS M, FAVORITOS F \r\nWHERE  A.IdMarca = M.Id AND A.IdCategoria = C.Id AND F.IdUser = @id AND A.Id = F.IdArticulo ORDER BY Precio ASC";
+
+
+                }
 
                 datos.setearConsulta(consulta);
                 datos.setearParametros("@id", IdUser);

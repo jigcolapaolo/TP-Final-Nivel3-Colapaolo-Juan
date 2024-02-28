@@ -26,7 +26,6 @@ namespace TPFinalNivel3_Colapaolo
             if (!IsPostBack)
             {
 
-
                 if (ListaArticulosFav == null)
                 {
                     ArticuloNegocio negocio = new ArticuloNegocio();
@@ -34,7 +33,16 @@ namespace TPFinalNivel3_Colapaolo
                     ListaArticulosFav = negocio.listarFavoritos(user.Id);
                 }
 
+            }
+
+            if (Session["favoritosFiltrados"] == null)
+            {
                 repRepeaterFav.DataSource = ListaArticulosFav;
+                repRepeaterFav.DataBind();
+            }
+            else
+            {
+                repRepeaterFav.DataSource = Session["favoritosFiltrados"];
                 repRepeaterFav.DataBind();
             }
         }

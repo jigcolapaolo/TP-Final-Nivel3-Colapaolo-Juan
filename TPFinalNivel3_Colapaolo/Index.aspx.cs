@@ -28,8 +28,17 @@ namespace TPFinalNivel3_Colapaolo
                     ListaArticulos = negocio.listar();
                 }
 
-                repRepeater.DataSource = ListaArticulos;
-                repRepeater.DataBind();
+                if (Session["articulosFiltrados"] == null)
+                {
+                    repRepeater.DataSource = ListaArticulos;
+                    repRepeater.DataBind();
+                }
+                else
+                {
+                    repRepeater.DataSource = Session["articulosFiltrados"];
+                    repRepeater.DataBind();
+                }
+                
             }
 
         }

@@ -44,10 +44,13 @@
 
                 <%--Filtro--%>
                 <ul class="sidebar-nav">
+                    <%--Check de todos los filtros--%>
+                    <asp:CheckBox Text="" CssClass="d-none" ID="chkFiltros" AutoPostBack="true" OnCheckedChanged="chkFiltros_CheckedChanged" runat="server" />
 
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="#" class="sidebar-link" onclick="<%=btnTodosArt.ClientID %>.click()">
                             <i class="bi bi-globe2"></i>
+                            <asp:Button Text="Todos los Artículos" ID="btnTodosArt" CssClass="d-none" UseSubmitBehavior="false" OnClick="btnTodosArt_Click" runat="server" />
                             <span>Todos los Artículos</span>
                         </a>
                     </li>
@@ -63,16 +66,20 @@
                         <ul id="authC" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item ms-1">
                                 <%--CategoriaRepeater--%>
-                                <asp:Repeater runat="server" ID="repeaterCategoria">
-                                    <ItemTemplate>
-
-                                        <input type="checkbox" class="btn-check" id='<%#"optionC" + (Container.ItemIndex + 1) %>' onclick="toggleCheckboxes(this)" autocomplete="off">
-                                        <label class="sidebar-link" for='<%#"optionC" + (Container.ItemIndex + 1) %>'><i class="bi bi-dot"></i><%#Eval("Descripcion") %></label>
-
-                                        <%--                                        <input type="radio" class="btn-check" name="Categoria" id='<%#"optionC" + (Container.ItemIndex + 1) %>' autocomplete="off"">
-                                        <label class="sidebar-link" for='<%#"optionC" + (Container.ItemIndex + 1) %>'><i class="bi bi-dot"></i><%#Eval("Descripcion") %></label>--%>
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                                <asp:ScriptManager runat="server" ID="ScriptManager1" />
+                                <asp:UpdatePanel runat="server" ID="updatePanelCategoria">
+                                    <ContentTemplate>
+                                        <asp:Repeater runat="server" ID="repeaterCategoria">
+                                            <ItemTemplate>
+                                                <div class="item-hover">
+                                                    <asp:CheckBox ID="chkCategoria" CssClass="btn-check" AutoPostBack="true" OnCheckedChanged="chkCategoria_CheckedChanged" runat="server" />
+                                                    <asp:Label Text='<%#Eval("Descripcion") %>' ID="lblDescripcionCat" AssociatedControlID="chkCategoria" CssClass="sidebar-link" runat="server"></asp:Label>
+                                                    <asp:Label Text='<%#Eval("Id") %>' ID="lblIdCat" CssClass="d-none" runat="server" />
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
 
                                 <%--CategoriaRepeater Fin--%>
                             </li>
@@ -89,15 +96,21 @@
                         </a>
                         <ul id="authM" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
+
                                 <%--MarcaRepeater--%>
-                                <asp:Repeater runat="server" ID="repeaterMarcas">
-                                    <ItemTemplate>
-
-                                        <input type="radio" class="btn-check" name="Marca" id='<%#"optionM" + (Container.ItemIndex + 1) %>' autocomplete="off">
-                                        <label class="sidebar-link" for='<%#"optionM" + (Container.ItemIndex + 1) %>'><i class="bi bi-dot"></i><%#Eval("Descripcion") %></label>
-
-                                    </ItemTemplate>
-                                </asp:Repeater>
+                                <asp:UpdatePanel runat="server">
+                                    <ContentTemplate>
+                                        <asp:Repeater runat="server" ID="repeaterMarcas">
+                                            <ItemTemplate>
+                                                <div class="item-hover">
+                                                    <asp:CheckBox ID="chkMarca" CssClass="btn-check" AutoPostBack="true" OnCheckedChanged="chkMarca_CheckedChanged" runat="server" />
+                                                    <asp:Label Text='<%#Eval("Descripcion") %>' ID="lblDescripcionMarca" AssociatedControlID="chkMarca" CssClass="sidebar-link" runat="server"></asp:Label>
+                                                    <asp:Label Text='<%#Eval("Id") %>' ID="lblIdMarca" CssClass="d-none" runat="server" />
+                                                </div>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                                 <%--MarcaRepeater Fin--%>
                             </li>
                         </ul>
@@ -113,14 +126,16 @@
                         </a>
                         <ul id="authP" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item">
-
                                 <%--Ordenar mas Barato--%>
-                                <input type="radio" class="btn-check" name="Precio" id="optionP1" autocomplete="off">
-                                <label class="sidebar-link" for="optionP1"><i class="bi bi-dot"></i>Mas Barato</label>
-                                <%--Ordenar mas Caro--%>
-                                <input type="radio" class="btn-check" name="Precio" id="optionP2" autocomplete="off">
-                                <label class="sidebar-link" for="optionP2"><i class="bi bi-dot"></i>Mas Caro</label>
-
+                                <div class="item-hover">
+                                    <asp:CheckBox ID="chkArtBarato" CssClass="btn-check" AutoPostBack="true" OnCheckedChanged="chkArtBarato_CheckedChanged" runat="server" />
+                                    <asp:Label Text='Mas Barato' ID="lblArtBarato" AssociatedControlID="chkArtBarato" CssClass="sidebar-link" runat="server"></asp:Label>
+                                    <%--Ordenar mas Caro--%>
+                                </div>
+                                <div class="item-hover">
+                                    <asp:CheckBox ID="chkArtCaro" CssClass="btn-check" AutoPostBack="true" OnCheckedChanged="chkArtCaro_CheckedChanged" runat="server" />
+                                    <asp:Label Text='Mas Caro' ID="lblArtCaro" AssociatedControlID="chkArtCaro" CssClass="sidebar-link" runat="server"></asp:Label>
+                                </div>
                             </li>
                         </ul>
                     </li>
