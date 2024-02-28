@@ -44,8 +44,6 @@
 
                 <%--Filtro--%>
                 <ul class="sidebar-nav">
-                    <%--Check de todos los filtros--%>
-                    <asp:CheckBox Text="" CssClass="d-none" ID="chkFiltros" AutoPostBack="true" OnCheckedChanged="chkFiltros_CheckedChanged" runat="server" />
 
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link" onclick="<%=btnTodosArt.ClientID %>.click()">

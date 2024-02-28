@@ -84,28 +84,6 @@ namespace TPFinalNivel3_Colapaolo
 
         }
 
-        protected void chkFiltros_CheckedChanged(object sender, EventArgs e)
-        {
-            foreach (RepeaterItem item in repeaterCategoria.Items)
-            {
-
-                var chkCategoria = item.FindControl("chkCategoria") as CheckBox;
-
-
-                if (chkCategoria.Checked)
-                {
-                    Label lblId = (Label)item.FindControl("idCat");
-                    string id = lblId.Text;
-
-                    ArticuloNegocio negocio = new ArticuloNegocio();
-                    Session["articulosFiltrados"] = negocio.filtro(id, "", "Categoria");
-                    Response.Redirect("Index.aspx");
-                }
-
-            }
-
-        }
-
         protected void chkCategoria_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox chk = sender as CheckBox;
