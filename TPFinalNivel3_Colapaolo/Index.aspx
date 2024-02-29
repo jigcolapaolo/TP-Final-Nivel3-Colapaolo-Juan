@@ -35,37 +35,43 @@
 
 
 
-            <div class="row my-4 justify-content-between">
-                <h1 id="topCat" class="text-secondary display-6">Catálogo</h1>
+    <div class="row my-4 justify-content-between">
+        <h1 id="topCat" class="text-secondary display-6">Catálogo</h1>
 
-                <%--Filtro por nombre--%>
-                <div class="col-10 col-lg-3">
-                    <div class="input-group mt-2 mb-2">
-                        <div class="input-group-text">
-                            <i class="bi bi-search"></i>
-                        </div>
-                        <asp:TextBox Text="" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroNombre_TextChanged" placeholder="Buscar por Nombre" ID="txtFiltroNombre" runat="server" />
-                    </div>
+        <%--Filtro por nombre--%>
+        <div class="col-10 col-lg-3">
+            <div class="input-group mt-2 mb-2">
+                <div class="input-group-text">
+                    <i class="bi bi-search"></i>
                 </div>
-
+                <asp:TextBox Text="" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltroNombre_TextChanged" placeholder="Buscar por Nombre" ID="txtFiltroNombre" runat="server" />
             </div>
+        </div>
+
+    </div>
+
+
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
 
 
             <div class="row row-cols-1 row-cols-md-3 g-5 mb-4 ms-md-2">
 
                 <%--Repeater--%>
-                <asp:Repeater runat="server" ID="repRepeater">
+                <asp:Repeater runat="server" ID="repRepeater" OnItemDataBound="repRepeater_ItemDataBound">
                     <ItemTemplate>
 
                         <div class="col ms-5 ms-md-0">
                             <%--Card--%>
-
                             <div class="card shadow" style="width: 16rem;">
 
                                 <%if (Session["user"] != null)
-                                    {%>
-                                <i class="bi bi-star text-warning h4 p-2 bg-success bg-gradient position-absolute" onclick="clickFavorito(this)" id="star"></i>
-
+                                    {
+                                %>
+                                <div class="text-warning h4 p-2 bg-success bg-gradient position-absolute" id="star">
+                                    <asp:CheckBox ID="chkFavoritoIndex" runat="server" CssClass="btn-check" AutoPostBack="true" OnCheckedChanged="chkFavoritoIndex_CheckedChanged"/>
+                                    <asp:Label Text="" CssClass="form-check-label bi bi-star" AssociatedControlID="chkFavoritoIndex" ID="lblStarIndex" runat="server" />
+                                </div>
 
                                 <%} %>
 
@@ -78,6 +84,7 @@
                                         </a>
                                         <small class="card-text mb-3"><%#Eval("Categoria") %> / <%#Eval("Marca") %></small>
                                         <h1 class="card-text">$<%#string.Format("{0:0.00}", Convert.ToDecimal(Eval("Precio"))) %></h1>
+                                        <asp:Label Text='<%#Eval("Id") %>' CssClass="d-none" ID="lblIdIndex" runat="server" />
                                     </div>
                                 </a>
                             </div>
@@ -91,9 +98,12 @@
 
             </div>
 
-            <%--Flecha Volver a Top--%>
-            <a href="#" class="arrow-up">
-                <div href="#topCat" class="btn btn-outline-success rounded"><i class="bi bi-arrow-up"></i></div>
-            </a>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <%--Flecha Volver a Top--%>
+    <a href="#" class="arrow-up">
+        <div href="#topCat" class="btn btn-outline-success rounded"><i class="bi bi-arrow-up"></i></div>
+    </a>
 
 </asp:Content>

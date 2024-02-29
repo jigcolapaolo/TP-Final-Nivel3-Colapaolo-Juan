@@ -34,20 +34,6 @@ hamBurger.addEventListener("click", function () {
 });
 
 
-function clickFavorito(elemento) {
-    // Si la clase actual es "bi bi-star", se cambia a "bi bi-star-fill"
-    if (elemento.classList.contains("bi-star")) {
-        elemento.classList.remove("bi-star");
-        elemento.classList.add("bi-star-fill");
-    } else {
-        // Si la clase actual es diferente de "bi bi-star", se cambia a "bi bi-star"
-        elemento.classList.remove("bi-star-fill");
-        elemento.classList.add("bi-star");
-    }
-}
-
-
-
 //Efecto offcanvas del toggler del navbar
 const navbarToggler = document.querySelector(".navbar-toggler");
 const sidebarOverlay = document.querySelector("#sidebarOverlay");

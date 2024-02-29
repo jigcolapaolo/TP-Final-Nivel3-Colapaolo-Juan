@@ -19,7 +19,7 @@ namespace TPFinalNivel3_Colapaolo
 
             if (user == null)
             {
-                Response.Redirect("Index.aspx", false);
+                Response.Redirect("Index.aspx");
             }
 
 
@@ -33,14 +33,12 @@ namespace TPFinalNivel3_Colapaolo
                     ListaArticulosFav = negocio.listarFavoritos(user.Id);
                 }
 
-            }
-
-            if (Session["favoritosFiltrados"] == null)
-            {
                 repRepeaterFav.DataSource = ListaArticulosFav;
                 repRepeaterFav.DataBind();
+
             }
-            else
+
+            if (Session["favoritosFiltrados"] != null)
             {
                 repRepeaterFav.DataSource = Session["favoritosFiltrados"];
                 repRepeaterFav.DataBind();
@@ -95,6 +93,25 @@ namespace TPFinalNivel3_Colapaolo
 
             repRepeaterFav.DataSource = listaFav;
             repRepeaterFav.DataBind();
+        }
+
+        protected void chkFavorito_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (RepeaterItem item in repRepeaterFav.Items)
+            {
+                CheckBox chkFavorito = (CheckBox)item.FindControl("chkFavorito");
+                Label lblStar = (Label)item.FindControl("lblStar");
+
+                if(chkFavorito.Checked)
+                {
+                    lblStar.CssClass = "form-check-label bi bi-star-fill";
+                }
+                else
+                {
+                    lblStar.CssClass = "form-check-label bi bi-star";
+                }
+            }
+
         }
     }
 }
