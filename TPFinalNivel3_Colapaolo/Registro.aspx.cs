@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using Dominio;
 using Negocio;
 using Helper;
+using static System.Net.Mime.MediaTypeNames;
+using System.Security.Policy;
 
 namespace TPFinalNivel3_Colapaolo
 {
@@ -20,29 +22,44 @@ namespace TPFinalNivel3_Colapaolo
 
         protected void btnRegistro_Click(object sender, EventArgs e)
         {
+
             try
             {
+
                 User usuario = new User();
                 UserNegocio negocio = new UserNegocio();
 
                 if (Validacion.IsValidEmail(txtEmail.Text))
                 {
                     usuario.Email = txtEmail.Text;
+                    divErrorEmail.Attributes["class"] = "d-none";
                 }
                 else
                 {
-                    Session.Add("Error", "Formato de Email incorrecto.");
-                    Response.Redirect("Informe.aspx");
+                    divErrorEmail.Attributes["class"] = "text-danger mt-1";
+                    return;
                 }
 
-                if (txtPassword.Text == txtConfirmarPass.Text)
+                if (txtPassword.Text != "")
                 {
-                    usuario.Pass = txtConfirmarPass.Text;
+                    if (txtPassword.Text == txtConfirmarPass.Text)
+                    {
+                        usuario.Pass = txtConfirmarPass.Text;
+                        divErrorPass.Attributes["class"] = "d-none";
+                    }
+                    else
+                    {
+                        divErrorPass.Attributes["class"] = "text-danger mt-1";
+                        lblErrorPass.Text = "El password no coincide.";
+                        return;
+                    }
+
                 }
                 else
                 {
-                    Session.Add("Error", "El Password no coincide.");
-                    Response.Redirect("Informe.aspx");
+                    divErrorPass.Attributes["class"] = "text-danger mt-1";
+                    lblErrorPass.Text = "No ha ingresado el password.";
+                    return;
                 }
 
                 usuario.Nombre = string.IsNullOrEmpty(txtNombre.Text) ? "" : txtNombre.Text;
@@ -53,7 +70,7 @@ namespace TPFinalNivel3_Colapaolo
                 string fecha = DateTime.Now.ToString("ddMMyyyyHHmmss");
 
 
-                usuario.Id = negocio.nuevoUser(usuario);
+                
 
 
                 if (txtImagen.PostedFile != null && txtImagen.PostedFile.ContentLength > 0)
@@ -68,6 +85,8 @@ namespace TPFinalNivel3_Colapaolo
                 {
                     usuario.UrlImagenPerfil = "";
                 }
+
+                usuario.Id = negocio.nuevoUser(usuario);
 
                 Session.Add("user", usuario);
                 Session.Add("mensajeInforme", "Registro exitoso.");

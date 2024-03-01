@@ -65,6 +65,12 @@
                 <asp:TextBox CssClass="form-control bg-light" ID="txtPassword" placeholder="Password" TextMode="Password" runat="server" />
             </div>
 
+            <%--ErrorLogin--%>
+            <div class="text-danger d-none" id="divErrorLogin" runat="server">
+                <i class="bi bi-x-circle"></i>
+                <asp:Label Text="Email o Password incorrectos." ID="lblErrorLogin" CssClass="text-danger" runat="server" />
+            </div>
+
             <%--Boton login--%>
             <asp:Button Text="Ingresar" ID="btnLogin" CssClass="btn btn-warning bg-gradient text-dark w-100 mt-4 fw-semibold shadow-sm"
                 UseSubmitBehavior="false" OnClick="btnLogin_Click" runat="server" />

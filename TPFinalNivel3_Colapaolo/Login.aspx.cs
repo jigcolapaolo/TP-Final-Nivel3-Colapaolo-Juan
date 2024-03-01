@@ -19,6 +19,9 @@ namespace TPFinalNivel3_Colapaolo
                 UserNegocio negocioUser = new UserNegocio();
 
             }
+
+            if (Session["user"] != null)
+                Response.Redirect("Index.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -39,8 +42,8 @@ namespace TPFinalNivel3_Colapaolo
                 }
                 else
                 {
-                    Session.Add("Error", "Email o Password incorrecto.");
-                    Response.Redirect("Informe.aspx", false);
+                    divErrorLogin.Attributes["class"] = "text-danger mt-1";
+                    return;
                 }
 
             }

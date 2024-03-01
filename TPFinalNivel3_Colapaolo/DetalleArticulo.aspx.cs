@@ -76,13 +76,11 @@ namespace TPFinalNivel3_Colapaolo
                         {
                             lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
                             chkFavoritoAdmin.Checked = true;
-
                         }
                         else
                         {
                             lblStarUser.CssClass = "form-check-label bi bi-star-fill";
                             chkFavoritoUser.Checked = true;
-
                         }
                     }
                     else
@@ -103,8 +101,6 @@ namespace TPFinalNivel3_Colapaolo
                 }
 
             }
-
-
 
 
             if (Session["articulo"] != null)
@@ -163,52 +159,12 @@ namespace TPFinalNivel3_Colapaolo
                         ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
                         ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
 
-
-                        //Cargo datos en modo Admin (VistaUser)
-                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
-                            imgArticuloAdminUser.ImageUrl = "./Images/SinImagen.png";
-                        else
-                            imgArticuloAdminUser.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
-
-                        lblNombreAdmin.Text = articulo.Nombre;
-                        lblMarcaAdmin.Text = articulo.Marca.Descripcion;
-                        lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
-                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
-                        lblDescripcionAdmin.Text = articulo.Descripcion;
-
                     }
 
                     if ((bool)Session["vistaAdmin"] == true)
                     {
                         articulo = (Articulo)Session["articulo"];
 
-                        //Cargo datos en modo Admin (VistaAdmin)
-                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
-                            imgArticuloAdmin.ImageUrl = "./Images/SinImagen.png";
-                        else
-                            imgArticuloAdmin.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
-
-                        txtCodigo.Text = articulo.Codigo;
-                        txtNombre.Text = articulo.Nombre;
-                        txtPrecio.Text = articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
-                        txtDescripcion.Text = articulo.Descripcion;
-
-                        CategoriaNegocio negocioCat = new CategoriaNegocio();
-                        MarcaNegocio negocioMarca = new MarcaNegocio();
-
-                        ddlCategoria.DataSource = negocioCat.listar();
-                        ddlCategoria.DataValueField = "Id";
-                        ddlCategoria.DataTextField = "Descripcion";
-                        ddlCategoria.DataBind();
-                        ddlMarca.DataSource = negocioMarca.listar();
-                        ddlMarca.DataValueField = "Id";
-                        ddlMarca.DataTextField = "Descripcion";
-                        ddlMarca.DataBind();
-
-                        ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
-                        ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
-
-
                         //Cargo datos en modo Admin (VistaUser)
                         if (string.IsNullOrEmpty(articulo.ImagenUrl))
                             imgArticuloAdminUser.ImageUrl = "./Images/SinImagen.png";
@@ -218,7 +174,7 @@ namespace TPFinalNivel3_Colapaolo
                         lblNombreAdmin.Text = articulo.Nombre;
                         lblMarcaAdmin.Text = articulo.Marca.Descripcion;
                         lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
-                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
+                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
                         lblDescripcionAdmin.Text = articulo.Descripcion;
 
 
@@ -265,7 +221,7 @@ namespace TPFinalNivel3_Colapaolo
                         lblNombreAdmin.Text = articulo.Nombre;
                         lblMarcaAdmin.Text = articulo.Marca.Descripcion;
                         lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
-                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
+                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
                         lblDescripcionAdmin.Text = articulo.Descripcion;
 
                     }
@@ -360,7 +316,7 @@ namespace TPFinalNivel3_Colapaolo
                 lblNombreAdmin.Text = articulo.Nombre;
                 lblMarcaAdmin.Text = articulo.Marca.Descripcion;
                 lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
-                lblPrecioAdmin.Text = "$" + articulo.Precio.ToString("0.000");
+                lblPrecioAdmin.Text = "$" + articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
                 lblDescripcionAdmin.Text = articulo.Descripcion;
 
             }
@@ -369,10 +325,44 @@ namespace TPFinalNivel3_Colapaolo
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            articulo = new Articulo();
+
+            //Validacion
+
+            if (txtCodigo.Text == "" || txtCodigo.Text.Length < 3)
+            {
+                divErrorCodigoDetalle.Attributes["class"] = "text-danger my-1";
+                return;
+            }
+            else
+            {
+                divErrorCodigoDetalle.Attributes["class"] = "d-none";
+            }
+
+            if (txtNombre.Text == "")
+            {
+                divErrorNombreDetalle.Attributes["class"] = "text-danger my-1";
+                return;
+            }
+            else
+            {
+                divErrorNombreDetalle.Attributes["class"] = "d-none";
+            }
+
+            if (txtPrecio.Text == "")
+            {
+                divErrorPrecioDetalle.Attributes["class"] = "text-danger my-1";
+                return;
+            }
+            else
+            {
+                divErrorPrecioDetalle.Attributes["class"] = "d-none";
+            }
+
 
             try
             {
+                articulo = new Articulo();
+
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Marca = new Marca();
@@ -418,10 +408,10 @@ namespace TPFinalNivel3_Colapaolo
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 articulo = null;
-                throw;
+                throw ex;
             }
 
         }
@@ -429,6 +419,41 @@ namespace TPFinalNivel3_Colapaolo
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             articulo = (Articulo)Session["articulo"];
+
+            //Validacion
+
+            if (txtCodigo.Text == "" || txtCodigo.Text.Length < 3)
+            {
+                divErrorCodigoDetalle.Attributes["class"] = "text-danger my-1";
+                return;
+            }
+            else
+            {
+                divErrorCodigoDetalle.Attributes["class"] = "d-none";
+            }
+
+            if (txtNombre.Text == "")
+            {
+                divErrorNombreDetalle.Attributes["class"] = "text-danger my-1";
+                return;
+            }
+            else
+            {
+                divErrorNombreDetalle.Attributes["class"] = "d-none";
+            }
+
+            if (txtPrecio.Text == "")
+            {
+                divErrorPrecioDetalle.Attributes["class"] = "text-danger my-1";
+                return;
+            }
+            else
+            {
+                divErrorPrecioDetalle.Attributes["class"] = "d-none";
+            }
+
+
+
 
             try
             {
@@ -474,10 +499,10 @@ namespace TPFinalNivel3_Colapaolo
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
         }

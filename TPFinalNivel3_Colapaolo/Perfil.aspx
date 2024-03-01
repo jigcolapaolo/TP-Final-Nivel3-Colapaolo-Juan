@@ -92,11 +92,16 @@
                         <div class="col-lg-6 col-12">
 
                             <%--Email--%>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-1">
                                 <div class="input-group-text bg-warning bg-opacity-75 bg-gradient">
                                     <i class="bi bi-envelope"></i>
                                 </div>
                                 <asp:TextBox CssClass="form-control bg-light" ID="txtEmail" placeholder="Email" runat="server" />
+                            </div>
+                            <%--ErrorEmail--%>
+                            <div class="text-danger d-none" id="divErrorEmailPerfil" runat="server">
+                                <i class="bi bi-x-circle"></i>
+                                <asp:Label Text="Formato de Email incorrecto." ID="lblErrorEmailPerfil" CssClass="text-danger" runat="server" />
                             </div>
 
 
@@ -133,6 +138,12 @@
                                             <i class="bi bi-arrow-right-short"></i>
                                         </div>
                                         <asp:TextBox CssClass="form-control bg-light" ID="txtNuevaPass" placeholder="Ingresa tu nueva Password" TextMode="Password" runat="server" />
+                                    </div>
+
+                                    <%--ErrorPass--%>
+                                    <div class="text-danger d-none" id="divErrorPassPerfil" runat="server">
+                                        <i class="bi bi-x-circle"></i>
+                                        <asp:Label Text="" ID="lblErrorPassPerfil" CssClass="text-danger" runat="server" />
                                     </div>
 
 

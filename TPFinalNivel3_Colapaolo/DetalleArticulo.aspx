@@ -156,12 +156,22 @@
                             </asp:Label>
                             <asp:TextBox Text="" ID="txtCodigo" CssClass="form-control" runat="server" />
                         </div>
+                        <%--ErrorCodigo--%>
+                        <div class="text-danger d-none" id="divErrorCodigoDetalle" runat="server">
+                            <i class="bi bi-x-circle"></i>
+                            <asp:Label Text="Debe ingresar un código. Mínimo 3 caracteres." ID="lblErrorCodigoDetalle" CssClass="text-danger" runat="server" />
+                        </div>
                         <%--Nombre--%>
                         <div class="d-flex flex-column justify-content-start align-items-start mt-1">
                             <asp:Label Text="" for="txtNombre" CssClass="form-label fw-bold text-danger-emphasis" runat="server">
                                 <small><i class="bi bi-asterisk"></i></small>Nombre
                             </asp:Label>
                             <asp:TextBox Text="" ID="txtNombre" CssClass="form-control" runat="server" />
+                        </div>
+                        <%--ErrorNombre--%>
+                        <div class="text-danger d-none" id="divErrorNombreDetalle" runat="server">
+                            <i class="bi bi-x-circle"></i>
+                            <asp:Label Text="Debe ingresar un nombre." ID="lblErrorNombreDetalle" CssClass="text-danger" runat="server" />
                         </div>
                         <%--Categoria y Marca--%>
                         <div class="d-flex justify-content-around align-items-center my-2">
@@ -184,6 +194,11 @@
                                 <small><i class="bi bi-asterisk"></i></small>Precio
                             </asp:Label>
                             <asp:TextBox Text="" ID="txtPrecio" Type="Number" step="0.1" CssClass="form-control" runat="server" />
+                        </div>
+                        <%--ErrorPrecio--%>
+                        <div class="text-danger d-none" id="divErrorPrecioDetalle" runat="server">
+                            <i class="bi bi-x-circle"></i>
+                            <asp:Label Text="Debe ingresar un número." ID="lblErrorPrecioDetalle" CssClass="text-danger" runat="server" />
                         </div>
                         <%--Descripcion--%>
                         <div class="d-flex flex-column justify-content-start align-items-start">
@@ -239,7 +254,7 @@
                         <div class="position-relative pb-5">
                             <%--Icono favorito--%>
                             <div class="text-warning h2 position-absolute bottom-0 start-0">
-                                <asp:CheckBox ID="chkFavoritoAdmin" CssClass="" OnCheckedChanged="chkFavoritoAdmin_CheckedChanged" AutoPostBack="true" runat="server" />
+                                <asp:CheckBox ID="chkFavoritoAdmin" CssClass="btn-check" OnCheckedChanged="chkFavoritoAdmin_CheckedChanged" AutoPostBack="true" runat="server" />
                                 <asp:Label Text="" CssClass="form-check-label bi bi-star" AssociatedControlID="chkFavoritoAdmin" ID="lblStarAdmin" runat="server" />
                             </div>
 

@@ -62,6 +62,7 @@
             }
         }
 
+
     </script>
 
 </head>
@@ -100,6 +101,11 @@
                         <asp:TextBox CssClass="form-control bg-light" ID="txtEmail" placeholder="Email" runat="server" />
                         <div class="ms-2"><i class="bi bi-asterisk"></i></div>
                     </div>
+                    <%--ErrorEmail--%>
+                    <div class="text-danger d-none" id="divErrorEmail" runat="server">
+                        <i class="bi bi-x-circle"></i>
+                        <asp:Label Text="El formato de Email no es valido." ID="lblErrorEmail" CssClass="text-danger" runat="server" />
+                    </div>
 
                     <%--Password--%>
                     <div class="input-group mt-3">
@@ -110,16 +116,21 @@
                         <div class="ms-2"><i class="bi bi-asterisk"></i></div>
                     </div>
                     <%--Confirmar Password--%>
-                    <div class="input-group mt-3 mb-5">
+                    <div class="input-group mt-3">
                         <div class="input-group-text bg-warning bg-opacity-75 bg-gradient">
                             <i class="bi bi-arrow-right-short"></i>
                         </div>
                         <asp:TextBox CssClass="form-control bg-light" ID="txtConfirmarPass" placeholder="Confirmar Password" TextMode="Password" runat="server" />
                         <div class="ms-2"><i class="bi bi-asterisk"></i></div>
                     </div>
+                    <%--ErrorPassword--%>
+                    <div class="text-danger d-none" id="divErrorPass" runat="server">
+                        <i class="bi bi-x-circle"></i>
+                        <asp:Label Text="" ID="lblErrorPass" CssClass="text-danger" runat="server" />
+                    </div>
 
                     <%--Nombre y Apellido--%>
-                    <div class="input-group">
+                    <div class="input-group mt-3">
                         <span class="input-group-text bg-warning bg-opacity-75 bg-gradient"><i class="bi bi-person-fill"></i></span>
                         <asp:TextBox CssClass="form-control bg-light" ID="txtNombre" placeholder="Nombre" runat="server" />
                         <asp:TextBox CssClass="form-control bg-light" ID="txtApellido" placeholder="Apellido" runat="server" />
@@ -158,7 +169,7 @@
             <div class="row">
                 <div class="d-flex justify-content-center mt-4">
 
-                    <%--Boton login--%>
+                    <%--Boton Registro--%>
                     <asp:Button Text="Registrarse" ID="btnRegistro" OnClick="btnRegistro_Click" CssClass="btn btn-warning bg-gradient text-dark me-4 fw-semibold shadow-sm"
                         UseSubmitBehavior="false" runat="server" />
 

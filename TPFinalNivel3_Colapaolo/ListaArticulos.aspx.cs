@@ -14,6 +14,9 @@ namespace TPFinalNivel3_Colapaolo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Seguridad.isAdmin(Session["user"]))
+                Response.Redirect("Index.aspx");
+
             if (!IsPostBack)
             {
 

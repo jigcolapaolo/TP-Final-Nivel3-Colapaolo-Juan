@@ -32,6 +32,11 @@ namespace TPFinalNivel3_Colapaolo
                 imgRegistro.ImageUrl = Validacion.validarImagenPerfil(usuario);
 
             }
+
+            if(passCheck.Checked == false)
+            {
+                divErrorPassPerfil.Attributes["class"] = "d-none";
+            }
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -40,14 +45,15 @@ namespace TPFinalNivel3_Colapaolo
             {
                 usuario = (User)Session["user"];
 
-                if (Validacion.IsValidEmail(txtEmail.Text))
+                if (Validacion.IsValidEmail(txtEmail.Text) && txtEmail.Text != "")
                 {
                     usuario.Email = txtEmail.Text;
+                    divErrorEmailPerfil.Attributes["class"] = "d-none";
                 }
                 else
                 {
-                    Session.Add("Error", "Formato de email incorrecto.");
-                    Response.Redirect("Informe.aspx");
+                    divErrorEmailPerfil.Attributes["class"] = "text-danger";
+                    return;
                 }
 
                 usuario.Nombre = txtNombre.Text;
@@ -59,16 +65,22 @@ namespace TPFinalNivel3_Colapaolo
                     {
                         if (txtNuevaPass.Text.Length < 3)
                         {
-                            Session.Add("Error", "La nueva Password debe tener mínimo 3 caracteres.");
-                            Response.Redirect("Informe.aspx");
+                            divErrorPassPerfil.Attributes["class"] = "text-danger my-1";
+                            lblErrorPassPerfil.Text = "La nueva Password debe tener mínimo 3 caracteres.";
+                            return;
                         }
                         else
+                        {
                             usuario.Pass = txtNuevaPass.Text;
+                            divErrorPassPerfil.Attributes["class"] = "d-none";
+
+                        }
                     }
                     else
                     {
-                        Session.Add("Error", "La Password actual ingresada no es correcta.");
-                        Response.Redirect("Informe.aspx");
+                        divErrorPassPerfil.Attributes["class"] = "text-danger my-1";
+                        lblErrorPassPerfil.Text = "La Password actual ingresada no es correcta.";
+                        return;
                     }
                 }
 
