@@ -21,12 +21,6 @@ namespace TPFinalNivel3_Colapaolo
         {
             User user = Session["user"] != null ? (User)Session["user"] : null;
 
-            if (user == null)
-            {
-                Response.Redirect("Index.aspx");
-            }
-
-
             ArticuloNegocio negocioArt = new ArticuloNegocio();
 
 
@@ -65,7 +59,7 @@ namespace TPFinalNivel3_Colapaolo
 
                 }
 
-                if (articulo != null)
+                if (articulo != null && Seguridad.sesionActiva(Session["user"]))
                 {
                     //Icono favorito
                     List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
