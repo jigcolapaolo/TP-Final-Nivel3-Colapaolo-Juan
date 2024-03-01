@@ -14,7 +14,8 @@ namespace TPFinalNivel3_Colapaolo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["user"] != null)
+                Response.Redirect("Index.aspx");
         }
 
         protected void btnRegistro_Click(object sender, EventArgs e)

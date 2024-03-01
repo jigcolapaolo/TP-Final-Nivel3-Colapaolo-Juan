@@ -22,6 +22,19 @@ namespace TPFinalNivel3_Colapaolo
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            //SI LA PAGINA NO ES DEFAULT NI LOGIN NI REGISTROTRAINEE, REDIRIGE A LOGIN.ASPX, NO PERMITE ACCEDER A LAS OTRAS PAGINAS
+            //    HASTA LOGUEARSE
+
+            if (!(Page is Default || Page is Login1 || Page is Registro || Page is DetalleArticulo))
+            {
+                if (!Seguridad.sesionActiva(Session["user"]))
+                {
+                    //Si no hay una sesion activa, redirige a login
+                    Response.Redirect("Login.aspx", false);
+                }
+            }
+
+
             if (!IsPostBack)
             {
                 //Cargo las listas de Categoria y Marca en el Sidebar

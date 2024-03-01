@@ -19,7 +19,7 @@ namespace TPFinalNivel3_Colapaolo
         {
 
             if (Session["user"] == null)
-                Response.Redirect("Index.aspx", false);
+                Response.Redirect("Login.aspx");
             else
                 usuario = (User)Session["user"];
 

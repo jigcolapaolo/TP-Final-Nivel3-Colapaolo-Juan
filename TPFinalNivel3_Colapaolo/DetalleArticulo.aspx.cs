@@ -19,13 +19,19 @@ namespace TPFinalNivel3_Colapaolo
         public Articulo articulo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            User user = Session["user"] != null ? (User)Session["user"] : null;
+
+            if (user == null)
+            {
+                Response.Redirect("Index.aspx");
+            }
+
 
             ArticuloNegocio negocioArt = new ArticuloNegocio();
 
 
             if (!IsPostBack)
             {
-
 
                 if (Session["vistaAdmin"] == null)
                     Session["vistaAdmin"] = true;
@@ -41,32 +47,62 @@ namespace TPFinalNivel3_Colapaolo
                 }
                 else
                 {
-                    //Articulo Nuevo
-                    articulo = null;
-                    Session["articulo"] = null;
-                    Session["vistaAdmin"] = true;
+                    //Si no recibe un id de un articulo y es admin, es porque estoy queriendo agregar un nuevo articulo, si no, no
+                    //permito el ingreso.
+                    if (Seguridad.isAdmin(Session["user"]))
+                    {
+                        //Articulo Nuevo
+                        articulo = null;
+                        Session["articulo"] = null;
+                        Session["vistaAdmin"] = true;
+
+                    }
+                    else
+                    {
+                        Response.Redirect("Index.aspx");
+                    }
+
+
                 }
 
-
-                //Icono favorito
-                List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
-
-                if (listaFavoritos.Any(art => art.Id == articulo.Id))
+                if (articulo != null)
                 {
-                    lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
-                    chkFavoritoAdmin.Checked = true;
-                    lblStarUser.CssClass = "form-check-label bi bi-star-fill";
-                    chkFavoritoUser.Checked = true;
+                    //Icono favorito
+                    List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
+
+                    if (listaFavoritos.Any(art => art.Id == articulo.Id))
+                    {
+                        if (Seguridad.isAdmin(Session["user"]))
+                        {
+                            lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
+                            chkFavoritoAdmin.Checked = true;
+
+                        }
+                        else
+                        {
+                            lblStarUser.CssClass = "form-check-label bi bi-star-fill";
+                            chkFavoritoUser.Checked = true;
+
+                        }
+                    }
+                    else
+                    {
+                        if (Seguridad.isAdmin(Session["user"]))
+                        {
+                            lblStarAdmin.CssClass = "form-check-label bi bi-star";
+                            chkFavoritoAdmin.Checked = false;
+
+                        }
+                        else
+                        {
+                            lblStarUser.CssClass = "form-check-label bi bi-star";
+                            chkFavoritoUser.Checked = false;
+
+                        }
+                    }
                 }
-                else
-                {
-                    lblStarAdmin.CssClass = "form-check-label bi bi-star";
-                    chkFavoritoAdmin.Checked = false;
-                    lblStarUser.CssClass = "form-check-label bi bi-star";
-                    chkFavoritoUser.Checked = false;
-                }
+
             }
-
 
 
 
@@ -90,7 +126,7 @@ namespace TPFinalNivel3_Colapaolo
                     lblNombre.Text = articulo.Nombre;
                     lblMarca.Text = articulo.Marca.Descripcion;
                     lblCategoria.Text = articulo.Categoria.Descripcion;
-                    lblPrecio.Text = "$" + articulo.Precio.ToString("0.000");
+                    lblPrecio.Text = "$" + articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
                     lblDescripcion.Text = articulo.Descripcion;
 
                 }
@@ -185,20 +221,6 @@ namespace TPFinalNivel3_Colapaolo
                         lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
                         lblDescripcionAdmin.Text = articulo.Descripcion;
 
-
-                        //Icono favorito
-                        List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
-
-                        if (listaFavoritos.Any(art => art.Id == articulo.Id))
-                        {
-                            lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
-                            chkFavoritoAdmin.Checked = true;
-                        }
-                        else
-                        {
-                            lblStarAdmin.CssClass = "form-check-label bi bi-star";
-                            chkFavoritoAdmin.Checked = false;
-                        }
 
                     }
 
@@ -481,45 +503,6 @@ namespace TPFinalNivel3_Colapaolo
             }
         }
 
-        protected void chkFavoritoAdmin_CheckedChanged(object sender, EventArgs e)
-        {
-            articulo = (Articulo)Session["articulo"];
-            List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
-            User user = (User)Session["user"];
-            ArticuloNegocio negocio = new ArticuloNegocio();
-
-            CheckBox chkFavorito = (CheckBox)sender;
-
-            if (chkFavorito.Checked)
-            {
-                if (!listaFavoritos.Any(art => art.Id == articulo.Id))
-                {
-                    negocio.agregarFavorito(user.Id, articulo.Id);
-                    Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
-                }
-
-                if(Seguridad.isAdmin(user))
-                    lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
-                else
-                    lblStarUser.CssClass = "form-check-label bi bi-star-fill";
-
-                chkFavorito.Checked = true;
-            }
-            else
-            {
-                negocio.eliminarFavorito(user.Id, articulo.Id);
-                Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
-
-                if (Seguridad.isAdmin(user))
-                    lblStarAdmin.CssClass = "form-check-label bi bi-star";
-                else
-                    lblStarUser.CssClass = "form-check-label bi bi-star";
-
-                chkFavorito.Checked = false;
-            }
-
-        }
-
         protected void btnVolver_Click(object sender, EventArgs e)
         {
             if (Request.UrlReferrer != null)
@@ -532,6 +515,79 @@ namespace TPFinalNivel3_Colapaolo
             {
                 // Manejo caso donde no haya una URL de referencia
                 Response.Redirect("Index.aspx", false);
+            }
+        }
+
+        protected void chkFavoritoUser_CheckedChanged(object sender, EventArgs e)
+        {
+            articulo = (Articulo)Session["articulo"];
+            List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
+            User user = (User)Session["user"];
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            CheckBox chkFavorito = (CheckBox)sender;
+
+
+            if (chkFavorito.Checked)
+            {
+
+                if (!listaFavoritos.Any(art => art.Id == articulo.Id))
+                {
+                    negocio.agregarFavorito(user.Id, articulo.Id);
+                    Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
+                }
+
+                lblStarUser.CssClass = "form-check-label bi bi-star-fill";
+            }
+            else
+            {
+                negocio.eliminarFavorito(user.Id, articulo.Id);
+                Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
+
+                lblStarUser.CssClass = "form-check-label bi bi-star";
+
+            }
+        }
+
+        protected void chkFavoritoAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            articulo = (Articulo)Session["articulo"];
+            List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
+            User user = (User)Session["user"];
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            CheckBox chkFavorito = (CheckBox)sender;
+
+
+            if (chkFavorito.Checked)
+            {
+
+                if (!listaFavoritos.Any(art => art.Id == articulo.Id))
+                {
+                    negocio.agregarFavorito(user.Id, articulo.Id);
+                    Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
+                }
+
+                lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
+            }
+            else
+            {
+                if ((bool)Session["vistaAdmin"] != true)
+                {
+                    negocio.eliminarFavorito(user.Id, articulo.Id);
+                    Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
+
+                    lblStarAdmin.CssClass = "form-check-label bi bi-star";
+
+                }
+                else
+                {
+                    if (listaFavoritos.Any(art => art.Id == articulo.Id))
+                    {
+                        chkFavoritoAdmin.Checked = true;
+                    }
+                }
+
             }
         }
     }

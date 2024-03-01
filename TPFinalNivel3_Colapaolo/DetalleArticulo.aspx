@@ -86,7 +86,7 @@
                             {%>
                         <div class="position-relative pb-5">
                             <div class="text-warning h2 position-absolute bottom-0 end-0">
-                                <asp:CheckBox ID="chkFavoritoUser" runat="server" OnCheckedChanged="chkFavoritoAdmin_CheckedChanged" CssClass="btn-check" AutoPostBack="true" />
+                                <asp:CheckBox ID="chkFavoritoUser" runat="server" OnCheckedChanged="chkFavoritoUser_CheckedChanged" CssClass="btn-check" AutoPostBack="true" />
                                 <asp:Label Text="" CssClass="form-check-label bi bi-star" AssociatedControlID="chkFavoritoUser" ID="lblStarUser" runat="server" />
                             </div>
                         </div>
@@ -237,8 +237,9 @@
                     <%--COLUMNA 2--%>
                     <div class="col-12 col-lg-5 d-flex flex-column justify-content-around pt-lg-0 bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
                         <div class="position-relative pb-5">
+                            <%--Icono favorito--%>
                             <div class="text-warning h2 position-absolute bottom-0 start-0">
-                                <asp:CheckBox ID="chkFavoritoAdmin" runat="server" CssClass="btn-check" OnCheckedChanged="chkFavoritoAdmin_CheckedChanged" AutoPostBack="true" />
+                                <asp:CheckBox ID="chkFavoritoAdmin" CssClass="" OnCheckedChanged="chkFavoritoAdmin_CheckedChanged" AutoPostBack="true" runat="server" />
                                 <asp:Label Text="" CssClass="form-check-label bi bi-star" AssociatedControlID="chkFavoritoAdmin" ID="lblStarAdmin" runat="server" />
                             </div>
 
@@ -282,7 +283,6 @@
 
             <%--Flecha Volver--%>
             <asp:LinkButton Text="" ID="btnVolver" OnClick="btnVolver_Click" CssClass="btn btn-success btn-sm rounded-pill shadow arrow-up" runat="server"><i class="bi bi-arrow-left-circle me-2"></i>Volver</asp:LinkButton>
-
 
             <!-- Modal Eliminar -->
             <div class="modal fade" id="modalEliminarArt" tabindex="-1" aria-labelledby="modalEliminarArtLabel" aria-hidden="true">
