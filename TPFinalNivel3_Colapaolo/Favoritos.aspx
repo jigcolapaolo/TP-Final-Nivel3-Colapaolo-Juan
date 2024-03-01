@@ -44,11 +44,16 @@
         <asp:LinkButton ID="btnLinkActualizar" OnClick="btnLinkActualizar_Click" runat="server" CssClass="btn btn-warning btn-sm rounded-pill my-2">Guardar Cambios</asp:LinkButton>
     </div>
 
+    <%--Mensaje Sin articulos--%>
+    <div class="d-flex justify-content-center d-none" id="divSinArticulos" runat="server">
+        <h1 class="text-secondary bg-secondary-subtle rounded-pill text-center p-4">No se encontraron artículos.</h1>
+    </div>
+
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
 
-
             <div class="row row-cols-1 row-cols-md-3 g-5 mb-4 ms-md-2">
+
 
                 <%--Repeater--%>
                 <asp:Repeater runat="server" ID="repRepeaterFav">

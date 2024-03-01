@@ -50,6 +50,10 @@
 
     </div>
 
+    <%--Mensaje Sin articulos--%>
+    <div class="d-flex justify-content-center d-none" id="divSinArticulosIndex" runat="server">
+        <h1 class="text-secondary bg-secondary-subtle rounded-pill text-center p-4">No se encontraron artículos.</h1>
+    </div>
 
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
@@ -69,7 +73,7 @@
                                     {
                                 %>
                                 <div class="text-warning h4 p-2 bg-success bg-gradient position-absolute" id="star">
-                                    <asp:CheckBox ID="chkFavoritoIndex" runat="server" CssClass="btn-check" AutoPostBack="true" OnCheckedChanged="chkFavoritoIndex_CheckedChanged"/>
+                                    <asp:CheckBox ID="chkFavoritoIndex" runat="server" CssClass="btn-check" AutoPostBack="true" OnCheckedChanged="chkFavoritoIndex_CheckedChanged" />
                                     <asp:Label Text="" CssClass="form-check-label bi bi-star" AssociatedControlID="chkFavoritoIndex" ID="lblStarIndex" runat="server" />
                                 </div>
 

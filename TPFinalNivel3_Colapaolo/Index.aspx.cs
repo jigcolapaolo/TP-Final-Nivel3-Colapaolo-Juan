@@ -21,6 +21,7 @@ namespace TPFinalNivel3_Colapaolo
     public partial class Default : System.Web.UI.Page
     {
         public List<Articulo> ListaArticulos { get; set; }
+        public List<Articulo> ArticulosFiltrados {  get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -70,6 +71,21 @@ namespace TPFinalNivel3_Colapaolo
 
             }
 
+            if (Session["articulosFiltrados"] != null)
+                ArticulosFiltrados = (List<Articulo>)Session["articulosFiltrados"];
+
+            if (ListaArticulos != null && ArticulosFiltrados != null)
+            {
+                if (ArticulosFiltrados.Count == 0 || ListaArticulos.Count == 0)
+                {
+                    divSinArticulosIndex.Attributes["class"] = "d-flex justify-content-center cursorDefault";
+                }
+                else
+                {
+                    divSinArticulosIndex.Attributes["class"] = "d-none";
+                }
+            }
+
 
         }
 
@@ -84,7 +100,14 @@ namespace TPFinalNivel3_Colapaolo
             repRepeater.DataSource = lista;
             repRepeater.DataBind();
 
-
+            if (lista.Count == 0)
+            {
+                divSinArticulosIndex.Attributes["class"] = "d-flex justify-content-center cursorDefault";
+            }
+            else
+            {
+                divSinArticulosIndex.Attributes["class"] = "d-none";
+            }
 
         }
 

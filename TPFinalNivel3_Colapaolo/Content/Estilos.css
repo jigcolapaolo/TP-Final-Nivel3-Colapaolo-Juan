@@ -184,13 +184,18 @@ a.sidebar-link:hover, a.sidebar-link:focus, a.sidebar-link:active {
     font-weight: bold;
 }
 
+/*Estilos hover de cada item de los dropdown del sidebar*/
 .item-hover:hover {
-
     background-color: lightgreen;
-    color: black;
     opacity: 0.8;
     border-left: 3px solid orange;
+    border-radius: 30px;
+    color: black;
 }
+
+    .item-hover:hover :nth-child(2) {
+        color: black;
+    }
 
 .sidebar-item {
     position: relative;
