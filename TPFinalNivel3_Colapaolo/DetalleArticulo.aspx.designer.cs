@@ -24,6 +24,24 @@ namespace TPFinalNivel3_Colapaolo
         protected global::System.Web.UI.WebControls.Image imgArticulo;
 
         /// <summary>
+        /// Control chkFavoritoUser.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkFavoritoUser;
+
+        /// <summary>
+        /// Control lblStarUser.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStarUser;
+
+        /// <summary>
         /// Control lblNombre.
         /// </summary>
         /// <remarks>
@@ -186,6 +204,24 @@ namespace TPFinalNivel3_Colapaolo
         protected global::System.Web.UI.WebControls.Image imgArticuloAdminUser;
 
         /// <summary>
+        /// Control chkFavoritoAdmin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkFavoritoAdmin;
+
+        /// <summary>
+        /// Control lblStarAdmin.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStarAdmin;
+
+        /// <summary>
         /// Control linkVistaAdmin.
         /// </summary>
         /// <remarks>
@@ -238,6 +274,15 @@ namespace TPFinalNivel3_Colapaolo
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDescripcionAdmin;
+
+        /// <summary>
+        /// Control btnVolver.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnVolver;
 
         /// <summary>
         /// Control btnClose.

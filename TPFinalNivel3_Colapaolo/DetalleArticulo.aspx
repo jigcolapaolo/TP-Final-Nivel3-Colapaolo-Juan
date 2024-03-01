@@ -66,7 +66,9 @@
 
             <%--USER--%>
             <%if (!Helper.Seguridad.isAdmin(Session["user"]))
-                {%>
+                {
+
+            %>
             <div class="container rounded p-4">
                 <%--FILA 1--%>
                 <div class="row">
@@ -80,6 +82,16 @@
                     </div>
                     <%--COLUMNA 2--%>
                     <div class="col-12 col-lg-5 d-flex flex-column justify-content-around bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
+                        <%if (Helper.Seguridad.sesionActiva(Session["user"]))
+                            {%>
+                        <div class="position-relative pb-5">
+                            <div class="text-warning h2 position-absolute bottom-0 end-0">
+                                <asp:CheckBox ID="chkFavoritoUser" runat="server" OnCheckedChanged="chkFavoritoAdmin_CheckedChanged" CssClass="btn-check" AutoPostBack="true" />
+                                <asp:Label Text="" CssClass="form-check-label bi bi-star" AssociatedControlID="chkFavoritoUser" ID="lblStarUser" runat="server" />
+                            </div>
+                        </div>
+                        <%} %>
+
                         <%--Nombre--%>
                         <div class="d-flex justify-content-start align-items-center">
                             <asp:Label Text="" ID="lblNombre" CssClass="display-6 text-danger text-break" runat="server" />
@@ -224,19 +236,23 @@
                     </div>
                     <%--COLUMNA 2--%>
                     <div class="col-12 col-lg-5 d-flex flex-column justify-content-around pt-lg-0 bg-success-subtle bg-opacity-75 bg-gradient rounded p-3 px-5">
-                        <%--Oculto el cambio de vista si no hay un articulo--%>
+                        <div class="position-relative pb-5">
+                            <div class="text-warning h2 position-absolute bottom-0 start-0">
+                                <asp:CheckBox ID="chkFavoritoAdmin" runat="server" CssClass="btn-check" OnCheckedChanged="chkFavoritoAdmin_CheckedChanged" AutoPostBack="true" />
+                                <asp:Label Text="" CssClass="form-check-label bi bi-star" AssociatedControlID="chkFavoritoAdmin" ID="lblStarAdmin" runat="server" />
+                            </div>
 
-                        <%if (articulo != null)
-                            {%>
-                        <%--Vista Admin--%>
-                        <div class="d-flex align-self-end">
-                            <asp:LinkButton Text="" CssClass="d-flex justify-content-end link-success" ID="linkVistaAdmin" OnClick="linkVistaAdmin_Click" runat="server">
+                            <%--Oculto el cambio de vista si no hay un articulo--%>
+
+                            <%if (articulo != null)
+                                {%>
+                            <div class="d-flex align-self-end">
+                                <asp:LinkButton Text="" CssClass="link-success position-absolute top-0 end-0" ID="linkVistaAdmin" OnClick="linkVistaAdmin_Click" runat="server">
                                 <small><i class="bi bi-eye me-1"></i>Vista Admin</small>
-                            </asp:LinkButton>
+                                </asp:LinkButton>
+                            </div>
+                            <% } %>
                         </div>
-                        <% } %>
-
-
 
                         <%--Nombre--%>
                         <div class="d-flex justify-content-start align-items-center">
@@ -265,9 +281,7 @@
             <%} %>
 
             <%--Flecha Volver--%>
-            <a href="#" onclick="javascript:history.back();" class="arrow-up">
-                <div class="btn btn-success btn-sm rounded-pill shadow"><i class="bi bi-arrow-left-circle me-2"></i>Volver</div>
-            </a>
+            <asp:LinkButton Text="" ID="btnVolver" OnClick="btnVolver_Click" CssClass="btn btn-success btn-sm rounded-pill shadow arrow-up" runat="server"><i class="bi bi-arrow-left-circle me-2"></i>Volver</asp:LinkButton>
 
 
             <!-- Modal Eliminar -->

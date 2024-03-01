@@ -19,6 +19,7 @@ namespace TPFinalNivel3_Colapaolo
         public Articulo articulo { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+
             ArticuloNegocio negocioArt = new ArticuloNegocio();
 
 
@@ -45,7 +46,30 @@ namespace TPFinalNivel3_Colapaolo
                     Session["articulo"] = null;
                     Session["vistaAdmin"] = true;
                 }
+
+
+                //Icono favorito
+                List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
+
+                if (listaFavoritos.Any(art => art.Id == articulo.Id))
+                {
+                    lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
+                    chkFavoritoAdmin.Checked = true;
+                    lblStarUser.CssClass = "form-check-label bi bi-star-fill";
+                    chkFavoritoUser.Checked = true;
+                }
+                else
+                {
+                    lblStarAdmin.CssClass = "form-check-label bi bi-star";
+                    chkFavoritoAdmin.Checked = false;
+                    lblStarUser.CssClass = "form-check-label bi bi-star";
+                    chkFavoritoUser.Checked = false;
+                }
             }
+
+
+
+
 
             if (Session["articulo"] != null)
             {
@@ -68,9 +92,117 @@ namespace TPFinalNivel3_Colapaolo
                     lblCategoria.Text = articulo.Categoria.Descripcion;
                     lblPrecio.Text = "$" + articulo.Precio.ToString("0.000");
                     lblDescripcion.Text = articulo.Descripcion;
+
                 }
                 else
                 {
+                    //Si cambie a vista User y vuelvo a Admin, cargo los datos
+                    if ((bool)Session["vistaAdmin"] == false)
+                    {
+                        articulo = (Articulo)Session["articulo"];
+
+                        //Cargo datos en modo Admin (VistaAdmin)
+                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
+                            imgArticuloAdmin.ImageUrl = "./Images/SinImagen.png";
+                        else
+                            imgArticuloAdmin.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
+
+                        txtCodigo.Text = articulo.Codigo;
+                        txtNombre.Text = articulo.Nombre;
+                        txtPrecio.Text = articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
+                        txtDescripcion.Text = articulo.Descripcion;
+
+                        CategoriaNegocio negocioCat = new CategoriaNegocio();
+                        MarcaNegocio negocioMarca = new MarcaNegocio();
+
+                        ddlCategoria.DataSource = negocioCat.listar();
+                        ddlCategoria.DataValueField = "Id";
+                        ddlCategoria.DataTextField = "Descripcion";
+                        ddlCategoria.DataBind();
+                        ddlMarca.DataSource = negocioMarca.listar();
+                        ddlMarca.DataValueField = "Id";
+                        ddlMarca.DataTextField = "Descripcion";
+                        ddlMarca.DataBind();
+
+                        ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
+                        ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
+
+
+                        //Cargo datos en modo Admin (VistaUser)
+                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
+                            imgArticuloAdminUser.ImageUrl = "./Images/SinImagen.png";
+                        else
+                            imgArticuloAdminUser.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
+
+                        lblNombreAdmin.Text = articulo.Nombre;
+                        lblMarcaAdmin.Text = articulo.Marca.Descripcion;
+                        lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
+                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
+                        lblDescripcionAdmin.Text = articulo.Descripcion;
+
+                    }
+
+                    if ((bool)Session["vistaAdmin"] == true)
+                    {
+                        articulo = (Articulo)Session["articulo"];
+
+                        //Cargo datos en modo Admin (VistaAdmin)
+                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
+                            imgArticuloAdmin.ImageUrl = "./Images/SinImagen.png";
+                        else
+                            imgArticuloAdmin.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
+
+                        txtCodigo.Text = articulo.Codigo;
+                        txtNombre.Text = articulo.Nombre;
+                        txtPrecio.Text = articulo.Precio.ToString("0.00", CultureInfo.InvariantCulture);
+                        txtDescripcion.Text = articulo.Descripcion;
+
+                        CategoriaNegocio negocioCat = new CategoriaNegocio();
+                        MarcaNegocio negocioMarca = new MarcaNegocio();
+
+                        ddlCategoria.DataSource = negocioCat.listar();
+                        ddlCategoria.DataValueField = "Id";
+                        ddlCategoria.DataTextField = "Descripcion";
+                        ddlCategoria.DataBind();
+                        ddlMarca.DataSource = negocioMarca.listar();
+                        ddlMarca.DataValueField = "Id";
+                        ddlMarca.DataTextField = "Descripcion";
+                        ddlMarca.DataBind();
+
+                        ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
+                        ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
+
+
+                        //Cargo datos en modo Admin (VistaUser)
+                        if (string.IsNullOrEmpty(articulo.ImagenUrl))
+                            imgArticuloAdminUser.ImageUrl = "./Images/SinImagen.png";
+                        else
+                            imgArticuloAdminUser.ImageUrl = articulo.ImagenUrl.StartsWith("art") ? "~/ImagenArt/" + articulo.ImagenUrl : articulo.ImagenUrl;
+
+                        lblNombreAdmin.Text = articulo.Nombre;
+                        lblMarcaAdmin.Text = articulo.Marca.Descripcion;
+                        lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
+                        lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
+                        lblDescripcionAdmin.Text = articulo.Descripcion;
+
+
+                        //Icono favorito
+                        List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
+
+                        if (listaFavoritos.Any(art => art.Id == articulo.Id))
+                        {
+                            lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
+                            chkFavoritoAdmin.Checked = true;
+                        }
+                        else
+                        {
+                            lblStarAdmin.CssClass = "form-check-label bi bi-star";
+                            chkFavoritoAdmin.Checked = false;
+                        }
+
+                    }
+
+
                     if (!IsPostBack)
                     {
                         articulo = (Articulo)Session["articulo"];
@@ -113,7 +245,9 @@ namespace TPFinalNivel3_Colapaolo
                         lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
                         lblPrecioAdmin.Text = "$" + articulo.Precio.ToString();
                         lblDescripcionAdmin.Text = articulo.Descripcion;
+
                     }
+
                 }
             }
             else
@@ -179,6 +313,7 @@ namespace TPFinalNivel3_Colapaolo
 
                 ddlCategoria.SelectedValue = articulo.Categoria.Id.ToString();
                 ddlMarca.SelectedValue = articulo.Marca.Id.ToString();
+
             }
 
         }
@@ -205,6 +340,7 @@ namespace TPFinalNivel3_Colapaolo
                 lblCategoriaAdmin.Text = articulo.Categoria.Descripcion;
                 lblPrecioAdmin.Text = "$" + articulo.Precio.ToString("0.000");
                 lblDescripcionAdmin.Text = articulo.Descripcion;
+
             }
 
         }
@@ -345,5 +481,58 @@ namespace TPFinalNivel3_Colapaolo
             }
         }
 
+        protected void chkFavoritoAdmin_CheckedChanged(object sender, EventArgs e)
+        {
+            articulo = (Articulo)Session["articulo"];
+            List<Articulo> listaFavoritos = (List<Articulo>)Session["listaFavoritos"];
+            User user = (User)Session["user"];
+            ArticuloNegocio negocio = new ArticuloNegocio();
+
+            CheckBox chkFavorito = (CheckBox)sender;
+
+            if (chkFavorito.Checked)
+            {
+                if (!listaFavoritos.Any(art => art.Id == articulo.Id))
+                {
+                    negocio.agregarFavorito(user.Id, articulo.Id);
+                    Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
+                }
+
+                if(Seguridad.isAdmin(user))
+                    lblStarAdmin.CssClass = "form-check-label bi bi-star-fill";
+                else
+                    lblStarUser.CssClass = "form-check-label bi bi-star-fill";
+
+                chkFavorito.Checked = true;
+            }
+            else
+            {
+                negocio.eliminarFavorito(user.Id, articulo.Id);
+                Session["listaFavoritos"] = negocio.listarFavoritos(user.Id);
+
+                if (Seguridad.isAdmin(user))
+                    lblStarAdmin.CssClass = "form-check-label bi bi-star";
+                else
+                    lblStarUser.CssClass = "form-check-label bi bi-star";
+
+                chkFavorito.Checked = false;
+            }
+
+        }
+
+        protected void btnVolver_Click(object sender, EventArgs e)
+        {
+            if (Request.UrlReferrer != null)
+            {
+                // Redirijo a la página de referencia
+                string urlAnterior = Request.QueryString["returnUrl"];
+                Response.Redirect(urlAnterior, false);
+            }
+            else
+            {
+                // Manejo caso donde no haya una URL de referencia
+                Response.Redirect("Index.aspx", false);
+            }
+        }
     }
 }
