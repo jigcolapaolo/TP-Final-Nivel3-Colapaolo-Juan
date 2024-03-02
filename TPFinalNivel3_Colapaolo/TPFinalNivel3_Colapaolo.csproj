@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Content\Estilos.css" />
     <Content Include="Content\Script.js" />
+    <Content Include="default.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="DetalleArticulo.aspx" />
     <Content Include="Favoritos.aspx" />
@@ -85,6 +86,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
